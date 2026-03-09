@@ -53,20 +53,10 @@
   filter: blur(0.6px);
 }
 
-/* ---- HOVER: emerge from fog ---- */
+/* ---- HOVER: brighter text ---- */
 
 .navLink:hover {
   color: var(--gnos-white);
-}
-
-.navLink:hover .char:nth-child(odd) {
-  filter: blur(0px);
-  opacity: 1;
-}
-
-.navLink:hover .char:nth-child(even) {
-  filter: blur(0.4px);
-  opacity: 0.75;
 }
 
 /* ---- ACTIVE: slow breathing ---- */

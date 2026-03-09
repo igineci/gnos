@@ -1,0 +1,37 @@
+/* — BandcampEmbed: dark iframe — */
+
+.wrap {
+  margin: 2rem 0;
+}
+
+.heading {
+  font-family: var(--gnos-font-display);
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gnos-turquoise);
+  margin: 0 0 1rem;
+}
+
+.embed {
+  width: 100%;
+  max-width: 700px;
+  height: 472px;
+  border: 0;
+}
+
+.link {
+  display: inline-block;
+  font-family: var(--gnos-font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  color: var(--gnos-turquoise);
+  text-decoration: none;
+  padding: 0.5rem 0;
+  transition: opacity 0.3s ease;
+}
+
+.link:hover {
+  opacity: 0.8;
+}

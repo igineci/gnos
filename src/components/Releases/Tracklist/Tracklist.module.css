@@ -1,0 +1,62 @@
+/* — Tracklist: minimal, industrial — */
+
+.wrap {
+  margin: 2rem 0;
+}
+
+.heading {
+  font-family: var(--gnos-font-display);
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gnos-turquoise);
+  margin: 0 0 1rem;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.track {
+  display: grid;
+  grid-template-columns: 2rem 1fr auto;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.track.va {
+  grid-template-columns: 2rem 1fr auto auto;
+}
+
+.track:last-child {
+  border-bottom: none;
+}
+
+.index {
+  font-family: var(--gnos-font-body);
+  font-size: 0.7rem;
+  color: var(--gnos-muted);
+}
+
+.title {
+  font-family: var(--gnos-font-body);
+  font-size: 0.9rem;
+  color: var(--gnos-white);
+}
+
+.artist {
+  font-family: var(--gnos-font-body);
+  font-size: 0.8rem;
+  color: var(--gnos-muted);
+}
+
+.duration {
+  font-family: var(--gnos-font-body);
+  font-size: 0.75rem;
+  color: var(--gnos-muted);
+}

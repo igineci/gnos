@@ -1,6 +1,11 @@
+import { ReleaseGallery } from '@/components/Releases/ReleaseGallery/ReleaseGallery';
+import styles from './ReleasesPage.module.css';
+
 const ReleasesPage = () => (
-  <section>
-    <h1 className="text-4xl font-bold">Releases</h1>
+  <section className={styles.page}>
+    <div className={styles.container}>
+      <ReleaseGallery />
+    </div>
   </section>
 );
 

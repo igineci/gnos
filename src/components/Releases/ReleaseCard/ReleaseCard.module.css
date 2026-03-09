@@ -1,0 +1,144 @@
+/* — ReleaseCard: cover art artifact with turquoise hover — */
+
+.card {
+  display: block;
+  position: relative;
+  aspect-ratio: 1;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+}
+
+.coverWrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+/* film grain — makes cover art look like old photography */
+.grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  opacity: 0.08;
+}
+
+.card.album .grain {
+  opacity: 0.14;
+}
+
+.card.album:hover .grain {
+  animation: grainFlicker 0.8s ease-in-out infinite;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0.75rem;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.title {
+  font-family: var(--gnos-font-display);
+  font-size: 0.95rem;
+  font-weight: 900;
+  letter-spacing: var(--gnos-font-tracking-wide);
+  text-transform: uppercase;
+  color: var(--gnos-white);
+  filter: blur(4px);
+  transition: filter 0.5s ease;
+}
+
+.artist {
+  font-family: var(--gnos-font-body);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--gnos-muted);
+  margin-top: 0.25rem;
+  filter: blur(4px);
+  transition: filter 0.5s ease 0.05s;
+}
+
+.catalog {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.75rem;
+  font-family: var(--gnos-font-display);
+  font-size: 0.45rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: var(--gnos-turquoise);
+  opacity: 0.8;
+}
+
+/* — HOVER — */
+
+.card:hover .cover {
+  transform: scale(1.03);
+}
+
+.card:hover .overlay {
+  opacity: 1;
+}
+
+.card:hover .title,
+.card:hover .artist {
+  filter: blur(0);
+}
+
+/* VA: electric turquoise glow */
+.card.va:hover {
+  box-shadow: 0 0 32px var(--gnos-turquoise-glow-bright), 0 0 48px var(--gnos-turquoise-glow);
+}
+
+/* Album: grain animation on hover */
+.card.album:hover {
+  box-shadow: none;
+}
+
+/* — ACTIVE — */
+
+.card:active .coverWrap {
+  animation: pulse 0.3s ease;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes grainFlicker {
+  0%, 100% {
+    opacity: 0.14;
+  }
+  50% {
+    opacity: 0.24;
+  }
+}

@@ -5,6 +5,8 @@ export const ROUTE_PATHS = {
   TEAM: '/meet-our-team',
   BLOG: '/blog',
   RELEASES: '/releases',
+  /** Pattern for single release: /releases/:slug */
+  RELEASE: '/releases/:slug',
 } as const;
 
 /** Page order for pagination (linear flow). */

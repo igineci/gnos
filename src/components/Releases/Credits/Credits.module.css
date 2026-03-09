@@ -1,0 +1,42 @@
+/* — Credits: role / name pairs — */
+
+.wrap {
+  margin: 2rem 0;
+}
+
+.heading {
+  font-family: var(--gnos-font-display);
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gnos-turquoise);
+  margin: 0 0 1rem;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  margin: 0;
+}
+
+.item {
+  margin: 0;
+}
+
+.role {
+  font-family: var(--gnos-font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gnos-muted);
+  margin: 0 0 0.15rem;
+}
+
+.name {
+  font-family: var(--gnos-font-body);
+  font-size: 0.85rem;
+  color: var(--gnos-white);
+  margin: 0;
+}
