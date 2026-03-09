@@ -1,1 +1,33 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: 'Compacta';
+  src: url('/fonts/Compacta-Black-Poster-Font.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* — gnos design tokens — */
+:root {
+  --gnos-font-display: 'Compacta', Impact, 'Arial Narrow', sans-serif;
+  --gnos-black: #000000;
+  --gnos-turquoise: #08595E;
+  --gnos-turquoise-glow: rgba(8, 89, 94, 0.4);
+  --gnos-white: #ffffff;
+  --gnos-charcoal: #0d0d0d;
+  --gnos-muted: rgba(255, 255, 255, 0.5);
+  --gnos-font-tracking: 0.12em;
+  --gnos-font-tracking-wide: 0.2em;
+  --gnos-font-body: system-ui, -apple-system, sans-serif;
+}
+
+html {
+  background-color: var(--gnos-black);
+}
+
+body {
+  color: var(--gnos-white);
+  font-family: system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}

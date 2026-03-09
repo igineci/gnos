@@ -1,41 +1,91 @@
+/* — header: nav centered — */
+
 .header {
+  position: relative;
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  padding: 1.5rem 2rem;
+  padding: 1.6rem 4rem;
+  isolation: isolate;
 }
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: inherit;
-}
+/* ---- nav ---- */
 
 .nav {
   display: flex;
-  gap: 2rem;
+  gap: 3.5rem;
+  align-items: baseline;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .navLink {
-  text-decoration: none;
-  color: inherit;
-  font-size: 0.875rem;
-  letter-spacing: 0.08em;
+  display: inline-block;
+  padding: 0.5rem 14px;
+  font-family: var(--gnos-font-display);
+  font-size: 1.7rem;
+  font-weight: 900;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
-  opacity: 0.6;
-  transition: opacity 0.2s ease;
+  color: var(--gnos-muted);
+  text-decoration: none;
+  transition: color 0.4s ease;
 }
+
+/* characters: slow transitions, staggered by index */
+.char {
+  display: inline-block;
+  filter: blur(0px);
+  opacity: 1;
+  transition:
+    filter 0.5s ease calc(var(--i) * 0.05s),
+    opacity 0.5s ease calc(var(--i) * 0.05s),
+    transform 0.5s ease calc(var(--i) * 0.05s),
+    text-shadow 0.5s ease calc(var(--i) * 0.05s),
+    color 0.15s ease;
+}
+
+/* scrambling chars: turquoise signal noise */
+.scrambling {
+  color: var(--gnos-turquoise);
+  opacity: 0.7;
+  filter: blur(0.6px);
+}
+
+/* ---- HOVER: emerge from fog ---- */
 
 .navLink:hover {
+  color: var(--gnos-white);
+}
+
+.navLink:hover .char:nth-child(odd) {
+  filter: blur(0px);
   opacity: 1;
 }
 
-.active {
-  opacity: 1;
+.navLink:hover .char:nth-child(even) {
+  filter: blur(0.4px);
+  opacity: 0.75;
+}
+
+/* ---- ACTIVE: slow breathing ---- */
+
+.navLink.active {
+  color: var(--gnos-white);
+}
+
+.navLink.active .char {
+  animation: breathe 3s ease-in-out calc(var(--i) * 0.15s) infinite alternate;
+}
+
+@keyframes breathe {
+  0% {
+    opacity: 0.5;
+    filter: blur(0.3px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+  }
 }
