@@ -1,0 +1,200 @@
+/* — TrackPlayer: placeholder player for 6 tracks — */
+/* Oscilloscope / analog synth aesthetic, dark + turquoise */
+
+.wrap {
+  margin: 2rem 0;
+}
+
+.heading {
+  font-family: var(--gnos-font-display);
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gnos-turquoise);
+  margin: 0 0 1rem;
+}
+
+.player {
+  background: linear-gradient(
+    180deg,
+    rgba(8, 89, 94, 0.08) 0%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  padding: 1.5rem;
+  max-width: 500px;
+  position: relative;
+}
+
+.player::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+}
+
+/* — Controls — */
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.playBtn {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--gnos-turquoise);
+  background: rgba(8, 89, 94, 0.15);
+  color: var(--gnos-turquoise);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.playBtn:hover {
+  background: rgba(8, 89, 94, 0.3);
+  box-shadow: 0 0 12px var(--gnos-turquoise-glow);
+}
+
+.playIcon {
+  font-family: var(--gnos-font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+/* — Waveform — */
+
+.waveform {
+  flex: 1;
+  height: 2rem;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.waveformBars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  height: 100%;
+  padding: 0 0.25rem;
+}
+
+.bar {
+  width: 3px;
+  min-height: 4px;
+  background: rgba(8, 89, 94, 0.5);
+  border-radius: 1px;
+}
+
+.player.playing .bar {
+  animation: waveformPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes waveformPulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(8, 89, 94, 0.2);
+  transition: width 0.5s ease;
+  pointer-events: none;
+}
+
+/* — Track list — */
+
+.trackList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.track {
+  display: grid;
+  grid-template-columns: 2rem 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.5rem 0.4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.track.va {
+  grid-template-columns: 2rem 1fr auto auto;
+}
+
+.track:last-child {
+  border-bottom: none;
+}
+
+.track:hover {
+  background: rgba(8, 89, 94, 0.08);
+}
+
+.track.active {
+  background: rgba(8, 89, 94, 0.12);
+  color: var(--gnos-turquoise);
+}
+
+.track.active .index,
+.track.active .title {
+  color: var(--gnos-turquoise);
+}
+
+.index {
+  font-family: var(--gnos-font-body);
+  font-size: 0.7rem;
+  color: var(--gnos-muted);
+}
+
+.title {
+  font-family: var(--gnos-font-body);
+  font-size: 0.85rem;
+  color: var(--gnos-white);
+}
+
+.artist {
+  font-family: var(--gnos-font-body);
+  font-size: 0.75rem;
+  color: var(--gnos-muted);
+}
+
+.duration {
+  font-family: var(--gnos-font-body);
+  font-size: 0.7rem;
+  color: var(--gnos-muted);
+}
+
+.placeholderNote {
+  margin: 1rem 0 0;
+  font-family: var(--gnos-font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gnos-muted);
+  opacity: 0.7;
+}

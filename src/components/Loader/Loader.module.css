@@ -1,0 +1,56 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+}
+
+/* Position bar a little below middle */
+.container {
+  position: absolute;
+  top: 58%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* Same outline style as header frame */
+.barOutline {
+  position: relative;
+  width: 420px;
+  height: 26px;
+  border: 1px solid var(--gnos-turquoise);
+  border-radius: 2px;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  box-shadow:
+    0 0 6px var(--gnos-turquoise-glow-bright),
+    0 0 14px var(--gnos-turquoise-glow),
+    inset 0 0 8px rgba(8, 89, 94, 0.06);
+}
+
+.barFill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: var(--gnos-turquoise);
+  box-shadow: 0 0 8px var(--gnos-turquoise-glow-bright);
+}
+
+.percent {
+  font-family: var(--gnos-font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: var(--gnos-turquoise);
+  text-shadow:
+    0 0 4px var(--gnos-turquoise-glow-bright),
+    0 0 12px var(--gnos-turquoise-glow);
+  min-width: 3.5ch;
+}

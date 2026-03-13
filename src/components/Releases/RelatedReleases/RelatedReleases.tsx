@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { allReleases } from 'content-collections';
+import { sortedReleases } from '@/lib/releases';
 import { ROUTE_PATHS } from '@/constants/routes';
 import type { Release } from 'content-collections';
 import styles from './RelatedReleases.module.css';
@@ -9,7 +9,7 @@ interface RelatedReleasesProps {
 }
 
 export const RelatedReleases = ({ currentSlug }: RelatedReleasesProps) => {
-  const others = allReleases.filter((r) => r.slug !== currentSlug);
+  const others = sortedReleases.filter((r) => r.slug !== currentSlug);
 
   if (others.length === 0) return null;
 

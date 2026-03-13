@@ -11,6 +11,9 @@
 # production
 /dist
 
+# content-collections generated
+.content-collections
+
 # misc
 .DS_Store
 .env.local

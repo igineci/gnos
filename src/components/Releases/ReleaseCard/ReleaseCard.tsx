@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ROUTE_PATHS } from '@/constants/routes';
 import type { Release } from 'content-collections';
+import { getArtistDisplay } from '@/lib/releases';
 import styles from './ReleaseCard.module.css';
 
 interface ReleaseCardProps {
@@ -8,11 +9,7 @@ interface ReleaseCardProps {
 }
 
 export const ReleaseCard = ({ release }: ReleaseCardProps) => {
-  const artistDisplay =
-    release.type === 'album'
-      ? release.artist
-      : release.artists?.map((a) => a.name).join(', ') ?? '';
-
+  const artistDisplay = getArtistDisplay(release, 'full');
   const typeClass = release.type === 'album' ? styles.album : styles.va;
 
   return (
@@ -27,7 +24,6 @@ export const ReleaseCard = ({ release }: ReleaseCardProps) => {
           alt={`${release.title} cover`}
           className={styles.cover}
         />
-        <div className={styles.grain} aria-hidden />
         <div className={styles.overlay}>
           <span className={styles.title}>{release.title}</span>
           {artistDisplay && (
@@ -35,7 +31,6 @@ export const ReleaseCard = ({ release }: ReleaseCardProps) => {
           )}
         </div>
       </div>
-      <span className={styles.catalog}>{release.catalogNumber}</span>
     </Link>
   );
 };

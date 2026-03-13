@@ -1,0 +1,96 @@
+/* — ReleaseDatabaseItem: horizontal layout, artwork + text — */
+
+.item {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+  padding: 1rem;
+  border: 0.35px solid var(--gnos-turquoise);
+  background: rgba(0, 0, 0, 0.6);
+  text-decoration: none;
+  color: inherit;
+  transition:
+    background-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.item:hover {
+  background: rgba(8, 89, 94, 0.1);
+  box-shadow:
+    0 0 10px var(--gnos-turquoise-glow-bright),
+    0 0 24px var(--gnos-turquoise-glow),
+    inset 0 0 12px rgba(8, 89, 94, 0.06);
+}
+
+.item:hover .artwork {
+  box-shadow:
+    0 0 10px var(--gnos-turquoise-glow-bright),
+    0 0 20px var(--gnos-turquoise-glow);
+}
+
+.artwork {
+  position: relative;
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+}
+
+.coverFrame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cover {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  filter: contrast(1.1);
+}
+
+.details {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.title {
+  font-family: var(--gnos-font-display);
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gnos-turquoise);
+}
+
+.artist {
+  font-family: var(--gnos-font-display);
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gnos-turquoise);
+  opacity: 0.85;
+}
+
+.date {
+  font-family: var(--gnos-font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--gnos-turquoise);
+  opacity: 0.75;
+}

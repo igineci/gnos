@@ -14,6 +14,7 @@ export interface TracklistItem {
 export interface ReleaseArtist {
   name: string;
   bio?: string;
+  image?: string;
 }
 
 export interface ReleaseCredit {

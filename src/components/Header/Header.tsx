@@ -4,10 +4,11 @@ import { ROUTE_PATHS } from '@/constants/routes';
 import styles from './Header.module.css';
 
 const NAV_ITEMS = [
-  { label: 'About', path: ROUTE_PATHS.ABOUT },
+  { label: 'Home', path: ROUTE_PATHS.HOME },
   { label: 'Releases', path: ROUTE_PATHS.RELEASES },
-  { label: 'Blog', path: ROUTE_PATHS.BLOG },
-  { label: 'Team', path: ROUTE_PATHS.TEAM },
+  { label: 'Reflections', path: ROUTE_PATHS.REFLECTIONS },
+  { label: 'Gnos', path: ROUTE_PATHS.TEAM },
+  { label: 'About', path: ROUTE_PATHS.ABOUT },
   { label: 'Contact', path: ROUTE_PATHS.CONTACT },
 ] as const;
 
@@ -73,10 +74,44 @@ function ScrambleText({
   );
 }
 
+const SCROLL_THRESHOLD = 90;
+
 export const Header = () => {
   const location = useLocation();
   const hasMounted = useRef(false);
   const prevPath = useRef(location.pathname);
+  const frameRef = useRef<HTMLDivElement>(null);
+  const lastScrollY = useRef(0);
+  const [hidden, setHidden] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const y = window.scrollY;
+      if (y > lastScrollY.current && y > SCROLL_THRESHOLD) {
+        setHidden(true);
+      } else {
+        setHidden(false);
+      }
+      lastScrollY.current = y;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const el = frameRef.current;
+    if (!el) return;
+
+    const setWidth = () => {
+      document.documentElement.style.setProperty('--header-frame-width', `${el.offsetWidth}px`);
+    };
+
+    setWidth();
+    const ro = new ResizeObserver(setWidth);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   const [triggers, setTriggers] = useState<Record<string, number>>(() => {
     const init: Record<string, number> = {};
@@ -104,27 +139,29 @@ export const Header = () => {
   }, [location.pathname]);
 
   return (
-    <header className={styles.header}>
-      <nav aria-label="Main">
-        <ul className={styles.nav}>
-          {NAV_ITEMS.map(({ label, path }, index) => (
-            <li key={path}>
-              <NavLink
-                to={path}
-                className={({ isActive }) =>
-                  `${styles.navLink} ${isActive ? styles.active : ''}`
-                }
-              >
-                <ScrambleText
-                  text={label}
-                  trigger={triggers[path] || 0}
-                  delay={!hasMounted.current ? 600 : 1200}
-                />
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      </nav>
+    <header className={`${styles.header} ${hidden ? styles.headerHidden : ''}`}>
+      <div ref={frameRef} className={styles.frame}>
+        <nav aria-label="Main" className={styles.navWrap}>
+          <ul className={styles.nav}>
+            {NAV_ITEMS.map(({ label, path }, index) => (
+              <li key={path}>
+                <NavLink
+                  to={path}
+                  className={({ isActive }) =>
+                    `${styles.navLink} ${isActive ? styles.active : ''}`
+                  }
+                >
+                  <ScrambleText
+                    text={label}
+                    trigger={triggers[path] || 0}
+                    delay={!hasMounted.current ? index * 280 : 1200}
+                  />
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
     </header>
   );
 };

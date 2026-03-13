@@ -21,25 +21,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-/* film grain — makes cover art look like old photography */
-.grain {
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
-  pointer-events: none;
-  mix-blend-mode: overlay;
-  opacity: 0.08;
-}
-
-.card.album .grain {
-  opacity: 0.14;
-}
-
-.card.album:hover .grain {
-  animation: grainFlicker 0.8s ease-in-out infinite;
+  filter: grayscale(100%);
+  transition: transform 0.5s ease, filter 0.5s ease;
 }
 
 .overlay {
@@ -95,6 +78,7 @@
 
 .card:hover .cover {
   transform: scale(1.03);
+  filter: grayscale(0%);
 }
 
 .card:hover .overlay {
@@ -104,16 +88,6 @@
 .card:hover .title,
 .card:hover .artist {
   filter: blur(0);
-}
-
-/* VA: electric turquoise glow */
-.card.va:hover {
-  box-shadow: 0 0 32px var(--gnos-turquoise-glow-bright), 0 0 48px var(--gnos-turquoise-glow);
-}
-
-/* Album: grain animation on hover */
-.card.album:hover {
-  box-shadow: none;
 }
 
 /* — ACTIVE — */
@@ -134,11 +108,3 @@
   }
 }
 
-@keyframes grainFlicker {
-  0%, 100% {
-    opacity: 0.14;
-  }
-  50% {
-    opacity: 0.24;
-  }
-}

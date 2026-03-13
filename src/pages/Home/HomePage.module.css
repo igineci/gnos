@@ -1,0 +1,254 @@
+.section {
+  width: 100%;
+  min-height: 60vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.stack {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.panel {
+  position: relative;
+  border: 1px solid var(--gnos-turquoise);
+  background: rgba(0, 0, 0, 0.7);
+  box-shadow:
+    0 0 6px var(--gnos-turquoise-glow),
+    inset 0 0 20px rgba(8, 89, 94, 0.03);
+  overflow: hidden;
+}
+
+.panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid transparent;
+  box-shadow: inset 0 0 12px rgba(8, 89, 94, 0.08);
+  pointer-events: none;
+}
+
+.logoFrame {
+  position: relative;
+  width: 100%;
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.frameSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+.logoInner {
+  position: relative;
+  z-index: 1;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  max-width: 390px;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 8px var(--gnos-turquoise-glow));
+  animation: logoGlow 3s ease-in-out infinite;
+}
+
+.taglineFrame {
+  position: relative;
+  width: 100%;
+  min-width: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.textFrameSvg {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+.tagline {
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+  font-family: var(--gnos-font-tagline);
+  font-size: clamp(1.7rem, 1.5vw, 2.9rem);
+  color: #14b8b8;
+  letter-spacing: var(--gnos-font-tracking-wide);
+  text-shadow:
+    0 0 30px rgba(0, 0, 0, 0.99),
+    0 0 50px rgba(0, 0, 0, 0.9),
+    0 0 70px rgba(0, 0, 0, 0.75),
+    0 0 90px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+  padding: 0 1rem;
+  max-width: 88%;
+  text-align: center;
+  box-sizing: content-box;
+}
+
+.sectionLinksRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.sectionLinkFrame {
+  position: relative;
+  min-height: 92px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  overflow: hidden;
+  transition: filter 0.2s ease;
+}
+
+.sectionLinkFrame:hover {
+  filter: brightness(1.15);
+}
+
+.sectionLinkFrame:hover .sectionLinkText {
+  color: #2dd4d4;
+}
+
+.sectionLinkFrameSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+.sectionLinkText {
+  position: relative;
+  z-index: 1;
+  font-family: var(--gnos-font-display);
+  font-size: 1.05rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #14b8b8;
+  text-shadow:
+    0 0 6px rgba(9, 9, 9, 0.8),
+    0 0 16px rgba(9, 9, 9, 0.8);
+  padding: 0 0.5rem;
+  text-align: center;
+}
+
+/* — bottom row: glitch + waveform — */
+.bottomRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+/* — panel: glitch — */
+.panelGlitch {
+  min-height: 80px;
+}
+
+.glitchPattern {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 1rem;
+}
+
+.glitchBar {
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gnos-turquoise) 20%,
+    var(--gnos-turquoise) 80%,
+    transparent
+  );
+  opacity: 0.5;
+  animation: glitchPulse 2s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes glitchPulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scaleX(0.8);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scaleX(1);
+  }
+}
+
+/* — panel: waveform — */
+.panelWaveform {
+  min-height: 80px;
+}
+
+.waveform {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gnos-turquoise);
+}
+
+.waveformSvg {
+  width: 90%;
+  height: 50%;
+  opacity: 0.8;
+  animation: waveformOscillate 3s ease-in-out infinite;
+}
+
+@keyframes waveformOscillate {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* — responsive — */
+@media (max-width: 520px) {
+  .sectionLinksRow {
+    grid-template-columns: 1fr;
+  }
+
+  .bottomRow {
+    grid-template-columns: 1fr;
+  }
+
+  .tagline {
+    font-size: 1.5rem;
+  }
+
+  .sectionLinkText {
+    font-size: 0.95rem;
+  }
+}
