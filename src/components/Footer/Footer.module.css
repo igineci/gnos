@@ -1,76 +1,72 @@
-/* — footer: ritual closing, not a corporate footer — */
+/* — Footer: same width as header and page content, border from footer-frame.svg — */
 
 .footer {
   position: relative;
-  padding: 3rem 1.5rem 1.5rem;
+  margin-top: auto;
+  width: var(--gnos-content-width, 1200px);
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  border: 24px solid transparent;
+  border-image: url('/svg/footer-frame.svg') 80 fill / 24px / 0 stretch;
+  background: transparent;
   overflow: hidden;
-  isolation: isolate;
+  box-sizing: border-box;
 }
 
-/* horizontal pulse line — the floor of the space */
-.footer::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 30%;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.12),
-    transparent
-  );
-}
-
-/* the mark: logo small, centered, like a seal */
-.seal {
-  display: block;
-  width: 5rem;
-  height: auto;
-  margin: 0 auto 1.5rem;
-  opacity: 0.2;
-  transition: opacity 0.6s ease;
-}
-
-.seal:hover {
-  opacity: 0.45;
-}
-
-/* single line of text — label identity */
-.identity {
-  text-align: center;
-  font-family: var(--gnos-font-display);
-  font-size: 0.55rem;
-  font-weight: 900;
-  letter-spacing: 0.5em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.15);
-  margin-bottom: 2rem;
-}
-
-/* bottom row */
-.dataRow {
+.frameInner {
+  padding: 2rem 2.5rem 2.5rem;
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
 }
 
-.datum {
+.iconsRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.iconLink {
+  color: var(--gnos-muted);
+  transition: color 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconLink:hover {
+  color: var(--gnos-turquoise);
+}
+
+.copyright {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
   font-family: var(--gnos-font-body);
-  font-size: 0.5rem;
-  letter-spacing: 0.15em;
-  color: rgba(255, 255, 255, 0.1);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+  color: var(--gnos-muted);
+  margin: 0;
 }
 
-.datum a {
-  color: inherit;
-  text-decoration: none;
-  transition: color 0.4s ease;
+.copyrightIcon {
+  display: inline-flex;
+  align-items: center;
+  opacity: 0.85;
 }
 
-.datum a:hover {
-  color: rgba(255, 255, 255, 0.35);
+.rights {
+  font-family: var(--gnos-font-body);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gnos-muted);
+  opacity: 0.7;
+  margin: 0;
 }

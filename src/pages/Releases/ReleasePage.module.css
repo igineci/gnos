@@ -24,7 +24,7 @@
 .mainFrame {
   position: relative;
   width: 100%;
-  max-width: var(--header-frame-width, 800px);
+  max-width: var(--gnos-content-width, 800px);
   margin-left: auto;
   margin-right: auto;
   min-height: 200px;

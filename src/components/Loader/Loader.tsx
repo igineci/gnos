@@ -4,7 +4,11 @@ import styles from './Loader.module.css';
 const DURATION_MS = 3000;
 const FADE_OUT_MS = 500;
 
-export const Loader = () => {
+interface LoaderProps {
+  onExited?: () => void;
+}
+
+export const Loader = ({ onExited }: LoaderProps) => {
   const [exited, setExited] = useState(false);
   const barRef = useRef<HTMLDivElement>(null);
   const percentRef = useRef<HTMLSpanElement>(null);
@@ -28,12 +32,15 @@ export const Loader = () => {
           overlayRef.current.style.transition = `opacity ${FADE_OUT_MS}ms ease-out`;
           overlayRef.current.style.pointerEvents = 'none';
         }
-        setTimeout(() => setExited(true), FADE_OUT_MS);
+        setTimeout(() => {
+          setExited(true);
+          onExited?.();
+        }, FADE_OUT_MS);
       }
     };
 
     requestAnimationFrame(tick);
-  }, []);
+  }, [onExited]);
 
   if (exited) return null;
 

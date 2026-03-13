@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import { getFeaturedArtists, getTeamMembers } from '@/data/gnos';
+import { ROUTE_PATHS } from '@/constants/routes';
 import styles from './TeamPage.module.css';
 
 const TeamPage = () => {
@@ -35,7 +37,12 @@ const TeamPage = () => {
               <div className={styles.galleryGrid}>
                 {featuredArtists.length > 0 ? (
                   featuredArtists.map((artist) => (
-                    <div key={artist.name} className={styles.galleryItem} title={artist.name}>
+                    <Link
+                      key={artist.slug}
+                      to={`/artist/${artist.slug}`}
+                      className={styles.galleryItem}
+                      title={artist.name}
+                    >
                       <div className={styles.galleryArtwork}>
                         <img
                           src="/svg/releases/cover-frame.svg"
@@ -53,7 +60,15 @@ const TeamPage = () => {
                           <div className={styles.coverPlaceholder} aria-hidden />
                         )}
                       </div>
-                    </div>
+                      <div className={styles.hoverOverlay} aria-hidden>
+                        <img
+                          src="/svg/hover-gnos.svg"
+                          alt=""
+                          className={styles.hoverSvg}
+                        />
+                        <span className={styles.hoverName}>{artist.name}</span>
+                      </div>
+                    </Link>
                   ))
                 ) : (
                   <p className={styles.emptyState}>No featured artists yet.</p>
@@ -85,7 +100,12 @@ const TeamPage = () => {
               <div className={styles.galleryGrid}>
                 {teamMembers.length > 0 ? (
                   teamMembers.map((member) => (
-                    <div key={member.name} className={styles.galleryItem} title={member.name}>
+                    <Link
+                      key={member.slug}
+                      to={`/team/${member.slug}`}
+                      className={styles.galleryItem}
+                      title={member.name}
+                    >
                       <div className={styles.galleryArtwork}>
                         <img
                           src="/svg/releases/cover-frame.svg"
@@ -103,7 +123,15 @@ const TeamPage = () => {
                           <div className={styles.coverPlaceholder} aria-hidden />
                         )}
                       </div>
-                    </div>
+                      <div className={styles.hoverOverlay} aria-hidden>
+                        <img
+                          src="/svg/hover-gnos.svg"
+                          alt=""
+                          className={styles.hoverSvg}
+                        />
+                        <span className={styles.hoverName}>{member.name}</span>
+                      </div>
+                    </Link>
                   ))
                 ) : (
                   <p className={styles.emptyState}>No team members yet.</p>

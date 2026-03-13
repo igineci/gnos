@@ -1,0 +1,33 @@
+.gnosFrame {
+  position: relative;
+  border: 18px solid transparent;
+  border-image: url('/svg/frame-gnos.svg') 38 fill / 48px / 0 stretch;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.frameContent {
+  position: relative;
+  padding: 0rem 1rem;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.gnosFrameImages .frameContent {
+  padding: 0;
+  padding-left: 1rem;
+}
+
+.gnosFrameImages {
+  min-height: 0;
+  height: 100%;
+}
+
+.gnosFrameHome {
+  border: 18px solid transparent;
+  border-image: url('/svg/home/frame.svg') 60 fill / 58px / 0 stretch;
+}

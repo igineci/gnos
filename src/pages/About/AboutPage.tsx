@@ -28,12 +28,19 @@ const AboutPage = () => {
           <div className={`${styles.frameContent} ${styles.frameContentTop}`}>
             <h2 className={styles.heading}>About Gnos</h2>
             <p className={styles.paragraph}>
-              GNOS Records is a techno label established in Belgrade, Serbia. We
-              are dedicated to a sound that is both primal and visionary, driven
-              by artistic integrity and creative necessity. GNOS gives artists a
-              platform to express and extend the life of their work, while
-              fostering deeper connections across the techno community, between
-              artists, managers, organizers, and the ravers who live for the music.
+              GNOS Records is a techno label established in Belgrade, Serbia. We are dedicated to a sound that is both primal and visionary, driven by artistic integrity and creative necessity. GNOS gives artists a platform to express and extend the life of their work, while fostering deeper connections across the techno community, between artists, managers, organizers, and the ravers who live for the music.
+            </p>
+            <p className={styles.paragraph}>
+              Beyond releasing music, GNOS exists as a space for exploration. Inspired by the idea of gnosis, knowledge gained through experience and insight, we approach techno not only as a genre, but as a medium for expression, reflection, and discovery.
+            </p>
+            <p className={styles.paragraph}>
+              Through releases, reflections, and collaborations with artists from different disciplines, GNOS aims to create a platform where sound, thought, and visual culture intersect. Philosophy, psychology, mythology, religion and other forms of artistic inquiry serve as a natural backdrop for the music we release.
+            </p>
+            <p className={styles.paragraph}>
+              Within this framework, gnosis represents movement from not knowing toward deeper understanding. GNOS adopts this principle as a guiding thread for the project: each release, collaboration, and reflection becomes part of an ongoing exploration, where techno functions as both a physical experience and a space for insight.
+            </p>
+            <p className={styles.paragraph}>
+              In this sense, GNOS also reflects a collective process of awareness. Just as gnosis points toward knowledge discovered through direct experience, techno itself becomes a place where such experiences unfold. The label embraces this dynamic as a living dialogue between artists and listeners, where each release contributes another fragment to a broader exploration of sound, perception, and meaning.
             </p>
           </div>
           <div className={`${styles.frameContent} ${styles.frameContentBottom}`}>

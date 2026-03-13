@@ -1,4 +1,4 @@
-import { Suspense, useEffect } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Header } from '@/components/Header/Header';
 import { Footer } from '@/components/Footer/Footer';
@@ -10,6 +10,7 @@ import styles from './RootLayout.module.css';
 export const RootLayout = () => {
   const { pathname } = useLocation();
   const isAboutPage = pathname === ROUTE_PATHS.ABOUT;
+  const [loaderExited, setLoaderExited] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -27,7 +28,7 @@ export const RootLayout = () => {
       className="root-layout"
       style={{ minHeight: '100vh', backgroundColor: 'var(--gnos-black)', display: 'flex', flexDirection: 'column', position: 'relative' }}
     >
-      <Loader />
+      <Loader onExited={() => setLoaderExited(true)} />
       <div
         style={{
           position: 'fixed',
@@ -62,9 +63,9 @@ export const RootLayout = () => {
           aria-hidden
         />
       </div>
-      <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', flex: 1, paddingTop: 'calc(var(--gnos-header-height) + 10px)' }}>
-        <Header />
-        <main style={{ flex: 1 }}>
+      <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', flex: 1, paddingTop: 'calc(var(--gnos-header-height) + var(--gnos-home-vertical-gap, 2.25rem))' }}>
+        <Header loaderExited={loaderExited} />
+        <main style={{ flex: 1, width: '100%', boxSizing: 'border-box' }}>
           <div className={styles.pageContent}>
             <Outlet />
           </div>

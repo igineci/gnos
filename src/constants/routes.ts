@@ -7,6 +7,10 @@ export const ROUTE_PATHS = {
   REFLECTIONS: '/reflections',
   /** Pattern for single release: /releases/:slug */
   RELEASE: '/releases/:slug',
+  /** Pattern for artist person page: /artist/:slug */
+  ARTIST: '/artist/:slug',
+  /** Pattern for team member person page: /team/:slug */
+  TEAM_MEMBER: '/team/:slug',
 } as const;
 
 /** Page order for pagination (linear flow). */

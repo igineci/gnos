@@ -1,75 +1,381 @@
 .header {
+  --header-accent: var(--gnos-turquoise);
+  --header-muted: var(--gnos-muted);
+  --header-x-padding: 1rem;
+  --header-bar-height: 6.5rem;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  width: 100%;
+  height: var(--header-bar-height);
   z-index: 100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.4rem var(--gnos-header-padding);
   isolation: isolate;
-  margin-bottom: 5px;
-  margin-top: 10px;
-  transform: translateY(0);
-  transition: transform 0.3s ease;
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(0 0 0 0);
+  box-sizing: border-box;
 }
 
-.headerHidden {
+.headerInner {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 100%;
+  height: var(--header-bar-height);
+  padding: 0.75rem var(--header-x-padding) 0;
+  padding-top: 1.125rem;
+  background: var(--gnos-black);
+  transform: translateY(0);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0s;
+  will-change: transform;
+  box-sizing: border-box;
+}
+
+.headerInner.headerHidden {
   transform: translateY(-100%);
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.25s;
+}
+
+.headerWaiting {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.menuBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.menuButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0.5rem;
+  margin: -0.5rem;
+  border: 0;
+  background: transparent;
+  color: var(--header-accent);
+  cursor: pointer;
+  border-radius: 0.25rem;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.menuButton:hover {
+  color: var(--gnos-white);
+  background: rgba(8, 89, 94, 0.2);
+}
+
+.menuButtonIcon {
+  position: relative;
+  width: 1.25rem;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+}
+
+.menuButtonIcon::before,
+.menuButtonIcon::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+  transition: transform 0.2s ease;
+}
+
+.menuButtonIcon::before {
+  top: -0.375rem;
+}
+
+.menuButtonIcon::after {
+  top: 0.375rem;
+}
+
+.headerMenuOpen .menuButtonIcon {
+  background: transparent;
+}
+
+.headerMenuOpen .menuButtonIcon::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.headerMenuOpen .menuButtonIcon::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+.frame {
+  width: 100%;
+  max-width: calc(100% - 2 * var(--header-x-padding));
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.75rem;
+  min-height: 2.25rem;
+}
+
+.logoBlock {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: var(--header-accent);
+  flex-shrink: 0;
+}
+
+.logoIcon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.logoText {
+  font-family: var(--gnos-font-display);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: inherit;
+}
+
+.navWrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 98;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 1.5rem 2rem;
+  background: var(--gnos-black);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.headerMenuOpen .navWrap {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .nav {
   display: flex;
-  align-items: baseline;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   list-style: none;
   margin: 0;
   padding: 0;
+  gap: 0;
+}
+
+.nav li {
+  width: 100%;
+  max-width: 20rem;
+  text-align: center;
 }
 
 .navLink {
-  display: inline-block;
-  padding: 0.5rem 20px;
+  position: relative;
+  display: block;
+  padding: 1rem 0.75rem;
+  min-height: 2.75rem;
   font-family: var(--gnos-font-display);
-  font-size: 1.7rem;
-  font-weight: 900;
-  letter-spacing: 0.25em;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--gnos-turquoise);
+  color: var(--header-muted);
   text-decoration: none;
-  transition: color 0.4s ease, text-shadow 0.4s ease;
-}
-
-.char {
-  display: inline-block;
-  filter: blur(0px);
-  opacity: 1;
-  transition:
-    filter 0.5s ease calc(var(--i) * 0.05s),
-    opacity 0.5s ease calc(var(--i) * 0.05s),
-    transform 0.5s ease calc(var(--i) * 0.05s),
-    text-shadow 0.5s ease calc(var(--i) * 0.05s),
-    color 0.15s ease;
-}
-
-.scrambling {
-  color: var(--gnos-turquoise);
-  opacity: 0.7;
-  filter: blur(0.6px);
+  transition: color 0.2s ease;
+  margin-bottom: 0;
 }
 
 .navLink:hover {
-  color: var(--gnos-white);
-  text-shadow:
-    0 0 6px rgba(8, 89, 94, 0.9),
-    0 0 16px var(--gnos-turquoise-glow-bright),
-    0 0 32px var(--gnos-turquoise-glow);
+  color: var(--header-accent);
 }
 
-.navLink.active {
-  color: var(--gnos-white);
-  text-shadow:
-    0 0 6px rgba(8, 89, 94, 0.9),
-    0 0 16px var(--gnos-turquoise-glow-bright),
-    0 0 32px var(--gnos-turquoise-glow);
+.navLinkActive {
+  color: var(--header-accent);
+}
+
+/* Decode animation */
+.char {
+  display: inline-block;
+  filter: blur(0);
+  opacity: 1;
+  transition:
+    filter 0.5s ease calc(var(--i, 0) * 0.05s),
+    opacity 0.5s ease calc(var(--i, 0) * 0.05s),
+    color 0.2s ease;
+}
+
+.scrambling {
+  color: var(--header-accent);
+  opacity: 0.75;
+  filter: blur(0.6px);
+}
+
+.navLinkUnderline::after {
+  content: '';
+  position: absolute;
+
+}
+
+.decorativeRight {
+  display: none;
+  flex-shrink: 0;
+  width: 1.875rem;
+  height: 0.9375rem;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--header-accent);
+  position: relative;
+}
+
+.decorativeRight::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 1px;
+  background: var(--header-accent);
+}
+
+.decorativeSvg {
+  display: none;
+
+}
+
+/* — line row: full-width line + SVG indicator in cutout; line at bottom of SVG — */
+.lineRow {
+  position: relative;
+  width: 100%;
+  height: 16px;
+  --indicator-left: 0;
+  --indicator-width: 102px;
+}
+
+.lineSegment {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: var(--header-accent);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lineSegment[data-side='left'] {
+  left: 0;
+  width: var(--indicator-left);
+}
+
+.lineSegment[data-side='right'] {
+  left: calc(var(--indicator-left) + var(--indicator-width));
+  right: 0;
+  width: auto;
+  bottom: 0;
+}
+
+.indicator {
+  position: absolute;
+  left: var(--indicator-left);
+  top: 0;
+  width: var(--indicator-width);
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--header-accent);
+  opacity: 0;
+  transition:
+    left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.indicatorVisible {
+  opacity: 1;
+}
+
+.indicatorSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+/* — Desktop: horizontal nav, hide hamburger, show decorative — */
+@media (min-width: 768px) {
+  .header {
+    --header-x-padding: 3rem;
+  }
+
+  .frame {
+    width: var(--gnos-content-width, 1200px);
+    max-width: calc(100% - 2 * var(--header-x-padding));
+  }
+
+  .menuButton {
+    display: none;
+  }
+
+  .navWrap {
+    position: static;
+    flex: 1;
+    padding: 0;
+    background: transparent;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .nav {
+    flex-direction: row;
+    gap: 2.5rem;
+  }
+
+  .nav li {
+    width: auto;
+    max-width: none;
+  }
+
+  .navLink {
+    display: inline-block;
+    padding: 0.25rem 0;
+    min-height: 0;
+    font-size: 0.875rem;
+    margin-bottom: -0.625rem;
+  }
+
+  .navLinkUnderline::after {
+    bottom: -0.4375rem;
+  }
+
+  .decorativeRight {
+    display: flex;
+  }
 }

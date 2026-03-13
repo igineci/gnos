@@ -1,6 +1,6 @@
 /* — page content: identical width to header frame, centered — */
 .pageContent {
-  width: var(--header-frame-width, 800px);
+  width: var(--gnos-content-width, 800px);
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;

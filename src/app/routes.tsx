@@ -11,6 +11,7 @@ const BlogPage = lazy(() => import('@/pages/Blog/BlogPage'));
 const ReleasesPage = lazy(() => import('@/pages/Releases/ReleasesPage'));
 const ReleasePage = lazy(() => import('@/pages/Releases/ReleasePage'));
 const ReflectionsPage = lazy(() => import('@/pages/Reflections/ReflectionsPage'));
+const PersonPage = lazy(() => import('@/pages/Person/PersonPage'));
 
 const lazyPage = (Component: React.LazyExoticComponent<React.ComponentType>) => (
   <Suspense>
@@ -28,6 +29,8 @@ export const router = createBrowserRouter([
       { path: ROUTE_PATHS.TEAM, element: lazyPage(TeamPage) },
       { path: ROUTE_PATHS.RELEASES, element: lazyPage(ReleasesPage) },
       { path: ROUTE_PATHS.RELEASE, element: lazyPage(ReleasePage) },
+      { path: ROUTE_PATHS.ARTIST, element: lazyPage(PersonPage) },
+      { path: ROUTE_PATHS.TEAM_MEMBER, element: lazyPage(PersonPage) },
       { path: ROUTE_PATHS.REFLECTIONS, element: lazyPage(ReflectionsPage) },
     ],
   },
