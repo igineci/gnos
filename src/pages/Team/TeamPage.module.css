@@ -66,17 +66,8 @@
 .sectionHeader {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem;
   margin-bottom: 1rem;
-  flex-wrap: wrap;
-}
-
-.sectionTitleRow {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex: 1;
   min-width: 0;
 }
 
@@ -90,105 +81,31 @@
   flex-shrink: 0;
 }
 
-.sectionLine {
+/* Line separator in same row as title, fills rest of width */
+.sectionLineSeparator {
   flex: 1;
-  height: 1px;
-  min-width: 1rem;
-  background: linear-gradient(90deg,
-      var(--gnos-turquoise) 0%,
-      transparent 100%);
-  box-shadow: 0 0 6px var(--gnos-turquoise-glow);
-}
-
-.decorLines {
+  min-width: 0;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-  flex-shrink: 0;
-  min-width: 120px;
+  align-items: center;
 }
 
-.decorLines .glitchBar {
-  height: 4px;
-  background: linear-gradient(90deg,
-      transparent,
-      var(--gnos-turquoise) 20%,
-      var(--gnos-turquoise) 80%,
-      transparent);
-  opacity: 0.5;
-  animation: glitchPulse 2s ease-in-out infinite;
-  animation-delay: var(--delay, 0s);
-}
-
-@keyframes glitchPulse {
-
-  0%,
-  100% {
-    opacity: 0.3;
-    transform: scaleX(0.8);
-  }
-
-  50% {
-    opacity: 0.7;
-    transform: scaleX(1);
-  }
+.sectionLineSeparator .lineSeparatorSvg {
+  display: block;
+  width: 100%;
+  height: 14px;
+  object-fit: fill;
+  object-position: center;
 }
 
 .listWrapper {
   position: relative;
   border: 1px solid var(--gnos-turquoise);
   padding: 1rem;
-  background: rgba(0, 0, 0, 0.5);
-  box-shadow:
-    0 0 8px var(--gnos-turquoise-glow-bright),
-    0 0 20px var(--gnos-turquoise-glow),
-    inset 0 0 20px rgba(8, 89, 94, 0.03);
+  background: transparent;
   overflow: visible;
 }
 
-.cornerFrame {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.corner {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  border-color: var(--gnos-turquoise);
-  border-style: solid;
-  border-width: 0;
-  box-shadow: 0 0 4px var(--gnos-turquoise-glow);
-}
-
-.corner[data-position='tl'] {
-  top: 4px;
-  left: 4px;
-  border-top-width: 2px;
-  border-left-width: 2px;
-}
-
-.corner[data-position='tr'] {
-  top: 4px;
-  right: 4px;
-  border-top-width: 2px;
-  border-right-width: 2px;
-}
-
-.corner[data-position='bl'] {
-  bottom: 4px;
-  left: 4px;
-  border-bottom-width: 2px;
-  border-left-width: 2px;
-}
-
-.corner[data-position='br'] {
-  bottom: 4px;
-  right: 4px;
-  border-bottom-width: 2px;
-  border-right-width: 2px;
-}
 
 /* — Gallery: grid of images in cover-frame.svg — */
 .galleryGrid {
@@ -331,8 +248,4 @@
     align-items: flex-start;
   }
 
-  .decorLines {
-    width: 100%;
-    min-width: 0;
-  }
 }

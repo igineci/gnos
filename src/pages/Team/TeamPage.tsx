@@ -17,14 +17,9 @@ const TeamPage = () => {
           {/* Featured Artists — grid of images in cover frame */}
           <div className={styles.section}>
             <div className={styles.sectionHeader}>
-              <div className={styles.sectionTitleRow}>
-                <span className={styles.sectionTitle}>FEATURED ARTISTS</span>
-                <div className={styles.sectionLine} />
-              </div>
-              <div className={styles.decorLines}>
-                <div className={styles.glitchBar} />
-                <div className={styles.glitchBar} style={{ '--delay': '0.2s' } as React.CSSProperties} />
-                <div className={styles.glitchBar} style={{ '--delay': '0.4s' } as React.CSSProperties} />
+              <span className={styles.sectionTitle}>FEATURED ARTISTS</span>
+              <div className={styles.sectionLineSeparator} aria-hidden>
+                <img src="/svg/line-separator.svg" alt="" className={styles.lineSeparatorSvg} />
               </div>
             </div>
             <div className={styles.listWrapper}>
@@ -80,14 +75,9 @@ const TeamPage = () => {
           {/* Meet the Team — grid of images in cover frame */}
           <div className={styles.section}>
             <div className={styles.sectionHeader}>
-              <div className={styles.sectionTitleRow}>
-                <span className={styles.sectionTitle}>MEET THE TEAM</span>
-                <div className={styles.sectionLine} />
-              </div>
-              <div className={styles.decorLines}>
-                <div className={styles.glitchBar} />
-                <div className={styles.glitchBar} style={{ '--delay': '0.2s' } as React.CSSProperties} />
-                <div className={styles.glitchBar} style={{ '--delay': '0.4s' } as React.CSSProperties} />
+              <span className={styles.sectionTitle}>MEET THE TEAM</span>
+              <div className={styles.sectionLineSeparator} aria-hidden>
+                <img src="/svg/line-separator.svg" alt="" className={styles.lineSeparatorSvg} />
               </div>
             </div>
             <div className={styles.listWrapper}>
