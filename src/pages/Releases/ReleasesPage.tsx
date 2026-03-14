@@ -2,11 +2,13 @@ import { sortedReleases } from '@/lib/releases';
 import { ReleaseDatabaseItem } from '@/components/Releases/ReleaseDatabaseItem/ReleaseDatabaseItem';
 import styles from './ReleasesPage.module.css';
 
-const isUpcoming = (release: (typeof sortedReleases)[number]) =>
+const isUpcomingByDate = (release: (typeof sortedReleases)[number]) =>
   release.releaseDate?.toUpperCase().includes('TBD') ?? false;
 
-const allUpcoming = sortedReleases.filter(isUpcoming);
-const upcomingReleases = allUpcoming.slice(0, 1);
+/** Upcoming: ignorantia (by slug) plus any TBD-dated releases; not clickable, show "Coming soon" on hover */
+const upcomingReleases = sortedReleases.filter(
+  (r) => r.slug === 'ignorantia' || isUpcomingByDate(r)
+);
 const catalogReleases = sortedReleases.filter((r) => !upcomingReleases.includes(r));
 
 const ReleasesPage = () => (
@@ -20,14 +22,9 @@ const ReleasesPage = () => (
         {upcomingReleases.length > 0 && (
           <div className={styles.section}>
             <div className={styles.sectionHeader}>
-              <div className={styles.sectionTitleRow}>
-                <span className={styles.sectionTitle}>UPCOMING RELEASES</span>
-                <div className={styles.sectionLine} />
-              </div>
-              <div className={styles.decorLines}>
-                <div className={styles.glitchBar} />
-                <div className={styles.glitchBar} style={{ '--delay': '0.2s' } as React.CSSProperties} />
-                <div className={styles.glitchBar} style={{ '--delay': '0.4s' } as React.CSSProperties} />
+              <span className={styles.sectionTitle}>UPCOMING RELEASES</span>
+              <div className={styles.sectionLineSeparator} aria-hidden>
+                <img src="/svg/line-separator.svg" alt="" className={styles.lineSeparatorSvg} />
               </div>
             </div>
             <div className={styles.releaseListWrapper}>
@@ -37,9 +34,13 @@ const ReleasesPage = () => (
                 <div className={styles.corner} data-position="bl" aria-hidden />
                 <div className={styles.corner} data-position="br" aria-hidden />
               </div>
-              <div className={styles.releaseList}>
+              <div className={styles.releaseList} role="list">
                 {upcomingReleases.map((release) => (
-                  <ReleaseDatabaseItem key={release.slug} release={release} />
+                  <ReleaseDatabaseItem
+                    key={release.slug}
+                    release={release}
+                    comingSoon
+                  />
                 ))}
               </div>
             </div>
@@ -50,14 +51,9 @@ const ReleasesPage = () => (
         {catalogReleases.length > 0 && (
           <div className={styles.section}>
             <div className={styles.sectionHeader}>
-              <div className={styles.sectionTitleRow}>
-                <span className={styles.sectionTitle}>CATALOG</span>
-                <div className={styles.sectionLine} />
-              </div>
-              <div className={styles.decorLines}>
-                <div className={styles.glitchBar} />
-                <div className={styles.glitchBar} style={{ '--delay': '0.2s' } as React.CSSProperties} />
-                <div className={styles.glitchBar} style={{ '--delay': '0.4s' } as React.CSSProperties} />
+              <span className={styles.sectionTitle}>CATALOG</span>
+              <div className={styles.sectionLineSeparator} aria-hidden>
+                <img src="/svg/line-separator.svg" alt="" className={styles.lineSeparatorSvg} />
               </div>
             </div>
             <div className={styles.releaseListWrapper}>

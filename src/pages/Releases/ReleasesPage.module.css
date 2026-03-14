@@ -8,13 +8,11 @@
 .scanlineOverlay {
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.12) 2px,
-    rgba(0, 0, 0, 0.12) 4px
-  );
+  background: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.12) 2px,
+      rgba(0, 0, 0, 0.12) 4px);
   pointer-events: none;
   z-index: 1;
 }
@@ -51,17 +49,8 @@
 .sectionHeader {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem;
   margin-bottom: 1rem;
-  flex-wrap: wrap;
-}
-
-.sectionTitleRow {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex: 1;
   min-width: 0;
 }
 
@@ -75,16 +64,20 @@
   flex-shrink: 0;
 }
 
-.sectionLine {
+.sectionLineSeparator {
   flex: 1;
-  height: 1px;
-  min-width: 1rem;
-  background: linear-gradient(
-    90deg,
-    var(--gnos-turquoise) 0%,
-    transparent 100%
-  );
-  box-shadow: 0 0 6px var(--gnos-turquoise-glow);
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.sectionLineSeparator .lineSeparatorSvg {
+  display: block;
+  width: 100%;
+  height: 14px;
+  object-fit: fill;
+  object-position: center;
 }
 
 .decorLines {
@@ -97,24 +90,24 @@
 
 .decorLines .glitchBar {
   height: 4px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--gnos-turquoise) 20%,
-    var(--gnos-turquoise) 80%,
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      var(--gnos-turquoise) 20%,
+      var(--gnos-turquoise) 80%,
+      transparent);
   opacity: 0.5;
   animation: glitchPulse 2s ease-in-out infinite;
   animation-delay: var(--delay, 0s);
 }
 
 @keyframes glitchPulse {
+
   0%,
   100% {
     opacity: 0.3;
     transform: scaleX(0.8);
   }
+
   50% {
     opacity: 0.7;
     transform: scaleX(1);
@@ -124,12 +117,14 @@
 .releaseListWrapper {
   position: relative;
   padding: 1rem;
+  overflow: visible;
 }
 
 .releaseList {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  overflow: visible;
 }
 
 .emptyState {

@@ -1,23 +1,23 @@
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { ROUTE_PATHS } from '@/constants/routes';
 import type { Release } from 'content-collections';
 import { formatReleaseDate, getArtistDisplay } from '@/lib/releases';
 import styles from './ReleaseDatabaseItem.module.css';
 
-interface ReleaseDatabaseItemProps {
+export interface ReleaseDatabaseItemProps {
   release: Release;
+  /** Upcoming release: not clickable, hover shows "Coming soon" (coming-soon-hover.svg) */
+  comingSoon?: boolean;
 }
 
-export const ReleaseDatabaseItem = ({ release }: ReleaseDatabaseItemProps) => {
+export const ReleaseDatabaseItem = ({ release, comingSoon = false }: ReleaseDatabaseItemProps) => {
+  const [searchParams] = useSearchParams();
+  const forceHover = searchParams.get('forceHover') === '1';
   const artistDisplay = getArtistDisplay(release, 'short');
   const dateLabel = formatReleaseDate(release.releaseDate);
 
-  return (
-    <Link
-      to={`${ROUTE_PATHS.RELEASES}/${release.slug}`}
-      className={styles.item}
-      aria-label={`View release: ${release.title}`}
-    >
+  const content = (
+    <>
       <div className={styles.artwork}>
         <img
           src="/svg/releases/cover-frame.svg"
@@ -38,6 +38,41 @@ export const ReleaseDatabaseItem = ({ release }: ReleaseDatabaseItemProps) => {
         )}
         <span className={styles.date}>{dateLabel}</span>
       </div>
+      {comingSoon && (
+        <div className={styles.hoverOverlay} aria-hidden>
+          <img
+            src="/svg/coming-soon-hover.svg"
+            alt=""
+            className={styles.hoverSvg}
+          />
+          <span className={styles.hoverLabel}>COMING SOON</span>
+        </div>
+      )}
+    </>
+  );
+
+  if (comingSoon) {
+    return (
+      <div
+        className={styles.item}
+        role="listitem"
+        aria-disabled="true"
+        aria-label={`Upcoming release: ${release.title}`}
+        data-upcoming
+        data-force-hover={forceHover ? '' : undefined}
+      >
+        {content}
+      </div>
+    );
+  }
+
+  return (
+    <Link
+      to={`${ROUTE_PATHS.RELEASES}/${release.slug}`}
+      className={styles.item}
+      aria-label={`View release: ${release.title}`}
+    >
+      {content}
     </Link>
   );
 };

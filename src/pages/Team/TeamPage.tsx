@@ -57,7 +57,7 @@ const TeamPage = () => {
                       </div>
                       <div className={styles.hoverOverlay} aria-hidden>
                         <img
-                          src="/svg/hover-gnos.svg"
+                          src="/svg/team-hover.svg"
                           alt=""
                           className={styles.hoverSvg}
                         />
@@ -115,7 +115,7 @@ const TeamPage = () => {
                       </div>
                       <div className={styles.hoverOverlay} aria-hidden>
                         <img
-                          src="/svg/hover-gnos.svg"
+                          src="/svg/team-hover.svg"
                           alt=""
                           className={styles.hoverSvg}
                         />
