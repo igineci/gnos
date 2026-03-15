@@ -1,0 +1,62 @@
+import type { Person } from './gnos';
+import { TARENS_SHARED } from './sharedPeople';
+
+export const TEAM_MEMBERS: Person[] = [
+  {
+    name: 'Tarens',
+    slug: 'tarens',
+    ...TARENS_SHARED,
+    promoLinks: [...TARENS_SHARED.promoLinks],
+    role: 'Founder',
+  },
+  {
+    name: 'Kabay',
+    slug: 'kabay',
+    image: '/images/team/kabay-left.jpg',
+    imageTopRight: '/images/team/kabay-tr.jpeg',
+    imageBottomRight: '/images/team/kabay-br.jpg',
+    bio: 'Kabay, a self-proclaimed club shaman, focuses on the mystical connection between electronic sound and the human mind. His artistic vision is an exploration of the concept interpreting the techno club experience as the modern equivalent of the ancient shamanic ritual.\n\nHis musical voice incorporates abstract textures, complex rhythms and ritualistic soundscapes, aiming to connect with the people on the dancefloor by tapping into our primal and subconscious instincts.\n\nKabay\'s music combines body-moving energy, dance-floor-driven tempos and eccentric sound design, telling a story for both the mind and the body.\n\nHis debut vinyl EP, Tribe of Liberation, released on the iconic label Clergy, is the epitome of his evolving artistic voice, while his Existential Archetypes EP on Vault Records and releases on his own label Kybera document further exploration of his sound.\n\nKabay has delivered memorable DJ sets at prominent events across Europe and the UK such as Clergy, Meat Free, HØL, PLTFRM FSTVL, Animal Farm and many more, crafting each performance as a unique ritual designed to leave a lasting memory long after the night ends.',
+    role: 'Mastering Engineer',
+    promoLinks: [
+      { label: 'INSTAGRAM', url: 'https://www.instagram.com/kabay._/' },
+      { label: 'SOUNDCLOUD', url: 'https://soundcloud.com/kabay_music' },
+      { label: 'KYBERA RECORDS', url: 'https://kybera.bandcamp.com/' },
+      { label: 'RESIDENT ADVISOR', url: 'https://ra.co/dj/kabay' },
+      { label: 'ALL LINKS (LINKTREE)', url: 'https://linktr.ee/kabay_music' },
+      { label: 'MASTERING & TEACHING', url: 'https://www.kabaymusic.com/' },
+    ],
+  },
+  {
+    name: 'Andjela Djekic',
+    slug: 'igineci',
+    image: '/images/team/andjela-left.jpeg',
+    imageTopRight: '/images/team/andjela-left1.jpeg',
+    imageBottomRight: '/images/team/andjela-br.jpeg',
+    promoLinks: [...TARENS_SHARED.promoLinks],
+    role: 'Web Developer',
+  },
+  {
+    name: 'Ema Djipalo',
+    slug: 'ema',
+    image: '/images/team/ema-left.jpeg',
+    imageTopRight: '/images/team/ema-tr.jpeg',
+    imageBottomRight: '/images/team/ema-br.jpeg',
+    bio: 'Ema is a graphic designer from Serbia with a passion for creating clean, memorable visual identities. With a background in graphic design, she has worked with a variety of clients on projects ranging from logo and packaging design to building complete brand visuals. Alongside static design, Ema also enjoys working with animation, creating logo animations and short illustrated sequences that bring brands to life in a dynamic way. Beyond design, Ema draws inspiration from her passion for film, music, Japanese culture, and anime, influences that often inform her visual sensibility and creative approach.',
+    role: 'Graphic Designer',
+  },
+  {
+    name: 'Andrija Radojevic',
+    slug: 'andrija',
+    image: '/images/team/andrija-left.JPG',
+    imageTopRight: '/images/team/andrija-tr.JPG',
+    imageBottomRight: '/images/team/andrija-br.JPG',
+    bio: 'Andrija is a photographer from Serbia with a passion for capturing moments in time. With a background in photography, he has worked with a variety of clients on projects ranging from portrait and landscape photography to building complete brand visuals. Alongside photography, Andrija also enjoys working with video, creating short films and documentaries that bring brands to life in a dynamic way. Beyond photography, Andrija draws inspiration from his passion for film, music, Japanese culture, and anime, influences that often inform his visual sensibility and creative approach.',
+    role: 'Photographer',
+    promoLinks: [
+      { label: 'INSTAGRAM', url: 'https://www.instagram.com/andrija_radojevic/' },
+      { label: 'BEHANCE', url: 'https://www.behance.net/andrija_radojevic' },
+      { label: 'LINKEDIN', url: 'https://www.linkedin.com/in/andrija-radojevic-7b7b7b7b7b/' },
+      { label: 'ALL LINKS (LINKTREE)', url: 'https://linktr.ee/andrija_radojevic' },
+    ],
+  },
+];

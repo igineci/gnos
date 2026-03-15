@@ -1,4 +1,6 @@
 import { sortedReleases } from '@/lib/releases';
+import { TEAM_MEMBERS } from './teamMembers';
+import { TARENS_SHARED } from './sharedPeople';
 
 /** Slug-friendly string from display name */
 export function nameToSlug(name: string): string {
@@ -21,7 +23,10 @@ export type Person = {
   country?: string;
   activeSince?: string;
   labels?: string;
+  /** Q&A for artists; not used for team members. */
   interview?: { q: string; a: string }[];
+  /** Role/title for team members; not used for artists. */
+  role?: string;
   promoLinks?: { label: string; url: string }[];
 };
 
@@ -127,16 +132,10 @@ const ARTIST_OVERRIDES: Partial<
     ],
   },
   tarens: {
-    image: '/images/artists/gnosva001/tarens-left.jpeg',
-    imageTopRight: '/images/artists/gnosva001/tarens-tr.jpeg',
-    imageBottomRight: '/images/artists/gnosva001/tarens-br.JPG',
-    bio: 'Tarens is a 25-year-old DJ and producer born in Serbia and based in Belgrade. Musically, he moves between raw, driving techno on one side and cinematic, industrial, and breakbeat-infused techno on the other. His productions aim to create a dark, provocative, and eerie atmosphere that captivates audiences and keeps their focus locked on the sound. Tarens has already built a solid discography with multiple releases on labels such as Otium Records, Manevarim, and KKula. He has also released two EPs—one on Kibernet Kriminalität and another on Neuphoria. Currently, he is dedicating countless hours in the studio, sharpening his craft and building an arsenal of new material. His growing catalog reflects his tireless pursuit of originality and uncompromising sound design. On stage, Tarens has left a mark at some of Serbia\'s most iconic nightclubs, including Drugstore, K9 Station, and Barutana, as well as other notable venues and clubs across the region. His festival appearances include Lovefest—one of Serbia\'s biggest electronic music festivals. Driven by a constant desire to push boundaries, Tarens creates a unique auditory experience that challenges conventions and immerses the listener in evolving textures and sensations. His performances and productions act as a wormhole of sound, breaking free from the monotony of everyday life and embracing the freedom of artistic expression.',
+    ...TARENS_SHARED,
+    promoLinks: [...TARENS_SHARED.promoLinks],
     country: 'RS',
     labels: 'OTIUM RECORDS, MANEVARIM, KKULA, KIBERNET KRIMINALITÄT, NEUPHORIA',
-    promoLinks: [
-      { label: 'INSTAGRAM', url: 'https://www.instagram.com/tarens_tk/' },
-      { label: 'SOUNDCLOUD', url: 'https://soundcloud.com/tarens' },
-    ],
     interview: [
       { q: 'Who/what inspires you visually?', a: 'Answer to be added.' },
       { q: 'What does uncertainty mean in your creative process?', a: 'Answer to be added.' },
@@ -176,14 +175,8 @@ export function getFeaturedArtists(): Person[] {
   });
 }
 
-/** Team members: same data as artists (doubled for POC), same slugs so /artist/:slug and /team/:slug both work. */
 export function getTeamMembers(): Person[] {
-  const release = sortedReleases.find((r) => r.slug === 'ignorantia');
-  const artists = release?.artists ?? [];
-  return artists.map((a) => {
-    const slug = nameToSlug(a.name);
-    return toPerson(a.name, a.image, slug, ARTIST_OVERRIDES[slug]);
-  });
+  return TEAM_MEMBERS;
 }
 
 export function getArtistBySlug(slug: string): Person | undefined {

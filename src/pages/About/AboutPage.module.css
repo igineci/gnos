@@ -29,29 +29,27 @@
   position: absolute;
   left: 0;
   right: 0;
-  overflow-y: auto;
+  overflow-y: hidden;
   padding: 0 1.25rem;
   box-sizing: border-box;
 }
 
-/* Frame 1 (about-frame1.svg 664×585): top window ~3% 2% 12% 53%, bottom ~2% 62% 2% 2% */
 .frameWrapper:first-of-type .frameContentTop {
-  top: 10%;
-  bottom: 52%;
-  margin-left: 5%;
-  margin-right: 12%;
+  top: 6%;
+  bottom: 59%;
+  margin-left: 6%;
+  margin-right: 16%;
 }
 
 .frameWrapper:first-of-type .frameContentBottom {
-  top: 69%;
-  bottom: 5%;
-  margin-left: 5%;
-  margin-right: 12%;
+  top: 66.5%;
+  bottom: 4.5%;
+  margin-left: 5.5%;
+  margin-right: 11.5%;
 }
 
-/* Frame 2 (about-frame-2.svg): 3rd = Opportunities (top), 4th = Label Codex (bottom) */
 .frameWrapper:last-of-type .frameContentTop {
-  top: 15%;
+  top: 5%;
   bottom: 53%;
   margin-left: 5%;
   margin-right: 12%;
@@ -65,35 +63,92 @@
 /* — Typography — */
 .heading {
   font-family: var(--gnos-font-display);
-  font-size: 1rem;
+  font-size: 2.2rem;
   font-weight: 900;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   text-align: center;
   color: var(--gnos-turquoise);
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.55rem;
 }
 
-.subHeading {
+.aboutHeading {
+  font-size: clamp(1rem, 1.55vw, 1.35rem);
+  letter-spacing: 0.2em;
+  text-align: left;
+  margin-bottom: 0.7rem;
+  font-weight: 900;
+}
+
+.sideHeading {
   font-family: var(--gnos-font-display);
-  font-size: 0.75rem;
+  font-size: 1.7rem;
   font-weight: 900;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--gnos-muted);
+  color: var(--gnos-turquoise);
   margin: 0 0 0.5rem;
 }
 
 .paragraph {
   font-family: var(--gnos-font-body);
-  font-size: 0.85rem;
-  line-height: 1.55;
+  font-size: 1.2rem;
+  line-height: 1.5;
   color: var(--gnos-white);
   margin: 0 0 0.75rem;
 }
 
 .paragraph:last-child {
   margin-bottom: 0;
+}
+
+.aboutIntroPanel {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: clamp(1rem, 2vw, 1.35rem);
+  scrollbar-width: thin;
+  scrollbar-color: var(--gnos-turquoise) rgba(3, 16, 17, 0.88);
+}
+
+.aboutIntroPanel::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.aboutIntroPanel::-webkit-scrollbar-track {
+  background:
+    linear-gradient(180deg,
+      rgba(3, 16, 17, 0.92) 0%,
+      rgba(6, 27, 29, 0.86) 100%);
+  border-left: 1px solid rgba(8, 89, 94, 0.22);
+  box-shadow: inset 0 0 0 1px rgba(8, 89, 94, 0.08);
+}
+
+.aboutIntroPanel::-webkit-scrollbar-thumb {
+  background:
+    linear-gradient(180deg,
+      rgba(8, 89, 94, 0.62) 0%,
+      rgba(25, 214, 192, 0.88) 48%,
+      rgba(8, 89, 94, 0.7) 100%);
+  border: 1px solid rgba(8, 89, 94, 0.95);
+  box-shadow:
+    0 0 10px rgba(8, 89, 94, 0.35),
+    inset 0 0 10px rgba(255, 255, 255, 0.08);
+}
+
+.aboutIntroPanel::-webkit-scrollbar-thumb:hover {
+  background:
+    linear-gradient(180deg,
+      rgba(34, 233, 209, 0.92) 0%,
+      rgba(8, 89, 94, 0.72) 100%);
+}
+
+.aboutParagraph {
+  max-width: 56ch;
+  font-size: clamp(0.72rem, 0.95vw, 0.86rem);
+  line-height: 1.66;
+  letter-spacing: 0.015em;
+  color: rgba(248, 250, 251, 0.92);
+  margin: 0 0 0.9rem;
 }
 
 .paragraphCenter {
@@ -119,12 +174,41 @@
 }
 
 /* — Mission (left) | Vision (right) in same frame — */
+.missionVisionPanel {
+  overflow: hidden;
+  padding-top: 0.2rem;
+}
+
 .missionVisionRow {
+  position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  align-items: start;
+  grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
+  gap: clamp(0.85rem, 2vw, 1.5rem);
+  align-items: stretch;
   width: 100%;
+  height: 100%;
+}
+
+.missionVisionRow::before {
+  content: '';
+  position: absolute;
+  left: 50.5%;
+  top: 4%;
+  bottom: 6%;
+  width: 1px;
+  background:
+    linear-gradient(180deg,
+      rgba(8, 89, 94, 0) 0%,
+      rgba(8, 89, 94, 0.92) 16%,
+      rgba(25, 214, 192, 0.95) 52%,
+      rgba(8, 89, 94, 0.84) 86%,
+      rgba(8, 89, 94, 0) 100%);
+  box-shadow:
+    0 0 16px rgba(8, 89, 94, 0.48),
+    0 0 32px rgba(8, 89, 94, 0.2);
+  transform: rotate(16deg);
+  transform-origin: center;
+  pointer-events: none;
 }
 
 .missionCol {
@@ -135,6 +219,23 @@
   text-align: left;
 }
 
+.diagonalMission,
+.diagonalVision {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.diagonalMission {
+  justify-content: flex-end;
+  padding: 1.45rem 1.2rem 0.6rem 0.2rem;
+}
+
+.diagonalVision {
+  justify-content: flex-start;
+  padding: 0.15rem 0.1rem 0.95rem 1.2rem;
+}
+
 .sideHeading {
   font-family: var(--gnos-font-display);
   font-size: 0.95rem;
@@ -143,6 +244,33 @@
   text-transform: uppercase;
   color: var(--gnos-turquoise);
   margin: 0 0 0.5rem;
+}
+
+.missionVisionHeading {
+  font-size: clamp(0.82rem, 1vw, 1rem);
+  letter-spacing: 0.24em;
+  margin-bottom: 0.6rem;
+  text-shadow:
+    0 0 10px rgba(8, 89, 94, 0.32),
+    0 0 24px rgba(8, 89, 94, 0.12);
+}
+
+.diagonalVision .missionVisionHeading {
+  text-align: right;
+}
+
+.missionVisionParagraph {
+  font-size: clamp(0.64rem, 0.78vw, 0.76rem);
+  line-height: 1.46;
+  letter-spacing: 0.014em;
+  color: rgba(248, 250, 251, 0.9);
+  max-width: 28ch;
+  margin: 0;
+}
+
+.diagonalVision .missionVisionParagraph {
+  max-width: 25ch;
+  margin-left: auto;
 }
 
 .list {
@@ -200,15 +328,60 @@
 
   .missionVisionRow {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 0.7rem;
+    height: auto;
+  }
+
+  .missionVisionRow::before {
+    left: 0;
+    right: 0;
+    top: 50%;
+    bottom: auto;
+    width: 100%;
+    height: 1px;
+    transform: none;
   }
 
   .frameContent {
     padding: 0 1rem;
   }
 
-  .heading {
-    font-size: 0.9rem;
+  .aboutHeading {
+    font-size: 0.92rem;
+    margin-bottom: 0.55rem;
+  }
+
+  .aboutParagraph {
+    max-width: 100%;
+    font-size: 0.72rem;
+    line-height: 1.55;
+    margin-bottom: 0.7rem;
+  }
+
+  .missionVisionPanel {
+    padding-top: 0;
+  }
+
+  .diagonalMission,
+  .diagonalVision {
+    padding: 0;
+  }
+
+  .missionVisionHeading {
+    font-size: 0.72rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .diagonalVision .missionVisionHeading {
+    text-align: left;
+  }
+
+  .missionVisionParagraph,
+  .diagonalVision .missionVisionParagraph {
+    max-width: 100%;
+    margin-left: 0;
+    font-size: 0.6rem;
+    line-height: 1.38;
   }
 
   .paragraph,

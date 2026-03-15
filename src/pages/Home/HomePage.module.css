@@ -132,6 +132,43 @@
   gap: 0.75rem;
 }
 
+.mainDecoration {
+  position: relative;
+  isolation: isolate;
+  width: 100vw;
+  min-height: clamp(8rem, 16vw, 12rem);
+  padding: clamp(0.5rem, 1.4vw, 1.25rem) 0;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.mainDecoration::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.mainDecorationSvg {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  flex: 0 0 auto;
+  object-fit: contain;
+  transform: rotate(11deg) scale(1.03);
+  transform-origin: center;
+  opacity: 0.76;
+  filter: brightness(0.72) saturate(0.88) contrast(1.08);
+}
+
 .sectionLinkFrame {
   position: relative;
   min-height: 92px;

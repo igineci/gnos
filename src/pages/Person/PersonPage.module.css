@@ -87,6 +87,18 @@
   gap: 1rem;
 }
 
+.framesGridTeam {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.framesGridTeam .frameCellImages {
+  grid-column: 1 / span 3;
+}
+
+.framesGridTeam .frameCellBio {
+  grid-column: 4;
+}
+
 .frameCellImages {
   grid-column: 1;
   grid-row: 1;
@@ -144,6 +156,18 @@
   overflow: hidden;
 }
 
+.frameCellRole {
+  justify-self: start;
+  align-self: start;
+  height: clamp(8.5rem, 12vw, 10.5rem);
+}
+
+.frameCellRole>* {
+  flex: none;
+  height: 100%;
+  min-height: 0;
+}
+
 .frameCellInterview>* {
   flex: 1;
   min-height: 0;
@@ -166,6 +190,15 @@
   overflow-y: auto;
 }
 
+.roleFrameScroll {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0 1.75rem;
+}
+
 .frameCellPromo {
   grid-column: 2;
   grid-row: 2;
@@ -174,6 +207,32 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+}
+
+.frameCellPromoCompact {
+  align-self: start;
+  height: clamp(8.5rem, 12vw, 10.5rem);
+}
+
+.framesGridTeam .frameCellRole,
+.framesGridTeam .frameCellPromoCompact {
+  justify-self: stretch;
+  width: 100%;
+}
+
+.framesGridTeam .frameCellRole {
+  grid-column: 1 / span 2;
+}
+
+.framesGridTeam .frameCellPromoCompact {
+  grid-column: 3 / span 2;
+  grid-row: 2;
+}
+
+.framesGridTeam .frameCellPromoCompact>* {
+  flex: none;
+  height: 100%;
+  min-height: 0;
 }
 
 .frameCellPromo>* {
@@ -196,6 +255,19 @@
   flex: 1;
   min-height: 0;
   overflow-y: auto;
+}
+
+.framesGridTeam .frameCellPromoCompact .frameScroll {
+  padding: 0.2rem 1rem 1rem;
+}
+
+.framesGridTeam .frameCellPromoCompact .promoList {
+  gap: 0.3rem;
+}
+
+.framesGridTeam .frameCellPromoCompact .promoLink {
+  font-size: 0.72rem;
+  padding: 0.22rem 0;
 }
 
 .frameScroll {
@@ -424,6 +496,19 @@
   margin: 0;
 }
 
+.roleText {
+  font-family: var(--gnos-font-display);
+  font-size: clamp(1.1rem, 2.2vw, 1.75rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gnos-turquoise);
+  text-align: center;
+  white-space: nowrap;
+  margin: 0;
+}
+
 /* — Frame 4: Promo links — */
 .promoList {
   list-style: none;
@@ -480,6 +565,11 @@
   .frameCellInterview {
     grid-column: 1;
     grid-row: 3;
+  }
+
+  .frameCellRole {
+    width: 100%;
+    height: auto;
   }
 
   .frameCellPromo {

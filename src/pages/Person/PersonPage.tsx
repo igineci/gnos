@@ -47,7 +47,7 @@ const PersonPage = () => {
           )}
         </header>
 
-        <div className={styles.framesGrid}>
+        <div className={`${styles.framesGrid} ${!isArtist ? styles.framesGridTeam : ''}`}>
           <div className={styles.frameCellImages}>
             <div className={styles.imageGallery}>
               <div className={styles.imageMain}>
@@ -118,54 +118,62 @@ const PersonPage = () => {
               <div className={styles.frameInner}>
                 <div className={styles.frameScroll}>
                   <p className={styles.bioText}>{person.bio}</p>
-                  <div className={styles.detailsPanel}>
-                    <div className={styles.detailsRow}>
-                      <div className={styles.detailItem}>
-                        <span className={styles.detailLabel}>COUNTRY</span>
-                        <span className={styles.detailValue}>{person.country}</span>
-                      </div>
-                      <div className={styles.detailDivider} aria-hidden />
-                      <div className={styles.detailItem}>
-                        <span className={styles.detailLabel}>ACTIVE SINCE</span>
-                        <span className={styles.detailValue}>{person.activeSince}</span>
-                      </div>
-                      <div className={styles.detailDivider} aria-hidden />
-                      <div className={styles.detailItem}>
-                        <span className={styles.detailLabel}>LABELS</span>
-                        <span className={styles.detailValue}>{person.labels}</span>
+                  {isArtist && (
+                    <div className={styles.detailsPanel}>
+                      <div className={styles.detailsRow}>
+                        <div className={styles.detailItem}>
+                          <span className={styles.detailLabel}>COUNTRY</span>
+                          <span className={styles.detailValue}>{person.country}</span>
+                        </div>
+                        <div className={styles.detailDivider} aria-hidden />
+                        <div className={styles.detailItem}>
+                          <span className={styles.detailLabel}>ACTIVE SINCE</span>
+                          <span className={styles.detailValue}>{person.activeSince}</span>
+                        </div>
+                        <div className={styles.detailDivider} aria-hidden />
+                        <div className={styles.detailItem}>
+                          <span className={styles.detailLabel}>LABELS</span>
+                          <span className={styles.detailValue}>{person.labels}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               </div>
             </GnosFrame>
           </div>
 
-          {/* Frame 3: Interview — home frame.svg */}
-          <div className={styles.frameCellInterview}>
+          {/* Frame 3: Interview (artists) or Role (team members) — home frame.svg */}
+          <div className={`${styles.frameCellInterview} ${!isArtist ? styles.frameCellRole : ''}`}>
             <GnosFrame variant="home">
-              <h2 className={styles.frameTitle}>INTERVIEW MODULE</h2>
+              {isArtist && (
+                <h2 className={styles.frameTitle}>INTERVIEW MODULE</h2>
+              )}
               <div className={styles.frameInner}>
-                <div className={styles.frameScroll}>
-                  <div className={styles.interviewList}>
-                    {person.interview?.map((item, i) => (
-                      <div key={i} className={styles.interviewItem}>
-                        <p className={styles.interviewQuestion}>
-                          <span className={styles.interviewQ}>Q:</span> {item.q}
-                        </p>
-                        <p className={styles.interviewAnswer}>
-                          <span className={styles.interviewA}>A:</span> {item.a}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
+                <div className={`${styles.frameScroll} ${!isArtist ? styles.roleFrameScroll : ''}`}>
+                  {isArtist ? (
+                    <div className={styles.interviewList}>
+                      {person.interview?.map((item, i) => (
+                        <div key={i} className={styles.interviewItem}>
+                          <p className={styles.interviewQuestion}>
+                            <span className={styles.interviewQ}>Q:</span> {item.q}
+                          </p>
+                          <p className={styles.interviewAnswer}>
+                            <span className={styles.interviewA}>A:</span> {item.a}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className={styles.roleText}>{person.role ?? '—'}</p>
+                  )}
                 </div>
               </div>
             </GnosFrame>
           </div>
 
           {/* Frame 4: Promo links */}
-          <div className={styles.frameCellPromo}>
+          <div className={`${styles.frameCellPromo} ${!isArtist ? styles.frameCellPromoCompact : ''}`}>
             <GnosFrame>
               <h2 className={styles.frameTitle}>PROMO LINKS</h2>
               <div className={styles.frameInner}>
