@@ -58,9 +58,9 @@ const ARTIST_OVERRIDES: Partial<
   Record<string, Partial<Pick<Person, 'image' | 'imageTopRight' | 'imageBottomRight' | 'bio' | 'interview' | 'activeSince' | 'country' | 'labels' | 'promoLinks'>>>
 > = {
   anoy: {
-    image: '/images/artists/gnosva001/anoy-left.jpg',
-    imageTopRight: '/images/artists/gnosva001/anoy.png',
-    imageBottomRight: '/images/artists/gnosva001/anoy-br.jpg',
+    image: '/images/artists/gnosva001/anoy-left.webp',
+    imageTopRight: '/images/artists/gnosva001/anoy.webp',
+    imageBottomRight: '/images/artists/gnosva001/anoy-br.webp',
     bio: 'Born in Montenegro and based in Belgrade/Serbia, Anoy emerged in 2020 with a clear and uncompromising vision of techno. His releases on labels such as Crisis of Man, Märked, KKULA, and many others showcase a fast-paced, hypnotic and forward-driven sound designed for intense dancefloor moments. His work quickly caught the attention of the scene, gaining support from many leading artists and tastemakers in contemporary techno.',
     country: 'RS',
     activeSince: '2020',
@@ -80,9 +80,9 @@ const ARTIST_OVERRIDES: Partial<
     ],
   },
   crynn: {
-    image: '/images/artists/gnosva001/crynn-left.jpg',
-    imageTopRight: '/images/artists/gnosva001/crynn-tr.jpg',
-    imageBottomRight: '/images/artists/gnosva001/crynn-br.JPG',
+    image: '/images/artists/gnosva001/crynn-left.webp',
+    imageTopRight: '/images/artists/gnosva001/crynn-tr.webp',
+    imageBottomRight: '/images/artists/gnosva001/crynn-br.webp',
     bio: 'CRY.NN is a young artist hailing from the Bohemian periphery. He has found his intuitive approach to techno and genres beyond on the viewfinder of the most prominent imprints of the modern hard techno scene. His discography features releases on prominent labels such as The Meaning Of Rave, SINDEX, Flesh and Hammers, and Childsplay, showcasing his ability to reflect his surrounding environment with violent and flashy sounds. His influence on the scene can be also seen from his newly founded imprint Neuphoria, which he founded with Swiss mastermind .wav_909; both are giving the spotlight to unique and precise sonic art.',
     country: 'CZ',
     labels: 'THE MEANING OF RAVE, SINDEX, FLESH AND HAMMERS, CHILDSPLAY, NEUPHORIA',
@@ -102,9 +102,9 @@ const ARTIST_OVERRIDES: Partial<
     ],
   },
   essio: {
-    image: '/images/artists/gnosva001/essio-left.jpeg',
-    imageTopRight: '/images/artists/gnosva001/essio-tr.jpeg',
-    imageBottomRight: '/images/artists/gnosva001/essio-br.JPG',
+    image: '/images/artists/gnosva001/essio-left.webp',
+    imageTopRight: '/images/artists/gnosva001/essio-tr.webp',
+    imageBottomRight: '/images/artists/gnosva001/essio-br.webp',
     bio: 'Essio is a Producer and DJ from Serbia. The first encounter with techno happened in the eighth grade, when he described it as "boring music". Only later, under the influence of his older brother, he gave it a try and slowly started Djing. Sharp and unusual rhythms and euphoric melodies of fast tempo tracks got his attention. He reached a turning point and became a techno DJ. He still doesn\'t have a specific musical direction, likes to delve into unknown genres of electronic music and loves to experiment with different sounds. His current attention is primarily on the quick rhythms and smooth grooves. He uses persistent 3–4 deck action while continuously improvising. He sees music as a salvation from reality and boring everyday life, and the accumulated amount of energy, which is constantly increasing, is the reason for that fast tempo in his sets, because that fast rhythm contributes to the discharge of that energy. In addition to DJing, Essio runs a label and project called Manevarim with friends. In 2024, he released an EP titled I Should Run a Shitpost Page on the label, contributed to a VA release from the Grab The Groove Collective, and released a track on the second VA release by Kongres, an up-and-coming label from Croatia.',
     country: 'RS',
     labels: 'MANEVARIM, GRAB THE GROOVE COLLECTIVE, KONGRES',

@@ -9,8 +9,8 @@ MDX files in this folder define releases. Each file is validated against the sch
 ### Data to provide
 
 1. **Cover art**
-   - Add image to `public/covers/` (e.g. `ignorantia.jpg` or `ignorantia.png`)
-   - Update `coverArt` in the MDX frontmatter to `/covers/ignorantia.jpg` (or your filename)
+   - Add image to `public/covers/` as a `.webp` file (e.g. `ignorantia.webp`)
+   - Update `coverArt` in the MDX frontmatter to `/covers/ignorantia.webp`
 
 2. **Tracklist**
    - Add tracks under `tracklist:` in frontmatter:
