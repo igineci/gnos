@@ -1,15 +1,37 @@
 .section {
   width: 100%;
-  min-height: 60vh;
   position: relative;
   overflow: hidden;
 }
 
-.stack {
+.hero {
+  height: calc(100vh - var(--gnos-header-height));
+  height: calc(100dvh - var(--gnos-header-height));
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 3rem 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.heroStack {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: var(--gnos-home-vertical-gap, 2.25rem);
+  align-items: center;
+  justify-content: center;
+  gap: var(--gnos-hero-gap);
+  position: relative;
+  z-index: 1;
+}
+
+.belowHero {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gnos-hero-gap);
+  padding-top: var(--gnos-hero-gap);
   position: relative;
   z-index: 1;
 }
@@ -35,11 +57,13 @@
 
 .logoFrame {
   position: relative;
+  flex-shrink: 0;
   width: 100%;
-  min-height: 140px;
+  aspect-ratio: 405 / 139;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 3rem;
 }
 
 .frameSvg {
@@ -49,29 +73,31 @@
   height: 100%;
   object-fit: fill;
   pointer-events: none;
+  z-index: 0;
 }
 
 .logoInner {
-  position: relative;
+  position: absolute;
+  inset: 0.25rem;
   z-index: 1;
-  padding: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .logo {
-  max-width: 390px;
-  width: 100%;
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
   height: auto;
-  filter: drop-shadow(0 0 8px var(--gnos-turquoise-glow));
-  animation: logoGlow 3s ease-in-out infinite;
+  object-fit: contain;
 }
 
 .taglineFrame {
   position: relative;
+  flex-shrink: 0;
   width: 100%;
-  min-width: 320px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -81,28 +107,23 @@
   display: block;
   width: 100%;
   height: auto;
+  object-fit: fill;
   pointer-events: none;
 }
 
 .tagline {
   position: absolute;
   left: 50%;
-  top: 55%;
+  top: 50%;
   transform: translate(-50%, -50%);
-  font-family: var(--gnos-font-tagline);
-  font-size: clamp(1.7rem, 1.5vw, 2.9rem);
-  color: #14b8b8;
-  letter-spacing: var(--gnos-font-tracking-wide);
-  text-shadow:
-    0 0 30px rgba(0, 0, 0, 0.99),
-    0 0 50px rgba(0, 0, 0, 0.9),
-    0 0 70px rgba(0, 0, 0, 0.75),
-    0 0 90px rgba(0, 0, 0, 0.5);
+  font-family: 'Compacta', var(--gnos-font-display);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   white-space: nowrap;
-  padding: 0 1rem;
-  max-width: 88%;
   text-align: center;
-  box-sizing: content-box;
+  color: rgb(103, 103, 103);
+  margin-top: 3px;
 }
 
 .sectionLinksRow {
@@ -127,7 +148,21 @@
 }
 
 .sectionLinkFrame:hover .sectionLinkText {
-  color: #2dd4d4;
+  color: var(--gnos-turquoise);
+}
+
+.sectionLinkFrameDisabled {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.6;
+}
+
+.sectionLinkFrameDisabled:hover {
+  filter: none;
+}
+
+.sectionLinkFrameDisabled .sectionLinkText {
+  color: var(--gnos-turquoise);
 }
 
 .sectionLinkFrameSvg {
@@ -147,7 +182,7 @@
   font-weight: 900;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #14b8b8;
+  color: var(--gnos-turquoise);
   text-shadow:
     0 0 6px rgba(9, 9, 9, 0.8),
     0 0 16px rgba(9, 9, 9, 0.8);
@@ -179,24 +214,24 @@
 
 .glitchBar {
   height: 4px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--gnos-turquoise) 20%,
-    var(--gnos-turquoise) 80%,
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      var(--gnos-turquoise) 20%,
+      var(--gnos-turquoise) 80%,
+      transparent);
   opacity: 0.5;
   animation: glitchPulse 2s ease-in-out infinite;
   animation-delay: var(--delay, 0s);
 }
 
 @keyframes glitchPulse {
+
   0%,
   100% {
     opacity: 0.3;
     transform: scaleX(0.8);
   }
+
   50% {
     opacity: 0.7;
     transform: scaleX(1);
@@ -225,10 +260,12 @@
 }
 
 @keyframes waveformOscillate {
+
   0%,
   100% {
     opacity: 0.6;
   }
+
   50% {
     opacity: 1;
   }
@@ -245,7 +282,8 @@
   }
 
   .tagline {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+    white-space: normal;
   }
 
   .sectionLinkText {

@@ -1,19 +1,18 @@
+/* In document flow (like seven-planets): sits at top of page, scrolls away with content — no fixed, no scroll show/hide */
 .header {
   --header-accent: var(--gnos-turquoise);
   --header-muted: var(--gnos-muted);
+  --header-decoration-color: var(--gnos-turquoise);
   --header-x-padding: 1rem;
-  --header-bar-height: 6.5rem;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  --header-bar-height: 6rem;
+  position: relative;
   width: 100%;
   height: var(--header-bar-height);
+  flex-shrink: 0;
   z-index: 100;
   isolation: isolate;
   margin: 0;
   overflow: hidden;
-  clip-path: inset(0 0 0 0);
   box-sizing: border-box;
 }
 
@@ -22,22 +21,11 @@
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;
-  min-height: 100%;
   height: var(--header-bar-height);
   padding: 0.75rem var(--header-x-padding) 0;
   padding-top: 1.125rem;
   background: var(--gnos-black);
-  transform: translateY(0);
-  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0s;
-  will-change: transform;
   box-sizing: border-box;
-}
-
-.headerInner.headerHidden {
-  transform: translateY(-100%);
-  visibility: hidden;
-  pointer-events: none;
-  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.25s;
 }
 
 .headerWaiting {
@@ -117,10 +105,15 @@
 }
 
 .frame {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: calc(100% - 2 * var(--header-x-padding));
   margin-left: auto;
   margin-right: auto;
+  height: 100%;
+  min-height: 0;
   box-sizing: border-box;
 }
 
@@ -130,7 +123,9 @@
   justify-content: space-between;
   gap: 1rem;
   padding-bottom: 0.75rem;
-  min-height: 2.25rem;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .logoBlock {
@@ -150,12 +145,12 @@
 }
 
 .logoText {
-  font-family: var(--gnos-font-display);
-  font-size: 14px;
+  font-family: 'Compacta', var(--gnos-font-display);
+  font-size: 18px;
   font-weight: 900;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: inherit;
+  color: var(--gnos-muted);
 }
 
 .navWrap {
@@ -209,14 +204,15 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--header-muted);
+  color: var(--header-accent);
   text-decoration: none;
   transition: color 0.2s ease;
   margin-bottom: 0;
 }
 
-.navLink:hover {
-  color: var(--header-accent);
+.navLink:hover,
+.navLinkActive:hover {
+  color: var(--gnos-white);
 }
 
 .navLinkActive {
@@ -240,95 +236,106 @@
   filter: blur(0.6px);
 }
 
-.navLinkUnderline::after {
-  content: '';
-  position: absolute;
-
-}
-
 .decorativeRight {
   display: none;
   flex-shrink: 0;
-  width: 1.875rem;
-  height: 0.9375rem;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid var(--header-accent);
+  align-items: stretch;
+  justify-content: flex-end;
+  align-self: stretch;
+  margin-left: auto;
   position: relative;
+  width: 14rem;
+  max-width: 32vw;
+  max-height: 100%;
+  overflow: hidden;
+  /* Fade in from left so it blends into header; softer at top/bottom edges */
+  mask-image: linear-gradient(to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.25) 8%,
+      rgba(0, 0, 0, 0.7) 22%,
+      black 40%,
+      black 100%);
+  -webkit-mask-image: linear-gradient(to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.25) 8%,
+      rgba(0, 0, 0, 0.7) 22%,
+      black 40%,
+      black 100%);
+  mask-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
 }
 
-.decorativeRight::after {
+/* Vignette: dark edges on top, bottom, right — whole decoration */
+.decorativeRight::before {
   content: '';
   position: absolute;
-  width: 10px;
-  height: 1px;
-  background: var(--header-accent);
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.75) 0%, transparent 22%, transparent 78%, rgba(0, 0, 0, 0.75) 100%),
+    linear-gradient(to right, transparent 15%, transparent 55%, rgba(0, 0, 0, 0.5) 80%, rgba(0, 0, 0, 0.92) 100%),
+    radial-gradient(ellipse 90% 90% at 35% 50%, transparent 20%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.7) 100%);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .decorativeSvg {
-  display: none;
-
-}
-
-/* — line row: full-width line + SVG indicator in cutout; line at bottom of SVG — */
-.lineRow {
-  position: relative;
+  display: block;
+  height: 100%;
   width: 100%;
-  height: 16px;
-  --indicator-left: 0;
-  --indicator-width: 102px;
+  background-color: var(--header-decoration-color);
+  mask-image: url(/svg/header-right.svg);
+  mask-size: cover;
+  mask-position: right center;
+  mask-repeat: no-repeat;
+  -webkit-mask-image: url(/svg/header-right.svg);
+  -webkit-mask-size: cover;
+  -webkit-mask-position: right center;
+  -webkit-mask-repeat: no-repeat;
+  opacity: 0.88;
+  filter: drop-shadow(0 0 12px rgba(8, 89, 94, 0.15));
 }
 
-.lineSegment {
+/* Header bottom: line from logo to decoration + active indicator */
+.headerBottom {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  height: 28px;
+  pointer-events: none;
+}
+
+.headerLine {
   position: absolute;
-  bottom: 0;
   left: 0;
-  height: 1px;
-  background: var(--header-accent);
-  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.lineSegment[data-side='left'] {
-  left: 0;
-  width: var(--indicator-left);
-}
-
-.lineSegment[data-side='right'] {
-  left: calc(var(--indicator-left) + var(--indicator-width));
   right: 0;
-  width: auto;
   bottom: 0;
+  height: 1px;
+  background-color: var(--header-accent);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.header:not(.headerWaiting) .headerLine {
+  opacity: 1;
 }
 
 .indicator {
   position: absolute;
-  left: var(--indicator-left);
-  top: 0;
-  width: var(--indicator-width);
+  bottom: 0;
+  width: 80px;
+  margin-left: 10px;
   height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--header-accent);
-  opacity: 0;
-  transition:
-    left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.25s ease;
-  pointer-events: none;
+  background-color: var(--gnos-black);
 }
 
-.indicatorVisible {
-  opacity: 1;
-}
-
-.indicatorSvg {
+.indicator img {
   display: block;
   width: 100%;
   height: 100%;
-  flex-shrink: 0;
+  object-fit: contain;
+  object-position: center bottom;
 }
 
-/* — Desktop: horizontal nav, hide hamburger, show decorative — */
 @media (min-width: 768px) {
   .header {
     --header-x-padding: 3rem;
@@ -371,11 +378,33 @@
     margin-bottom: -0.625rem;
   }
 
-  .navLinkUnderline::after {
-    bottom: -0.4375rem;
-  }
-
+  /* Right decoration: absolute so it doesn’t grow header and clip the line row */
   .decorativeRight {
     display: flex;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 14rem;
+    max-width: 22vw;
+    height: auto;
+    margin-left: 0;
+    max-height: none;
+    z-index: 0;
+    box-shadow: inset 20px 0 40px rgba(0, 0, 0, 0.65),
+      inset -16px 0 32px rgba(0, 0, 0, 0.5),
+      inset 0 16px 32px rgba(0, 0, 0, 0.45),
+      inset 0 -12px 24px rgba(0, 0, 0, 0.6);
+  }
+
+  .decorativeRight .decorativeSvg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .navWrap,
+  .logoBlock {
+    position: relative;
+    z-index: 1;
   }
 }

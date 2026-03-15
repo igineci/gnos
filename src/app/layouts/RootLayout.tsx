@@ -63,7 +63,7 @@ export const RootLayout = () => {
           aria-hidden
         />
       </div>
-      <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', flex: 1, paddingTop: 'calc(var(--gnos-header-height) + var(--gnos-home-vertical-gap, 2.25rem))' }}>
+      <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', flex: 1 }}>
         <Header loaderExited={loaderExited} />
         <main style={{ flex: 1, width: '100%', boxSizing: 'border-box' }}>
           <div className={styles.pageContent}>

@@ -1,15 +1,6 @@
-import { sortedReleases } from '@/lib/releases';
+import { catalogReleases, upcomingReleases } from '@/lib/releases';
 import { ReleaseDatabaseItem } from '@/components/Releases/ReleaseDatabaseItem/ReleaseDatabaseItem';
 import styles from './ReleasesPage.module.css';
-
-const isUpcomingByDate = (release: (typeof sortedReleases)[number]) =>
-  release.releaseDate?.toUpperCase().includes('TBD') ?? false;
-
-/** Upcoming: ignorantia (by slug) plus any TBD-dated releases; not clickable, show "Coming soon" on hover */
-const upcomingReleases = sortedReleases.filter(
-  (r) => r.slug === 'ignorantia' || isUpcomingByDate(r)
-);
-const catalogReleases = sortedReleases.filter((r) => !upcomingReleases.includes(r));
 
 const ReleasesPage = () => (
   <section className={styles.page}>

@@ -1,0 +1,263 @@
+/* — Contact: two frames + pulsating heart — */
+
+.page {
+  min-height: 100%;
+  padding: 20rem 0 4rem;
+  position: relative;
+  overflow: visible;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--gnos-content-width, 1000px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: stretch;
+  padding: 0 1rem;
+}
+
+/* — Frame cards (SVG frame) — */
+.frame {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 200px;
+  top: -7rem;
+}
+
+.frameSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  pointer-events: none;
+}
+
+.frameSvgMirrored {
+  transform: scaleX(-1);
+}
+
+.frameContent {
+  position: relative;
+  z-index: 1;
+  padding: 2rem 2.5rem;
+}
+
+/* Inquiries: left side, left-aligned */
+.frame:first-of-type {
+  align-items: flex-start;
+}
+
+.frame:first-of-type .frameContent {
+  text-align: left;
+}
+
+/* Promo links: right side, right-aligned */
+.frame:last-of-type {
+  align-items: flex-end;
+}
+
+.frame:last-of-type .frameContent {
+  text-align: right;
+}
+
+.frame:last-of-type .linksList {
+  align-items: flex-end;
+}
+
+/* — Card 1: Inquiries — */
+.frameLabel {
+  font-family: var(--gnos-font-display);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gnos-turquoise);
+  margin: 0 0 1rem;
+  text-shadow: 0 0 12px var(--gnos-turquoise-glow);
+}
+
+.inquiryText {
+  font-family: var(--gnos-font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--gnos-white);
+  margin: 0 0 0.5rem;
+}
+
+.emailLink {
+  font-family: var(--gnos-font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--gnos-turquoise);
+  text-decoration: none;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.emailLink:hover {
+  color: #0d7a80;
+  text-shadow: 0 0 12px var(--gnos-turquoise-glow);
+}
+
+/* — Card 2: Promo links — */
+.linksList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.promoLink {
+  display: inline-flex;
+  align-items: left;
+  gap: 0.5rem;
+  font-family: var(--gnos-font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gnos-white);
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  transition: color 0.25s ease,
+
+}
+
+.promoLink:hover {
+  color: var(--gnos-turquoise);
+}
+
+.promoLink svg {
+  flex-shrink: 0;
+  color: var(--gnos-turquoise);
+}
+
+/* — Pulsating heart (lives under both frames) — */
+.heartWrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heartWrap::before {
+  content: '';
+  position: absolute;
+  width: 60%;
+  max-width: 250px;
+  aspect-ratio: 1;
+  background: radial-gradient(ellipse at center,
+      rgba(8, 89, 94, 0.12) 0%,
+      rgba(8, 89, 94, 0.04) 40%,
+      transparent 70%);
+  animation: heartHalo 5.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+/* Dark shade overlay — heart recedes deep into background */
+.heartWrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 85% 85% at center,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.78) 35%,
+      rgba(0, 0, 0, 0.94) 65%,
+      rgba(0, 0, 0, 0.98) 100%);
+  pointer-events: none;
+}
+
+@keyframes heartHalo {
+
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(0.92);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.heartSvg {
+  width: clamp(300px, 50vw, 450px);
+  height: auto;
+  color: var(--gnos-turquoise);
+  filter: drop-shadow(0 0 12px var(--gnos-turquoise-glow)) drop-shadow(0 0 40px rgba(8, 89, 94, 0.25));
+  animation: contactPulse 5.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes contactPulse {
+
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(0.94);
+    filter: drop-shadow(0 0 8px var(--gnos-turquoise-glow)) drop-shadow(0 0 28px rgba(8, 89, 94, 0.2));
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+    filter: drop-shadow(0 0 20px var(--gnos-turquoise-glow-bright)) drop-shadow(0 0 48px rgba(8, 89, 94, 0.4));
+  }
+}
+
+/* — Responsive: stack on small screens — */
+@media (max-width: 720px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .heartSvg {
+    width: clamp(280px, 75vw, 380px);
+  }
+
+  .frameContent {
+    padding: 1.5rem 1.75rem;
+  }
+
+  /* On mobile, both frames left-aligned for readability */
+  .frame:last-of-type {
+    align-items: flex-start;
+  }
+
+  .frame:last-of-type .frameContent {
+    text-align: left;
+  }
+
+  .frame:last-of-type .linksList {
+    align-items: flex-start;
+  }
+
+  .frameLabel {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+  }
+
+  .inquiryText,
+  .emailLink {
+    font-size: 0.95rem;
+  }
+
+  .promoLink {
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+  }
+}

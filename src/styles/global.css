@@ -32,6 +32,7 @@
   --gnos-header-padding: 4rem;
   --gnos-content-width: 1200px;
   --gnos-home-vertical-gap: 2.25rem;
+  --gnos-hero-gap: 2rem;
   --header-frame-width: var(--gnos-content-width);
   --gnos-black: #000000;
   --gnos-turquoise: #08595E;
@@ -94,13 +95,11 @@ html.about-page-active {
 
 .gnos-line {
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--gnos-turquoise) 10%,
-    var(--gnos-turquoise) 90%,
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      var(--gnos-turquoise) 10%,
+      var(--gnos-turquoise) 90%,
+      transparent);
   box-shadow: 0 0 6px var(--gnos-turquoise-glow);
   margin: 0.75rem 0;
 }

@@ -62,3 +62,16 @@ export const sortedReleases: Release[] = [...allReleases].sort((a, b) => {
   if (dateA !== dateB) return dateB - dateA;
   return (a.catalogNumber ?? '').localeCompare(b.catalogNumber ?? '');
 });
+
+const isUpcomingByDate = (release: Release) =>
+  release.releaseDate?.toUpperCase().includes('TBD') ?? false;
+
+/** Upcoming: ignorantia (by slug) plus any TBD-dated releases */
+export const upcomingReleases = sortedReleases.filter(
+  (r) => r.slug === 'ignorantia' || isUpcomingByDate(r)
+);
+
+/** Catalog: releases that are not upcoming */
+export const catalogReleases = sortedReleases.filter(
+  (r) => !upcomingReleases.includes(r)
+);
