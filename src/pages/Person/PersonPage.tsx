@@ -64,6 +64,8 @@ const PersonPage = () => {
                       alt=""
                       className={styles.personImage}
                       aria-hidden
+                      decoding="async"
+                      fetchPriority="high"
                     />
                   ) : (
                     <div className={styles.imagePlaceholder} aria-hidden />
@@ -84,6 +86,8 @@ const PersonPage = () => {
                       alt=""
                       className={styles.personImage}
                       aria-hidden
+                      loading="lazy"
+                      decoding="async"
                     />
                   ) : (
                     <div className={styles.imagePlaceholder} aria-hidden />
@@ -102,6 +106,8 @@ const PersonPage = () => {
                       alt=""
                       className={styles.personImage}
                       aria-hidden
+                      loading="lazy"
+                      decoding="async"
                     />
                   ) : (
                     <div className={styles.imagePlaceholder} aria-hidden />

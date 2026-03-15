@@ -156,6 +156,8 @@ const TeamPage = () => {
                             src={artist.image}
                             alt={artist.name}
                             className={styles.coverImage}
+                            loading="lazy"
+                            decoding="async"
                           />
                         ) : (
                           <div className={styles.coverPlaceholder} aria-hidden />
@@ -218,6 +220,8 @@ const TeamPage = () => {
                             src={member.image}
                             alt={member.name}
                             className={styles.coverImage}
+                            loading="lazy"
+                            decoding="async"
                           />
                         ) : (
                           <div className={styles.coverPlaceholder} aria-hidden />
