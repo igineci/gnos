@@ -47,3 +47,23 @@
   max-width: 85%;
   color: rgb(103, 103, 103);
 }
+
+@media (max-width: 767px) {
+  .centerWrap {
+    padding: 0 1rem;
+  }
+
+  .taglineFrame {
+    min-width: 0;
+  }
+
+  .textFrameSvg {
+    margin-top: 1.25rem;
+  }
+
+  .tagline {
+    width: min(88%, 18rem);
+    font-size: clamp(1.2rem, 7vw, 1.8rem);
+    line-height: 1.12;
+  }
+}

@@ -198,3 +198,62 @@
   color: var(--gnos-muted);
   opacity: 0.7;
 }
+
+@media (max-width: 767px) {
+  .player {
+    padding: 1rem;
+  }
+
+  .controls {
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .playBtn {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .waveformBars {
+    gap: 1px;
+    padding: 0 0.15rem;
+  }
+
+  .track,
+  .track.va {
+    grid-template-columns: 2rem minmax(0, 1fr) auto;
+    grid-template-areas:
+      'index title duration'
+      '. artist artist';
+    gap: 0.25rem 0.75rem;
+    align-items: start;
+    padding: 0.75rem 0.4rem;
+  }
+
+  .index {
+    grid-area: index;
+  }
+
+  .title {
+    grid-area: title;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .artist {
+    grid-area: artist;
+    min-width: 0;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    overflow-wrap: anywhere;
+  }
+
+  .duration {
+    grid-area: duration;
+    padding-top: 0.1rem;
+  }
+
+  .placeholderNote {
+    line-height: 1.5;
+  }
+}

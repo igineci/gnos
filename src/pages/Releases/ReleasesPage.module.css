@@ -136,6 +136,20 @@
   text-align: center;
 }
 
+@media (max-width: 767px) {
+  .mainFrameContent {
+    padding: 1rem 1rem 1.5rem;
+  }
+
+  .section {
+    margin-bottom: 2rem;
+  }
+
+  .releaseListWrapper {
+    padding: 0.75rem;
+  }
+}
+
 @media (max-width: 520px) {
   .sectionHeader {
     flex-direction: column;

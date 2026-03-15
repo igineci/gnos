@@ -220,24 +220,57 @@
 
 /* — Responsive: stack on small screens — */
 @media (max-width: 720px) {
+  .page {
+    padding: 2rem 0 3rem;
+    overflow: hidden;
+  }
+
   .container {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  .frame {
+    top: 0;
+    min-height: auto;
+    align-items: stretch;
+    border: 1px solid var(--gnos-turquoise);
+    background: rgba(0, 0, 0, 0.72);
+    box-shadow:
+      0 0 8px rgba(8, 89, 94, 0.3),
+      inset 0 0 18px rgba(8, 89, 94, 0.06);
+    padding: 1.25rem 1rem;
+  }
+
+  .frameSvg {
+    display: none;
+  }
+
+  .heartWrap {
+    display: none;
   }
 
   .heartSvg {
     width: clamp(280px, 75vw, 380px);
   }
 
+  .heartWrap::before {
+    width: 90%;
+    max-width: 20rem;
+  }
+
   .frameContent {
-    padding: 1.5rem 1.75rem;
+    padding: 0;
   }
 
   /* On mobile, both frames left-aligned for readability */
+  .frame:first-of-type,
   .frame:last-of-type {
     align-items: flex-start;
   }
 
+  .frame:first-of-type .frameContent,
   .frame:last-of-type .frameContent {
     text-align: left;
   }
@@ -251,13 +284,38 @@
     letter-spacing: 0.25em;
   }
 
-  .inquiryText,
+  .inquiryText {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+  }
+
   .emailLink {
-    font-size: 0.95rem;
+    display: inline-block;
+    min-height: 2.75rem;
+    font-size: 1.1rem;
+    line-height: 1.35;
+    letter-spacing: 0.04em;
+    overflow-wrap: anywhere;
+  }
+
+  .linksList {
+    width: 100%;
+    gap: 0;
+  }
+
+  .linksList li + li {
+    border-top: 1px solid rgba(8, 89, 94, 0.28);
   }
 
   .promoLink {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    min-height: 2.75rem;
     font-size: 0.85rem;
     letter-spacing: 0.12em;
+    align-items: center;
+    padding: 0.9rem 0;
   }
 }

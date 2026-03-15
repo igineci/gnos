@@ -309,18 +309,82 @@
 }
 
 /* — responsive — */
-@media (max-width: 520px) {
-  .sectionLinksRow {
-    grid-template-columns: 1fr;
+@media (max-width: 767px) {
+  .hero {
+    min-height: calc(100dvh - var(--gnos-header-height));
+    height: auto;
+    align-items: center;
+    padding: 2rem 1rem 1.5rem;
   }
 
+  .heroStack,
+  .belowHero {
+    gap: 1.25rem;
+  }
+
+  .logoFrame {
+    margin-bottom: 1.25rem;
+  }
+
+  .taglineFrame {
+    width: auto;
+    max-width: none;
+  }
+
+  .textFrameSvg {
+    display: none;
+  }
+
+  .tagline {
+    position: static;
+    transform: none;
+    width: auto;
+    max-width: 12ch;
+    font-size: clamp(0.92rem, 4.2vw, 1.15rem);
+    line-height: 1.2;
+    white-space: normal;
+    letter-spacing: 0.12em;
+    text-align: center;
+    margin-top: 0;
+  }
+
+  .sectionLinksRow {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .sectionLinkFrame {
+    min-height: 5rem;
+  }
+
+  .sectionLinkText {
+    font-size: 0.98rem;
+    letter-spacing: 0.16em;
+    padding: 0 1rem;
+  }
+
+  .mainDecoration {
+    width: 100%;
+    min-height: 5rem;
+    margin-left: 0;
+    transform: none;
+    padding: 0.25rem 0;
+  }
+
+  .mainDecorationSvg {
+    width: 120%;
+    max-width: none;
+    transform: rotate(8deg) translateX(-2%);
+  }
+}
+
+@media (max-width: 520px) {
   .bottomRow {
     grid-template-columns: 1fr;
   }
 
   .tagline {
-    font-size: 1.25rem;
-    white-space: normal;
+    max-width: 11ch;
   }
 
   .sectionLinkText {

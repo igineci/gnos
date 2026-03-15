@@ -281,35 +281,92 @@
   text-align: center;
 }
 
+@media (max-width: 767px) {
+  .mainFrameContent {
+    padding: 1rem;
+  }
+
+  .galleryGrid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 1.25rem 0.9rem;
+  }
+
+  .galleryItem {
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+  }
+
+  .hoverOverlay {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    aspect-ratio: auto;
+    margin-top: 0.6rem;
+    opacity: 1;
+    transform: none;
+    display: block;
+  }
+
+  .galleryItem:hover .hoverOverlay,
+  .galleryItem:focus-visible .hoverOverlay {
+    transform: none;
+  }
+
+  .hoverSvg {
+    display: none;
+  }
+
+  .hoverText {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    min-height: 0;
+    padding: 0;
+    opacity: 1;
+    clip-path: none;
+    align-items: flex-start;
+    text-align: left;
+    gap: 0.25rem;
+  }
+
+  .galleryItem:hover .hoverText,
+  .galleryItem:focus-visible .hoverText {
+    opacity: 1;
+    clip-path: none;
+  }
+
+  .hoverName,
+  .hoverRole {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: initial;
+  }
+
+  .hoverName {
+    font-size: 0.92rem;
+  }
+
+  .hoverRole {
+    font-size: 0.68rem;
+  }
+}
+
 @media (max-width: 520px) {
   .sectionHeader {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .hoverOverlay {
-    left: 16%;
-    top: 104%;
-    width: min(17rem, calc(100vw - 3rem));
-    transform: translateY(0) scale(0.94);
-  }
-
-  .galleryItem:hover .hoverOverlay,
-  .galleryItem:focus-visible .hoverOverlay {
-    transform: translateY(0) scale(1);
-  }
-
-  .hoverText {
-    width: 65%;
-    min-height: 2.2rem;
-  }
-
   .hoverName {
-    font-size: clamp(0.68rem, 2.4vw, 0.82rem);
+    font-size: 0.88rem;
   }
 
   .hoverRole {
-    font-size: clamp(0.5rem, 1.7vw, 0.62rem);
+    font-size: 0.7rem;
   }
 
 }

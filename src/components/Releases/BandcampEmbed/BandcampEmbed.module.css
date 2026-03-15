@@ -35,3 +35,15 @@
 .link:hover {
   opacity: 0.8;
 }
+
+@media (max-width: 767px) {
+  .embed {
+    max-width: none;
+    height: min(70vh, 24rem);
+  }
+
+  .link {
+    min-height: 2.75rem;
+    padding: 0.75rem 0;
+  }
+}

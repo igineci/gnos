@@ -320,7 +320,29 @@
   color: var(--gnos-turquoise);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 767px) {
+  .container {
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  .frameWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 24px solid transparent;
+    border-image: url('/svg/releases/releases-frame.svg') 30 / 24px / 0 stretch;
+    background: rgba(0, 0, 0, 0.72);
+    box-shadow:
+      0 0 10px rgba(8, 89, 94, 0.32),
+      inset 0 0 18px rgba(8, 89, 94, 0.05);
+    padding: 1rem;
+  }
+
+  .frameSvg {
+    display: none;
+  }
+
   .twoCol {
     grid-template-columns: 1fr;
     gap: 0.75rem;
@@ -343,22 +365,38 @@
   }
 
   .frameContent {
-    padding: 0 1rem;
+    position: static;
+    left: auto;
+    right: auto;
+    overflow: visible;
+    padding: 0;
+    margin: 0 !important;
+  }
+
+  .frameContent + .frameContent {
+    padding-top: 1rem;
+    border-top: 1px solid rgba(8, 89, 94, 0.3);
+  }
+
+  .aboutIntroPanel {
+    overflow: visible;
+    padding-right: 0;
   }
 
   .aboutHeading {
-    font-size: 0.92rem;
+    font-size: 1rem;
     margin-bottom: 0.55rem;
   }
 
   .aboutParagraph {
     max-width: 100%;
-    font-size: 0.72rem;
-    line-height: 1.55;
+    font-size: 0.95rem;
+    line-height: 1.65;
     margin-bottom: 0.7rem;
   }
 
   .missionVisionPanel {
+    overflow: visible;
     padding-top: 0;
   }
 
@@ -368,7 +406,7 @@
   }
 
   .missionVisionHeading {
-    font-size: 0.72rem;
+    font-size: 0.95rem;
     margin-bottom: 0.35rem;
   }
 
@@ -380,12 +418,19 @@
   .diagonalVision .missionVisionParagraph {
     max-width: 100%;
     margin-left: 0;
-    font-size: 0.6rem;
-    line-height: 1.38;
+    font-size: 0.92rem;
+    line-height: 1.55;
   }
 
   .paragraph,
   .paragraphCenter {
-    font-size: 0.8rem;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .codexItem,
+  .codexAccent {
+    font-size: 0.95rem;
+    line-height: 1.6;
   }
 }

@@ -547,24 +547,62 @@
 }
 
 @media (max-width: 768px) {
+  .content {
+    padding: 0 1rem 1.5rem;
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0.25rem 0;
+    margin-left: 1rem;
+  }
+
+  .framesGrid {
+    gap: 0.75rem;
+  }
+
   .framesGrid {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto auto;
   }
 
+  .framesGridTeam .frameCellImages,
+  .framesGridTeam .frameCellBio,
+  .framesGridTeam .frameCellRole,
+  .framesGridTeam .frameCellPromoCompact {
+    grid-column: 1;
+  }
+
+  .framesGridTeam .frameCellBio {
+    grid-row: 2;
+  }
+
+  .framesGridTeam .frameCellRole {
+    grid-row: 3;
+  }
+
+  .framesGridTeam .frameCellPromoCompact {
+    grid-row: 4;
+  }
+
   .frameCellImages {
     grid-column: 1;
     grid-row: 1;
+    max-height: none;
   }
 
   .frameCellBio {
     grid-column: 1;
     grid-row: 2;
+    max-height: none;
   }
 
   .frameCellInterview {
     grid-column: 1;
     grid-row: 3;
+    height: auto;
   }
 
   .frameCellRole {
@@ -575,11 +613,24 @@
   .frameCellPromo {
     grid-column: 1;
     grid-row: 4;
+    height: auto;
+  }
+
+  .frameCellInterview,
+  .frameCellPromo {
+    overflow: visible;
+  }
+
+  .frameCellBio .frameScroll,
+  .frameCellInterview .frameScroll,
+  .frameCellPromo .frameScroll {
+    overflow: visible;
   }
 
   .imageGallery {
     grid-template-columns: 1fr;
-    grid-template-rows: 250px auto;
+    grid-template-rows: minmax(16rem, 56vw) auto;
+    gap: 0.75rem;
   }
 
   .imageMain {
@@ -591,9 +642,50 @@
     grid-column: 1;
     grid-row: 2;
     grid-template-rows: 1fr 1fr;
+    gap: 0.75rem;
   }
 
   .imageSecondary>* {
-    min-height: 100px;
+    min-height: 8rem;
+  }
+
+  .bioText {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .detailsRow {
+    padding: 1rem;
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+
+  .detailDivider {
+    display: none;
+  }
+
+  .detailLabel {
+    white-space: normal;
+  }
+
+  .roleFrameScroll {
+    padding: 1rem;
+  }
+
+  .roleText {
+    font-size: clamp(1rem, 7vw, 1.45rem);
+    line-height: 1.15;
+    white-space: normal;
+  }
+
+  .promoLink {
+    min-height: 2.75rem;
+    padding: 0.6rem 0;
+    gap: 0.75rem;
+  }
+
+  .promoLabel {
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
 }
