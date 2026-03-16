@@ -13,11 +13,9 @@ const NAV_ITEMS = [
 ] as const;
 
 const INDICATOR_WIDTH_PX = 102;
-const INDICATOR_HEIGHT_PX = 16;
 const DECODE_SPEED_MS = 45;
 const DECODE_GAP_BETWEEN_ITEMS_MS = 100;
 
-/** Left-to-right initial decode: each item starts after the previous one finishes. */
 const INITIAL_DECODE_DELAYS = (() => {
   const delays: number[] = [];
   let t = 0;
@@ -204,7 +202,7 @@ export const Header = ({ loaderExited = false }: HeaderProps) => {
         <div ref={frameRef} className={styles.frame}>
           <div className={styles.topRow}>
             <Link to={ROUTE_PATHS.HOME} className={styles.logoBlock} aria-label="GNOS Records Home">
-              <img src="/logo.svg" alt="" className={styles.logoIcon} width={28} height={28} />
+              <img src="/svg/logo-2.svg" alt="" className={styles.logoIcon} width={38} height={38} />
               <span className={styles.logoText}>GNOS RECORDS</span>
             </Link>
 

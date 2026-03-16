@@ -125,7 +125,7 @@
   padding-bottom: 0.75rem;
   flex: 1;
   min-height: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .logoBlock {
@@ -135,13 +135,18 @@
   text-decoration: none;
   color: var(--header-accent);
   flex-shrink: 0;
+  overflow: visible;
 }
 
 .logoIcon {
   display: block;
-  width: 24px;
-  height: 24px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
+  margin-right: 40px;
+  margin-top: 10px;
+  transform: translateY(1px) scale(2.15);
+  transform-origin: left center;
 }
 
 .logoText {
@@ -150,7 +155,7 @@
   font-weight: 900;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--gnos-muted);
+  color: var(--gnos-white);
 }
 
 .navWrap {
@@ -283,11 +288,11 @@
   height: 100%;
   width: 100%;
   background-color: var(--header-decoration-color);
-  mask-image: url(/svg/header-right.svg);
+  mask-image: url(/svg/sphere-1.svg);
   mask-size: cover;
   mask-position: right center;
   mask-repeat: no-repeat;
-  -webkit-mask-image: url(/svg/header-right.svg);
+  -webkit-mask-image: url(/svg/sphere-1.svg);
   -webkit-mask-size: cover;
   -webkit-mask-position: right center;
   -webkit-mask-repeat: no-repeat;
@@ -301,6 +306,7 @@
   z-index: 2;
   flex-shrink: 0;
   height: 28px;
+  margin-top: -15px;
   pointer-events: none;
 }
 
@@ -334,6 +340,12 @@
   height: 100%;
   object-fit: contain;
   object-position: center bottom;
+}
+
+@media (max-width: 767px) {
+  .indicator {
+    display: none;
+  }
 }
 
 @media (min-width: 768px) {

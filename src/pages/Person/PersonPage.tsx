@@ -1,4 +1,8 @@
 import { useParams, useLocation, Link } from 'react-router-dom';
+import { FaBehance, FaGithub, FaLinkedinIn, FaSoundcloud, FaSpotify } from 'react-icons/fa6';
+import { LuBookOpen, LuBoxes, LuGlobe, LuInstagram, LuLink, LuMail, LuMusic4, LuRadio, LuSlidersHorizontal } from 'react-icons/lu';
+import { SiBandcamp, SiBeatport } from 'react-icons/si';
+import { PiVinylRecordFill } from "react-icons/pi";
 import {
   getArtistBySlug,
   getTeamMemberBySlug,
@@ -7,6 +11,27 @@ import {
 import { ROUTE_PATHS } from '@/constants/routes';
 import { GnosFrame } from '@/components/Person/GnosFrame';
 import styles from './PersonPage.module.css';
+
+const getPromoIcon = (label: string, url: string) => {
+  const key = `${label} ${url}`.toLowerCase();
+
+  if (key.includes('instagram')) return <LuInstagram aria-hidden />;
+  if (key.includes('soundcloud')) return <FaSoundcloud aria-hidden />;
+  if (key.includes('linkedin')) return <FaLinkedinIn aria-hidden />;
+  if (key.includes('github')) return <FaGithub aria-hidden />;
+  if (key.includes('behance')) return <FaBehance aria-hidden />;
+  if (key.includes('bandcamp')) return <SiBandcamp aria-hidden />;
+  if (key.includes('spotify')) return <FaSpotify aria-hidden />;
+  if (key.includes('beatport')) return <SiBeatport aria-hidden />;
+  if (key.includes('resident advisor') || key.includes('ra.co')) return <LuRadio aria-hidden />;
+  if (key.includes('bookings') || key.startsWith('mailto:')) return <LuMail aria-hidden />;
+  if (key.includes('portfolio')) return <LuBookOpen aria-hidden />;
+  if (key.includes('mastering')) return <PiVinylRecordFill aria-hidden />;
+  if (key.includes('other projects')) return <LuBoxes aria-hidden />;
+  if (key.includes('linktree') || key.includes('all links')) return <LuLink aria-hidden />;
+
+  return <LuGlobe aria-hidden />;
+};
 
 
 const PersonPage = () => {
@@ -117,33 +142,30 @@ const PersonPage = () => {
             </div>
           </div>
 
-          {/* Frame 2: Biography */}
+          {/* Frame 2: Promo links */}
           <div className={styles.frameCellBio}>
             <GnosFrame>
-              <h2 className={styles.frameTitle}>BIOGRAPHY</h2>
+              <h2 className={styles.frameTitle}>PROMO LINKS</h2>
               <div className={styles.frameInner}>
                 <div className={styles.frameScroll}>
-                  <p className={styles.bioText}>{person.bio}</p>
-                  {isArtist && (
-                    <div className={styles.detailsPanel}>
-                      <div className={styles.detailsRow}>
-                        <div className={styles.detailItem}>
-                          <span className={styles.detailLabel}>COUNTRY</span>
-                          <span className={styles.detailValue}>{person.country}</span>
-                        </div>
-                        <div className={styles.detailDivider} aria-hidden />
-                        <div className={styles.detailItem}>
-                          <span className={styles.detailLabel}>ACTIVE SINCE</span>
-                          <span className={styles.detailValue}>{person.activeSince}</span>
-                        </div>
-                        <div className={styles.detailDivider} aria-hidden />
-                        <div className={styles.detailItem}>
-                          <span className={styles.detailLabel}>LABELS</span>
-                          <span className={styles.detailValue}>{person.labels}</span>
-                        </div>
-                      </div>
-                    </div>
-                  )}
+                  <ul className={styles.promoList}>
+                    {person.promoLinks?.map((link) => (
+                      <li key={link.label}>
+                        <a
+                          href={link.url}
+                          className={styles.promoLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <span className={styles.promoLead}>
+                            <span className={styles.promoIcon}>{getPromoIcon(link.label, link.url)}</span>
+                            <span className={styles.promoLabel}>{link.label}</span>
+                          </span>
+                          <span className={styles.promoArrow} aria-hidden>→</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </GnosFrame>
@@ -178,27 +200,33 @@ const PersonPage = () => {
             </GnosFrame>
           </div>
 
-          {/* Frame 4: Promo links */}
-          <div className={`${styles.frameCellPromo} ${!isArtist ? styles.frameCellPromoCompact : ''}`}>
+          {/* Frame 4: Biography */}
+          <div className={`${styles.frameCellPromo} ${styles.frameCellBiography} ${!isArtist ? styles.frameCellPromoCompact : ''}`}>
             <GnosFrame>
-              <h2 className={styles.frameTitle}>PROMO LINKS</h2>
+              <h2 className={styles.frameTitle}>BIOGRAPHY</h2>
               <div className={styles.frameInner}>
                 <div className={styles.frameScroll}>
-                  <ul className={styles.promoList}>
-                    {person.promoLinks?.map((link) => (
-                      <li key={link.label}>
-                        <a
-                          href={link.url}
-                          className={styles.promoLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <span className={styles.promoLabel}>{link.label}</span>
-                          <span className={styles.promoArrow} aria-hidden>→</span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
+                  <p className={styles.bioText}>{person.bio}</p>
+                  {isArtist && (
+                    <div className={styles.detailsPanel}>
+                      <div className={styles.detailsRow}>
+                        <div className={styles.detailItem}>
+                          <span className={styles.detailLabel}>COUNTRY</span>
+                          <span className={styles.detailValue}>{person.country}</span>
+                        </div>
+                        <div className={styles.detailDivider} aria-hidden />
+                        <div className={styles.detailItem}>
+                          <span className={styles.detailLabel}>ACTIVE SINCE</span>
+                          <span className={styles.detailValue}>{person.activeSince}</span>
+                        </div>
+                        <div className={styles.detailDivider} aria-hidden />
+                        <div className={styles.detailItem}>
+                          <span className={styles.detailLabel}>LABELS</span>
+                          <span className={styles.detailValue}>{person.labels}</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </GnosFrame>

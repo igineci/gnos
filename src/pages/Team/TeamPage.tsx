@@ -25,6 +25,36 @@ const TeamPage = () => {
     );
     let frameId = 0;
 
+    const setHoverSide = (node: HTMLElement) => {
+      if (window.innerWidth <= 767) {
+        delete node.dataset.hoverSide;
+        return;
+      }
+
+      const overlay = node.querySelector<HTMLElement>(`.${styles.hoverOverlay}`);
+
+      if (!overlay) {
+        return;
+      }
+
+      delete node.dataset.hoverSide;
+
+      const triggerRect = node.getBoundingClientRect();
+      const overlayWidth = overlay.getBoundingClientRect().width;
+
+      if (!overlayWidth) {
+        return;
+      }
+
+      const viewportPadding = 16;
+      const defaultRightEdge = triggerRect.left + triggerRect.width * 0.76 + overlayWidth;
+      const flippedLeftEdge = triggerRect.right - triggerRect.width * 0.76 - overlayWidth;
+
+      if (defaultRightEdge > window.innerWidth - viewportPadding && flippedLeftEdge >= viewportPadding) {
+        node.dataset.hoverSide = 'left';
+      }
+    };
+
     const fitHoverName = (node: HTMLElement) => {
       const parent = node.parentElement;
 
@@ -75,6 +105,7 @@ const TeamPage = () => {
     };
 
     const fitHoverNames = () => {
+      triggerNodes.forEach(setHoverSide);
       nameNodes.forEach(fitHoverName);
     };
 
