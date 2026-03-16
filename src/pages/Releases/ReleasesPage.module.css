@@ -156,6 +156,11 @@
     align-items: flex-start;
   }
 
+  .sectionLineSeparator {
+    width: 100%;
+    flex: none;
+  }
+
   .decorLines {
     width: 100%;
     min-width: 0;
