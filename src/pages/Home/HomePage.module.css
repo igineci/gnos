@@ -135,38 +135,75 @@
 .mainDecoration {
   position: relative;
   isolation: isolate;
-  width: 100vw;
-  min-height: clamp(8rem, 16vw, 12rem);
-  padding: clamp(0.5rem, 1.4vw, 1.25rem) 0;
+  --main-decoration-width: min(17rem, 92vw);
+  width: 100%;
+  height: 420px;
   margin-left: 50%;
   transform: translateX(-50%);
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: visible;
+  overflow: hidden;
   pointer-events: none;
+}
+
+.mainDecorationSvg {
+  display: block;
+  width: var(--main-decoration-width);
+  max-width: none;
+  height: auto;
+  object-fit: contain;
+  transform-origin: center;
+  animation: mainDecorationSpin 28s linear infinite;
 }
 
 .mainDecoration::before {
   content: '';
   position: absolute;
-  inset: 0;
-  z-index: 2;
+  inset: 20% 50% 10%;
+  z-index: 0;
+  pointer-events: none;
+  transform: translateX(-50%);
+  width: min(32rem, 68vw);
+  border-radius: 50%;
+  filter: blur(30px);
+}
+
+.mainDecorationComposition {
+  position: relative;
+  z-index: 1;
+  width: clamp(14rem, 28vw, 24rem);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainDecorationLayer {
+  position: absolute;
+  display: block;
+  object-fit: contain;
+  object-position: center;
   pointer-events: none;
 }
 
-.mainDecorationSvg {
-  position: relative;
-  z-index: 1;
-  display: block;
+.mainDecorationBorder {
+  inset: 0;
   width: 100%;
+  height: 100%;
+  opacity: 0.9;
+  transform: rotate(180deg);
+  filter:
+    drop-shadow(0 0 22px rgba(0, 240, 224, 0.12)) brightness(0.95) saturate(1.05);
+}
+
+.mainDecorationCenter {
+  left: 50%;
+  top: 50%;
+  width: 53%;
   height: auto;
-  flex: 0 0 auto;
-  object-fit: contain;
-  transform: rotate(11deg) scale(1.03);
-  transform-origin: center;
-  opacity: 0.76;
-  filter: brightness(0.72) saturate(0.88) contrast(1.08);
+  max-height: 72%;
+  transform: translate(-50%, -52%);
 }
 
 .sectionLinkFrame {
@@ -308,27 +345,68 @@
   }
 }
 
+@keyframes mainDecorationSpin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mainDecorationSvg {
+    animation: none;
+  }
+}
+
 /* — responsive — */
 @media (max-width: 767px) {
   .hero {
     min-height: calc(100dvh - var(--gnos-header-height));
     height: auto;
     align-items: center;
-    padding: 2rem 1rem 1.5rem;
+    justify-content: flex-start;
+    padding: 1.25rem 0.5rem 1.5rem;
   }
 
   .heroStack,
   .belowHero {
-    gap: 1.25rem;
+    gap: 1rem;
+  }
+
+  .heroStack {
+    width: 100%;
+    padding-top: 0;
   }
 
   .logoFrame {
-    margin-bottom: 1.25rem;
+    width: 100%;
+    height: clamp(18rem, 54vw, 22rem);
+    aspect-ratio: auto;
+    margin-bottom: 0;
+    overflow: visible;
+  }
+
+  .frameSvg {
+    transform: scaleY(1.9);
+    transform-origin: center;
+  }
+
+  .logoInner {
+    inset: 0;
+  }
+
+  .logo {
+    width: min(92%, 24rem);
+    max-width: 92%;
   }
 
   .taglineFrame {
     width: auto;
     max-width: none;
+    min-height: 2.5rem;
   }
 
   .textFrameSvg {
@@ -339,11 +417,11 @@
     position: static;
     transform: none;
     width: auto;
-    max-width: 12ch;
-    font-size: clamp(0.92rem, 4.2vw, 1.15rem);
+    max-width: none;
+    font-size: clamp(1.2rem, 5vw, 1.55rem);
     line-height: 1.2;
-    white-space: normal;
-    letter-spacing: 0.12em;
+    white-space: nowrap;
+    letter-spacing: 0.08em;
     text-align: center;
     margin-top: 0;
   }
@@ -364,27 +442,31 @@
   }
 
   .mainDecoration {
+    --main-decoration-width: min(16rem, 68vw);
     width: 100%;
-    min-height: 5rem;
+    height: 300px;
     margin-left: 0;
     transform: none;
-    padding: 0.25rem 0;
   }
 
-  .mainDecorationSvg {
-    width: 120%;
-    max-width: none;
-    transform: rotate(8deg) translateX(-2%);
+  .mainDecoration::before {
+    inset: 24% 50% 14%;
+    width: min(24rem, 82vw);
+  }
+
+  .mainDecorationComposition {
+    width: clamp(11rem, 46vw, 16rem);
+  }
+
+  .mainDecorationCenter {
+    width: 45%;
+    max-height: 70%;
   }
 }
 
 @media (max-width: 520px) {
   .bottomRow {
     grid-template-columns: 1fr;
-  }
-
-  .tagline {
-    max-width: 11ch;
   }
 
   .sectionLinkText {

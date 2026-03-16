@@ -141,7 +141,6 @@ export const Header = ({ loaderExited = false }: HeaderProps) => {
     };
   }, [loaderExited, targetIndex]);
 
-  /* Initial decode: when loader exits, trigger all nav items with staggered delay */
   useEffect(() => {
     if (!loaderExited) return;
     setTriggers((prev) => {
@@ -154,7 +153,6 @@ export const Header = ({ loaderExited = false }: HeaderProps) => {
     });
   }, [loaderExited]);
 
-  /* Close mobile menu on Escape; lock body scroll when menu open */
   useEffect(() => {
     if (!menuOpen) return;
     const onKeyDown = (e: KeyboardEvent) => {
@@ -168,7 +166,6 @@ export const Header = ({ loaderExited = false }: HeaderProps) => {
     };
   }, [menuOpen]);
 
-  /* On route change: re-trigger decode for the newly active item; close mobile menu */
   useEffect(() => {
     setMenuOpen(false);
     if (!hasMountedRef.current) {
@@ -253,7 +250,6 @@ export const Header = ({ loaderExited = false }: HeaderProps) => {
             <div className={styles.decorativeSvg} />
           </div>
 
-          {/* Border line + active indicator: from logo to decoration */}
           <div className={styles.headerBottom}>
             <div className={styles.headerLine} aria-hidden />
             {indicatorVisible && (
