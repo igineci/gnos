@@ -198,6 +198,14 @@ const PersonPage = () => {
                 </div>
               </div>
             </GnosFrame>
+            {!isArtist && (
+              <img
+                src="/svg/personpage-dec.svg"
+                alt=""
+                className={styles.roleDecoration}
+                aria-hidden
+              />
+            )}
           </div>
 
           {/* Frame 4: Biography */}

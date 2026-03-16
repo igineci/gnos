@@ -63,12 +63,12 @@
 }
 
 .personName {
-  font-family: var(--gnos-font-display);
+  font-family: 'Compacta', var(--gnos-font-display);
   font-size: clamp(1.7rem, 7vw, 2.7rem);
   font-weight: 900;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--gnos-turquoise);
+  color: var(--gnos-white);
   margin-top: 0.5rem;
 }
 
@@ -198,6 +198,27 @@
   justify-content: center;
   overflow: hidden;
   padding: 0 1.75rem;
+}
+
+.frameCellRole {
+  max-height: none;
+  height: auto;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.9rem;
+}
+
+.frameCellRole> :first-child {
+  flex: none;
+  height: clamp(2.5rem, 6vw, 5.5rem);
+  min-height: 0;
+}
+
+.frameCellRole> :last-child {
+  flex: none;
+  height: auto;
 }
 
 .frameCellPromo {
@@ -528,6 +549,20 @@
   margin: 0;
 }
 
+.roleDecoration {
+  display: block;
+  width: 40%;
+  height: auto;
+  opacity: 0.9;
+  pointer-events: none;
+  margin-top: -1.15rem;
+  transform: scaleX(2.85) scaleY(1.22);
+  transform-origin: center top;
+  margin-left: 145px;
+  margin-top: 30px;
+
+}
+
 /* — Frame 4: Promo links — */
 .promoList {
   list-style: none;
@@ -548,7 +583,7 @@
   text-transform: uppercase;
   color: var(--gnos-muted);
   text-decoration: none;
-  padding: 0.35rem 0;
+  padding: 0.35rem 1.5rem;
   transition: color 0.25s ease;
 }
 

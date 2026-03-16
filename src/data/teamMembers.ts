@@ -38,6 +38,7 @@ export const TEAM_MEMBERS: Person[] = [
       { label: 'OTHER PROJECTS', url: 'https://www.unicam.app' },
     ],
     role: 'Web Developer',
+    bio: 'Andjela is 23 year old frontend engineer focused on building authentic web experiences where technology and creativity merge. Alongside her engineering work on platforms and large web applications, she enjoys exploring the more expressive side of the web — creating immersive, visually distinctive interfaces that reflect the identity of the projects behind them. Her work combines performance-focused engineering with a strong sense of aesthetics, translating the energy of the music into a digital space. She is particularly interested in how new technologies can expand what is possible on the web while maintaining thoughtful design and clean architecture.'
   },
   {
     name: 'Ema Djipalo',

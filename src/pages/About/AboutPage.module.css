@@ -49,8 +49,8 @@
 }
 
 .frameWrapper:last-of-type .frameContentTop {
-  top: 5%;
-  bottom: 53%;
+  top: 3%;
+  bottom: 56%;
   margin-left: 5%;
   margin-right: 12%;
 }
@@ -60,9 +60,76 @@
   bottom: 5%;
 }
 
+.frameTwoTopContent {
+  top: 3%;
+  bottom: 56%;
+  margin-left: 5%;
+  margin-right: 12%;
+  z-index: 3;
+}
+
+.frameTwoBottomContent {
+  top: 55%;
+  bottom: 5%;
+  z-index: 2;
+}
+
+.aboutFrameTwoTopLayer {
+  position: absolute;
+  top: 3%;
+  bottom: 56%;
+  left: 5%;
+  right: 12%;
+  z-index: 3;
+  padding: 0 1.25rem;
+  box-sizing: border-box;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.opportunitiesBackdrop {
+  position: absolute;
+  left: 55%;
+  top: 50%;
+  width: 100vw;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.opportunitiesBackdrop::before {
+  content: '';
+  position: absolute;
+  left: 90%;
+  top: 50%;
+  width: min(28rem, 48vw);
+  height: min(16rem, 65%);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle,
+      rgba(0, 0, 0, 0.58) 0%,
+      rgba(0, 0, 0, 0.34) 34%,
+      rgba(0, 0, 0, 0.12) 58%,
+      rgba(0, 0, 0, 0) 78%);
+  filter: blur(14px);
+}
+
+.aboutFrameTwoBottomLayer {
+  position: absolute;
+  top: 55%;
+  bottom: 5%;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 0 1.25rem;
+  box-sizing: border-box;
+}
+
 /* — Typography — */
 .heading {
-  font-family: var(--gnos-font-display);
+  font-family: 'Compacta', var(--gnos-font-display);
   font-size: 2.2rem;
   font-weight: 900;
   letter-spacing: 0.1em;
@@ -70,14 +137,11 @@
   text-align: center;
   color: var(--gnos-turquoise);
   margin: 0 0 0.55rem;
+
 }
 
 .aboutHeading {
-  font-size: clamp(1rem, 1.55vw, 1.35rem);
-  letter-spacing: 0.2em;
   text-align: left;
-  margin-bottom: 0.7rem;
-  font-weight: 900;
 }
 
 .sideHeading {
@@ -92,7 +156,7 @@
 
 .paragraph {
   font-family: var(--gnos-font-body);
-  font-size: 1.2rem;
+  font-size: 0.95rem;
   line-height: 1.5;
   color: var(--gnos-white);
   margin: 0 0 0.75rem;
@@ -103,6 +167,24 @@
 }
 
 .aboutIntroPanel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.aboutHeader {
+  flex: 0 0 auto;
+  margin-bottom: 0.85rem;
+  padding-right: clamp(1rem, 1vw, 0.5rem);
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid rgba(8, 89, 94, 0.38);
+  font-family: 'Compacta', var(--gnos-font-display);
+}
+
+.aboutScroll {
+  flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: clamp(1rem, 2vw, 1.35rem);
@@ -110,11 +192,11 @@
   scrollbar-color: var(--gnos-turquoise) rgba(3, 16, 17, 0.88);
 }
 
-.aboutIntroPanel::-webkit-scrollbar {
+.aboutScroll::-webkit-scrollbar {
   width: 0.5rem;
 }
 
-.aboutIntroPanel::-webkit-scrollbar-track {
+.aboutScroll::-webkit-scrollbar-track {
   background:
     linear-gradient(180deg,
       rgba(3, 16, 17, 0.92) 0%,
@@ -123,7 +205,7 @@
   box-shadow: inset 0 0 0 1px rgba(8, 89, 94, 0.08);
 }
 
-.aboutIntroPanel::-webkit-scrollbar-thumb {
+.aboutScroll::-webkit-scrollbar-thumb {
   background:
     linear-gradient(180deg,
       rgba(8, 89, 94, 0.62) 0%,
@@ -135,7 +217,7 @@
     inset 0 0 10px rgba(255, 255, 255, 0.08);
 }
 
-.aboutIntroPanel::-webkit-scrollbar-thumb:hover {
+.aboutScroll::-webkit-scrollbar-thumb:hover {
   background:
     linear-gradient(180deg,
       rgba(34, 233, 209, 0.92) 0%,
@@ -143,22 +225,55 @@
 }
 
 .aboutParagraph {
-  max-width: 56ch;
-  font-size: clamp(0.72rem, 0.95vw, 0.86rem);
-  line-height: 1.66;
+  max-width: none;
+  width: 100%;
+  font-size: 0.95rem;
+  line-height: 1.72;
   letter-spacing: 0.015em;
   color: rgba(248, 250, 251, 0.92);
-  margin: 0 0 0.9rem;
+  margin: 0 0 1rem;
 }
 
 .paragraphCenter {
   font-family: var(--gnos-font-body);
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   line-height: 1.55;
   color: var(--gnos-white);
   text-align: center;
   max-width: 100%;
   margin: 0 auto 0.75rem;
+}
+
+.opportunitiesPanel {
+  position: relative;
+  isolation: isolate;
+  z-index: 1;
+  text-align: center;
+  overflow: hidden;
+}
+
+.opportunitiesBackground {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 0;
+  width: min(20rem, 82%);
+  height: auto;
+  transform: translate(-50%, -50%);
+  opacity: 0.3;
+  filter: brightness(0.82) contrast(1.08);
+  pointer-events: none;
+}
+
+.opportunitiesInner {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 34rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(52px);
 }
 
 .twoCol {
@@ -176,47 +291,53 @@
 /* — Mission (left) | Vision (right) in same frame — */
 .missionVisionPanel {
   overflow: hidden;
-  padding-top: 0.2rem;
+  padding-top: 0;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: calc(5.5% + 1.25rem);
+  padding-right: calc(11.5% + 1.25rem);
 }
 
 .missionVisionRow {
-  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
-  gap: clamp(0.85rem, 2vw, 1.5rem);
+  grid-template-columns: minmax(0, 1fr) clamp(2.75rem, 2.6vw, 2.35rem) minmax(0, 1fr);
+  column-gap: clamp(0.9rem, 1.9vw, 1.55rem);
   align-items: stretch;
   width: 100%;
   height: 100%;
 }
 
-.missionVisionRow::before {
-  content: '';
-  position: absolute;
-  left: 50.5%;
-  top: 4%;
-  bottom: 6%;
-  width: 1px;
-  background:
-    linear-gradient(180deg,
-      rgba(8, 89, 94, 0) 0%,
-      rgba(8, 89, 94, 0.92) 16%,
-      rgba(25, 214, 192, 0.95) 52%,
-      rgba(8, 89, 94, 0.84) 86%,
-      rgba(8, 89, 94, 0) 100%);
-  box-shadow:
-    0 0 16px rgba(8, 89, 94, 0.48),
-    0 0 32px rgba(8, 89, 94, 0.2);
-  transform: rotate(16deg);
-  transform-origin: center;
-  pointer-events: none;
-}
-
 .missionCol {
+  width: min(100%, 25rem);
+  justify-self: end;
   text-align: left;
 }
 
 .visionCol {
-  text-align: left;
+  width: min(100%, 23rem);
+  justify-self: start;
+  text-align: right;
+  margin-left: 6%;
+}
+
+.missionVisionSeparatorWrap {
+  align-self: stretch;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  min-height: 100%;
+  pointer-events: none;
+}
+
+.missionVisionSeparator {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: clamp(11rem, 15vw, 14rem);
+  object-fit: fill;
+  filter:
+    drop-shadow(0 0 12px rgba(8, 89, 94, 0.24)) drop-shadow(0 0 24px rgba(25, 214, 192, 0.08));
+  opacity: 0.95;
 }
 
 .diagonalMission,
@@ -227,13 +348,13 @@
 }
 
 .diagonalMission {
-  justify-content: flex-end;
-  padding: 1.45rem 1.2rem 0.6rem 0.2rem;
+  justify-content: flex-start;
 }
 
 .diagonalVision {
   justify-content: flex-start;
-  padding: 0.15rem 0.1rem 0.95rem 1.2rem;
+  max-width: none;
+  padding-left: 0;
 }
 
 .sideHeading {
@@ -247,9 +368,9 @@
 }
 
 .missionVisionHeading {
-  font-size: clamp(0.82rem, 1vw, 1rem);
-  letter-spacing: 0.24em;
-  margin-bottom: 0.6rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.18em;
+  margin-bottom: 0.85rem;
   text-shadow:
     0 0 10px rgba(8, 89, 94, 0.32),
     0 0 24px rgba(8, 89, 94, 0.12);
@@ -260,16 +381,16 @@
 }
 
 .missionVisionParagraph {
-  font-size: clamp(0.64rem, 0.78vw, 0.76rem);
-  line-height: 1.46;
-  letter-spacing: 0.014em;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
   color: rgba(248, 250, 251, 0.9);
-  max-width: 28ch;
+  max-width: 44ch;
   margin: 0;
+  line-height: 1.6;
 }
 
 .diagonalVision .missionVisionParagraph {
-  max-width: 25ch;
+  max-width: 44ch;
   margin-left: auto;
 }
 
@@ -297,18 +418,42 @@
   margin: 0 0 0.5rem;
 }
 
+.codexPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  padding-inline: clamp(1.25rem, 3vw, 2.75rem);
+}
+
+.codexHeadingMain {
+  font-size: clamp(1.45rem, 2.8vw, 2.45rem);
+  letter-spacing: 0.18em;
+  font-family: 'Compacta', var(--gnos-font-display);
+}
+
 .codexList {
   list-style: none;
   margin: 0;
   padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  justify-content: center;
+  column-gap: clamp(1.75rem, 4vw, 4.5rem);
+  row-gap: 0.8rem;
+  align-items: start;
   text-align: center;
+  width: min(100%, 62rem);
 }
 
 .codexItem,
 .codexAccent {
   font-family: var(--gnos-font-body);
-  font-size: 0.85rem;
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 2;
+  font-weight: 700;
   margin: 0;
 }
 
@@ -318,6 +463,22 @@
 
 .codexAccent {
   color: var(--gnos-turquoise);
+}
+
+.codexLine {
+  width: 100%;
+  white-space: nowrap;
+}
+
+.codexLine:nth-child(odd):not(:last-child) {
+  text-align: left;
+  justify-self: start;
+}
+
+.codexLine:nth-child(even) {
+  text-align: right;
+  justify-self: end;
+  margin-top: 2rem;
 }
 
 @media (max-width: 767px) {
@@ -350,18 +511,28 @@
 
   .missionVisionRow {
     grid-template-columns: 1fr;
-    gap: 0.7rem;
+    gap: 1rem;
     height: auto;
   }
 
-  .missionVisionRow::before {
-    left: 0;
-    right: 0;
-    top: 50%;
-    bottom: auto;
+  .missionVisionPanel {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .missionCol,
+  .visionCol {
     width: 100%;
-    height: 1px;
-    transform: none;
+    justify-self: stretch;
+  }
+
+  .visionCol {
+    text-align: left;
+    margin-left: 0;
+  }
+
+  .missionVisionSeparatorWrap {
+    display: none;
   }
 
   .frameContent {
@@ -373,26 +544,62 @@
     margin: 0 !important;
   }
 
-  .frameContent + .frameContent {
+  .aboutFrameTwoTopLayer,
+  .aboutFrameTwoBottomLayer {
+    position: static;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    width: 100%;
+    padding: 0;
+    margin: 0 !important;
+    overflow: visible;
+  }
+
+  .aboutFrameTwoTopLayer {
+    display: block;
+  }
+
+  .aboutFrameTwoBottomLayer {
+    padding-top: 1rem;
+    border-top: 1px solid rgba(8, 89, 94, 0.3);
+  }
+
+  .frameContent+.frameContent {
     padding-top: 1rem;
     border-top: 1px solid rgba(8, 89, 94, 0.3);
   }
 
   .aboutIntroPanel {
     overflow: visible;
-    padding-right: 0;
   }
 
-  .aboutHeading {
-    font-size: 1rem;
-    margin-bottom: 0.55rem;
-  }
-
-  .aboutParagraph {
-    max-width: 100%;
-    font-size: 0.95rem;
-    line-height: 1.65;
+  .aboutHeader {
     margin-bottom: 0.7rem;
+    padding-right: 0;
+    padding-bottom: 0.55rem;
+  }
+
+  .opportunitiesBackdrop {
+    display: none;
+  }
+
+  .opportunitiesBackground {
+    display: none;
+  }
+
+  .opportunitiesBackdrop::before {
+    display: none;
+  }
+
+  .opportunitiesInner {
+    width: 100%;
+    max-width: 100%;
+    min-height: 12rem;
+    padding: 1rem 0 0.5rem;
+    margin: 0 auto;
+    transform: none;
   }
 
   .missionVisionPanel {
@@ -432,5 +639,23 @@
   .codexAccent {
     font-size: 0.95rem;
     line-height: 1.6;
+  }
+
+  .codexList {
+    grid-template-columns: 1fr;
+    width: 100%;
+    justify-content: stretch;
+    column-gap: 0;
+  }
+
+  .codexLine {
+    white-space: normal;
+    text-align: center;
+    justify-self: stretch;
+  }
+
+  .codexHeadingMain {
+    font-size: 1.35rem;
+    letter-spacing: 0.14em;
   }
 }
