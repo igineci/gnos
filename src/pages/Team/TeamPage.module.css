@@ -386,6 +386,11 @@
     align-items: flex-start;
   }
 
+  .sectionLineSeparator {
+    width: 100%;
+    flex: none;
+  }
+
   .hoverName {
     font-size: 0.88rem;
   }

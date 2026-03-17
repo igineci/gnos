@@ -15,37 +15,50 @@
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 1.25rem;
+  gap: 0.75rem;
+  width: min(92vw, 32rem);
 }
 
 /* Same outline style as header frame */
 .barOutline {
   position: relative;
-  width: 420px;
-  height: 26px;
-  border: 1px solid var(--gnos-turquoise);
-  border-radius: 2px;
-  background-color: rgba(0, 0, 0, 0.5);
-  overflow: hidden;
-  box-shadow:
-    0 0 6px var(--gnos-turquoise-glow-bright),
-    0 0 14px var(--gnos-turquoise-glow),
-    inset 0 0 8px rgba(8, 89, 94, 0.06);
+  width: 100%;
+  max-width: 28.25rem;
+  height: 1.9rem;
+  overflow: visible;
+  filter:
+    drop-shadow(0 0 8px var(--gnos-turquoise-glow-bright)) drop-shadow(0 0 16px var(--gnos-turquoise-glow));
+}
+
+.barSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.barShell {
+  fill: rgba(3, 16, 18, 0.55);
+}
+
+.barFrame {
+  fill: none;
+  stroke: #08595e;
+  stroke-width: 5;
+  stroke-miterlimit: 10;
 }
 
 .barFill {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  background-color: var(--gnos-turquoise);
-  box-shadow: 0 0 8px var(--gnos-turquoise-glow-bright);
+  filter:
+    drop-shadow(0 0 8px var(--gnos-turquoise-glow-bright))
+    drop-shadow(0 0 14px var(--gnos-turquoise-glow));
 }
 
 .percent {
   font-family: var(--gnos-font-display);
-  font-size: 1.5rem;
+  font-size: clamp(1.05rem, 3.5vw, 1.5rem);
   font-weight: 900;
   letter-spacing: 0.15em;
   color: var(--gnos-turquoise);
@@ -53,4 +66,17 @@
     0 0 4px var(--gnos-turquoise-glow-bright),
     0 0 12px var(--gnos-turquoise-glow);
   min-width: 3.5ch;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row;
+    gap: 1.25rem;
+    width: auto;
+  }
+
+  .barOutline {
+    width: 28.25rem;
+  }
 }

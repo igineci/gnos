@@ -19,7 +19,7 @@ export type Person = {
   /** Optional separate image for bottom-right slot; falls back to image if not set. */
   imageBottomRight?: string;
   subtitle?: string;
-  bio?: string;
+  bio?: string | string[];
   country?: string;
   activeSince?: string;
   labels?: string;

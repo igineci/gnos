@@ -252,11 +252,11 @@
   width: var(--header-decoration-size);
   height: var(--header-decoration-size);
   background-color: var(--header-decoration-color);
-  mask-image: url(/svg/sphere-1.svg);
+  mask-image: url(/svg/header-right.svg);
   mask-size: contain;
   mask-position: center;
   mask-repeat: no-repeat;
-  -webkit-mask-image: url(/svg/sphere-1.svg);
+  -webkit-mask-image: url(/svg/header-right.svg);
   -webkit-mask-size: contain;
   -webkit-mask-position: center;
   -webkit-mask-repeat: no-repeat;
@@ -367,7 +367,7 @@
     z-index: 0;
     pointer-events: none;
     overflow: visible;
-    filter: saturate(80) brightness(0.72) contrast(0.8);
+    filter: saturate(20) brightness(0.72) contrast(0.8);
   }
 
   .decorativeRight .decorativeSvg {

@@ -29,8 +29,40 @@ const getPromoIcon = (label: string, url: string) => {
   if (key.includes('mastering')) return <PiVinylRecordFill aria-hidden />;
   if (key.includes('other projects')) return <LuBoxes aria-hidden />;
   if (key.includes('linktree') || key.includes('all links')) return <LuLink aria-hidden />;
+  if (key.includes('email')) return <LuMail aria-hidden />;
 
   return <LuGlobe aria-hidden />;
+};
+
+const splitBioIntoParagraphs = (bio: string | string[]) => {
+  if (Array.isArray(bio)) {
+    return bio.map((paragraph) => paragraph.trim()).filter(Boolean);
+  }
+
+  const normalizedBio = bio.replace(/\r\n/g, '\n').trim();
+  const explicitParagraphs = normalizedBio
+    .split(/\n\s*\n/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
+
+  if (explicitParagraphs.length > 1) {
+    return explicitParagraphs;
+  }
+
+  const sentences = normalizedBio.match(/[^.!?]+(?:[.!?]+|$)/g)?.map((sentence) => sentence.trim()).filter(Boolean) ?? [normalizedBio];
+
+  if (sentences.length <= 2) {
+    return [normalizedBio];
+  }
+
+  const groupSize = Math.ceil(sentences.length / 3);
+  const paragraphs: string[] = [];
+
+  for (let index = 0; index < sentences.length; index += groupSize) {
+    paragraphs.push(sentences.slice(index, index + groupSize).join(' '));
+  }
+
+  return paragraphs;
 };
 
 
@@ -56,6 +88,7 @@ const PersonPage = () => {
   }
 
   const backLabel = isArtist ? 'BACK TO ARTISTS' : 'BACK TO TEAM';
+  const bioParagraphs = splitBioIntoParagraphs(person.bio ?? '');
 
   return (
     <article className={styles.page}>
@@ -214,7 +247,13 @@ const PersonPage = () => {
               <h2 className={styles.frameTitle}>BIOGRAPHY</h2>
               <div className={styles.frameInner}>
                 <div className={styles.frameScroll}>
-                  <p className={styles.bioText}>{person.bio}</p>
+                  <div className={styles.bioText}>
+                    {bioParagraphs.map((paragraph, index) => (
+                      <p key={`${person.slug}-bio-${index}`} className={styles.bioParagraph}>
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
                   {isArtist && (
                     <div className={styles.detailsPanel}>
                       <div className={styles.detailsRow}>
