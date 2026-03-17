@@ -33,7 +33,7 @@ export const TEAM_MEMBERS: Person[] = [
   {
     name: 'Ema Djipalo',
     slug: 'ema',
-    image: '/images/team/ema-left.webp',
+    image: '/images/team/ema-left.jpeg',
     imageTopRight: '/images/team/ema-tr.jpeg',
     imageBottomRight: '/images/team/ema-br.webp',
     promoLinks: [
@@ -60,7 +60,13 @@ export const TEAM_MEMBERS: Person[] = [
     image: '/images/team/kabay-left.webp',
     imageTopRight: '/images/team/kabay-tr.webp',
     imageBottomRight: '/images/team/kabay-br.webp',
-    bio: 'Kabay, a self-proclaimed club shaman, focuses on the mystical connection between electronic sound and the human mind. His artistic vision is an exploration of the concept interpreting the techno club experience as the modern equivalent of the ancient shamanic ritual.\n\nHis musical voice incorporates abstract textures, complex rhythms and ritualistic soundscapes, aiming to connect with the people on the dancefloor by tapping into our primal and subconscious instincts.\n\nKabay\'s music combines body-moving energy, dance-floor-driven tempos and eccentric sound design, telling a story for both the mind and the body.\n\nHis debut vinyl EP, Tribe of Liberation, released on the iconic label Clergy, is the epitome of his evolving artistic voice, while his Existential Archetypes EP on Vault Records and releases on his own label Kybera document further exploration of his sound.\n\nKabay has delivered memorable DJ sets at prominent events across Europe and the UK such as Clergy, Meat Free, HØL, PLTFRM FSTVL, Animal Farm and many more, crafting each performance as a unique ritual designed to leave a lasting memory long after the night ends.',
+    bio: [
+      'Eryk Kabay is a UK and Berlin-based mastering engineer, DJ and producer specialising in electronic music. With over six years immersed in the techno scene, his work is driven by a deep understanding of the emotional and physical impact of sound on the dancefloor.',
+      'Trained at subSine Academy of Electronic Music in Glasgow, he developed his craft under the mentorship of Ableton Certified Trainer Simon Stokes (Petrichor), gaining a strong technical foundation alongside a refined artistic perspective.',
+      'Alongside mastering, Eryk is an active artist with releases on respected labels such as Clergy, Vault Sessions and his own imprint Kybera. This dual perspective allows him to approach each project not only with technical precision, but with a clear sensitivity to the artistic vision behind the music.',
+      'His mastering process focuses on clarity, translation and impact, ensuring tracks retain their character while performing at a professional standard across club systems and streaming platforms.',
+      'Known for his collaborative approach and attention to detail, he works closely with artists to deliver results that feel true to their intent while meeting the demands of modern electronic music.',
+    ],
     role: 'Mastering Engineer',
     promoLinks: [
       { label: 'MASTERING & TEACHING', url: 'https://www.kabaymusic.com/' },

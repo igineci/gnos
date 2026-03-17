@@ -367,7 +367,6 @@
     z-index: 0;
     pointer-events: none;
     overflow: visible;
-    filter: saturate(20) brightness(0.72) contrast(0.8);
   }
 
   .decorativeRight .decorativeSvg {

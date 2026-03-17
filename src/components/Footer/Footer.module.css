@@ -17,6 +17,13 @@
   min-height: 130px;
 }
 
+.footerWrap {
+  width: var(--gnos-content-width, 1200px);
+  max-width: 82%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .frameInner {
   padding: 0 2.5rem 2.5rem;
   display: flex;
@@ -138,12 +145,27 @@
   color: var(--gnos-white);
 }
 
+.scrollTopButton {
+  display: none;
+}
+
 @media (max-width: 767px) {
-  .footer {
+  .footerWrap {
     width: auto;
     max-width: calc(100% - 2rem);
     margin-top: 2rem;
     margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .footer {
+    width: auto;
+    max-width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
     border-width: 26px;
     min-height: 0;
   }
@@ -173,6 +195,51 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 0.75rem;
+  }
+
+  .scrollTopButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    margin: 0 auto;
+    border: 0;
+    background: transparent;
+    color: var(--gnos-white);
+    cursor: pointer;
+    transition:
+      transform 0.25s ease,
+      color 0.25s ease;
+  }
+
+  .scrollTopButton:hover {
+    transform: translateY(-2px);
+    color: var(--gnos-turquoise);
+  }
+
+  .scrollTopButton:focus-visible {
+    outline: 2px solid var(--gnos-turquoise);
+    outline-offset: 4px;
+  }
+
+  .scrollTopIconWrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    flex-shrink: 0;
+  }
+
+  .scrollTopIcon {
+    width: 1.6rem;
+    height: auto;
+    display: block;
+    transform: rotate(-90deg);
+  }
+
+  .scrollTopLabel {
+    display: none;
   }
 
   .iconLink {

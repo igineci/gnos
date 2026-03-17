@@ -8,7 +8,7 @@ const TARENS_PROMO_LINKS: { label: string; url: string }[] = [
 ];
 
 export const TARENS_SHARED = {
-  image: '/images/artists/gnosva001/tarens-left.webp',
+  image: '/images/artists/gnosva001/tarens-left.jpg',
   imageTopRight: '/images/artists/gnosva001/tarens-tr.JPG',
   imageBottomRight: '/images/artists/gnosva001/tarens-br.JPG',
   bio: [

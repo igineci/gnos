@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import { ROUTE_PATHS } from '@/constants/routes';
 import { RootLayout } from '@/app/layouts/RootLayout';
+import RouteErrorPage from '@/pages/Error/RouteErrorPage';
 
 const HomePage = lazy(() => import('@/pages/Home/HomePage'));
 const AboutPage = lazy(() => import('@/pages/About/AboutPage'));
@@ -12,6 +13,7 @@ const ReleasesPage = lazy(() => import('@/pages/Releases/ReleasesPage'));
 const ReleasePage = lazy(() => import('@/pages/Releases/ReleasePage'));
 const ReflectionsPage = lazy(() => import('@/pages/Reflections/ReflectionsPage'));
 const PersonPage = lazy(() => import('@/pages/Person/PersonPage'));
+const NotFoundPage = lazy(() => import('@/pages/Error/NotFoundPage'));
 
 const lazyPage = (Component: React.LazyExoticComponent<React.ComponentType>) => (
   <Suspense>
@@ -22,6 +24,7 @@ const lazyPage = (Component: React.LazyExoticComponent<React.ComponentType>) => 
 export const router = createBrowserRouter([
   {
     element: <RootLayout />,
+    errorElement: <RouteErrorPage />,
     children: [
       { path: ROUTE_PATHS.HOME, element: lazyPage(HomePage) },
       { path: ROUTE_PATHS.ABOUT, element: lazyPage(AboutPage) },
@@ -33,5 +36,9 @@ export const router = createBrowserRouter([
       { path: ROUTE_PATHS.TEAM_MEMBER, element: lazyPage(PersonPage) },
       { path: ROUTE_PATHS.REFLECTIONS, element: lazyPage(ReflectionsPage) },
     ],
+  },
+  {
+    path: '*',
+    element: lazyPage(NotFoundPage),
   },
 ]);

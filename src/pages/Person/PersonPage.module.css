@@ -212,7 +212,7 @@
 
 .frameCellRole> :first-child {
   flex: none;
-  height: clamp(2.5rem, 6vw, 5.5rem);
+  height: clamp(4.5rem, 8vw, 7.25rem);
   min-height: 0;
 }
 
@@ -374,7 +374,7 @@
   z-index: 0;
   object-fit: cover;
   object-position: center;
-  filter: grayscale(100%) contrast(1.05);
+  filter: grayscale(100%);
   margin-top: 0.5%;
   margin-left: 1%;
 }
@@ -559,16 +559,15 @@
 
 .roleDecoration {
   display: block;
-  width: 40%;
+  width: min(42%, 10rem);
+  max-width: 100%;
   height: auto;
   opacity: 0.9;
   pointer-events: none;
-  margin-top: -1.15rem;
-  transform: scaleX(2.85) scaleY(1.22);
+  align-self: center;
+  margin: 0.15rem auto 0;
+  transform: scaleX(2.35) scaleY(1.12);
   transform-origin: center top;
-  margin-left: 145px;
-  margin-top: 30px;
-
 }
 
 /* — Frame 4: Promo links — */
@@ -591,7 +590,7 @@
   text-transform: uppercase;
   color: var(--gnos-muted);
   text-decoration: none;
-  padding: 0.35rem 1.5rem;
+  padding: 1rem;
   transition: color 0.25s ease;
 }
 
@@ -614,6 +613,7 @@
   width: 1rem;
   height: 1rem;
   color: currentColor;
+  margin-left: 1rem;
 }
 
 .promoLabel {
@@ -689,6 +689,10 @@
     height: auto;
   }
 
+  .frameCellRole> :first-child {
+    height: clamp(5.5rem, 22vw, 7.5rem);
+  }
+
   .frameCellPromo {
     grid-column: 1;
     grid-row: 4;
@@ -749,13 +753,19 @@
   }
 
   .roleFrameScroll {
-    padding: 1rem;
+    padding: 1rem 0.9rem;
   }
 
   .roleText {
     font-size: clamp(1rem, 7vw, 1.45rem);
     line-height: 1.15;
     white-space: normal;
+  }
+
+  .roleDecoration {
+    width: min(56%, 8rem);
+    margin-top: -0.15rem;
+    transform: scaleX(1.9) scaleY(1.02);
   }
 
   .promoLink {
