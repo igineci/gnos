@@ -6,7 +6,7 @@ import { LuInstagram } from "react-icons/lu";
 
 const FOOTER_LINKS = [
   { href: 'https://instagram.com/gnosrecords', label: 'Instagram', icon: <LuInstagram /> },
-  { href: 'https://soundcloud.com/gnosrecords', label: 'SoundCloud', icon: <FaSoundcloud /> },
+  { href: 'https://soundcloud.com/gnos-records-502092091', label: 'SoundCloud', icon: <FaSoundcloud /> },
   { href: 'https://gnosrecords.bandcamp.com', label: 'Bandcamp', icon: <SiBandcamp /> },
 ];
 

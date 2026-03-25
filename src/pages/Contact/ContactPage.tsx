@@ -5,7 +5,7 @@ import { LuInstagram } from 'react-icons/lu';
 
 const PROMO_LINKS = [
   { label: 'Instagram', href: 'https://instagram.com/gnosrecords', icon: <LuInstagram size={20} /> },
-  { label: 'SoundCloud', href: 'https://soundcloud.com/gnosrecords', icon: <FaSoundcloud size={20} /> },
+  { label: 'SoundCloud', href: 'https://soundcloud.com/gnos-records-502092091', icon: <FaSoundcloud size={20} /> },
   { label: 'Bandcamp', href: 'https://gnosrecords.bandcamp.com', icon: <SiBandcamp size={20} /> },
 ] as const;
 
