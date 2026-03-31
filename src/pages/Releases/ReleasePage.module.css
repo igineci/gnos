@@ -26,6 +26,16 @@
   min-height: 120px;
 }
 
+@media (max-width: 767px) {
+  .page {
+    padding: 1rem 0 3rem;
+  }
+
+  .mainFrameContent {
+    padding: 1rem;
+  }
+}
+
 .back {
   display: inline-block;
   font-family: var(--gnos-font-body);
@@ -141,12 +151,14 @@
   flex-direction: column;
   gap: 1rem;
   min-height: 0;
+  order: 2;
 }
 
 @media (min-width: 640px) {
   .releasePrimaryLeft {
     height: 100%;
     align-self: stretch;
+    order: 1;
   }
 }
 
@@ -162,11 +174,18 @@
   display: flex;
   flex-direction: column;
   min-height: 0;
+  order: 1;
 }
 
 .releasePrimaryRight .panel {
   margin-bottom: 0;
   width: 100%;
+}
+
+@media (min-width: 640px) {
+  .releasePrimaryRight {
+    order: 2;
+  }
 }
 
 /* — Panel base — */
@@ -254,25 +273,7 @@
 }
 
 .descriptionPanel {
-  max-height: 160px;
-  overflow-y: auto;
-}
-
-@media (min-width: 640px) {
-  .releasePrimaryLeft .descriptionPanel {
-    flex: 1 1 0;
-    min-height: 0;
-    max-height: none;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  .releasePrimaryLeft .descriptionPanel .descriptionBox {
-    flex: 1 1 auto;
-    min-height: 0;
-    overflow-y: auto;
-  }
+  overflow: visible;
 }
 
 .descriptionBox {
@@ -280,7 +281,7 @@
   font-size: 1rem;
   line-height: 2;
   color: rgba(255, 255, 255, 0.85);
-  padding: 10px;
+  padding: 0.625rem;
 }
 
 /* Let [[gnos]] spans sit on the same line as following text; keep real paragraph breaks (p after p). */
@@ -362,32 +363,6 @@
   margin-bottom: 0;
 }
 
-/* Nested selector beats Team `galleryGrid`’s display:grid (same element, two classes) */
-.featuredArtistsOnRelease .featuredGalleryRow {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  gap: 1rem;
-  overflow-x: auto;
-  overflow-y: visible;
-  padding-bottom: 0.35rem;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-gutter: stable;
-}
-
-.featuredArtistsOnRelease .featuredGalleryRow>a {
-  flex: 0 0 auto;
-  width: 132px;
-  min-width: 132px;
-}
-
-@media (min-width: 768px) {
-  .featuredArtistsOnRelease .featuredGalleryRow>a {
-    width: 148px;
-    min-width: 148px;
-  }
-}
-
 .coverSquare {
   aspect-ratio: 1;
   max-width: 220px;
@@ -445,4 +420,68 @@
 .navLink:hover {
   color: var(--gnos-white);
   text-shadow: 0 0 8px var(--gnos-turquoise-glow);
+}
+
+@media (max-width: 767px) {
+  .topHeader {
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .topHeaderLeft,
+  .topHeaderRight {
+    min-width: 0;
+    flex: 1 1 0;
+  }
+
+  .topHeaderRight {
+    margin-left: 0;
+    justify-content: flex-end;
+  }
+
+  .topLabel {
+    font-size: 0.68rem;
+  }
+
+  .topValue {
+    font-size: 0.78rem;
+  }
+
+  .infoRow {
+    gap: 0.4rem;
+    padding: 0.6rem 0;
+  }
+
+  .infoLabel {
+    flex-basis: 9rem;
+    max-width: 42%;
+    font-size: 0.68rem;
+  }
+
+  .infoValue {
+    margin-left: 0.75rem;
+    font-size: 0.72rem;
+    overflow-wrap: anywhere;
+  }
+
+  .descriptionBox {
+    padding: 0.625rem;
+    line-height: 1.75;
+  }
+
+  .bandcampHero,
+  .panel .bandcampHero {
+    padding: 0.75rem 0 0;
+  }
+
+  .releaseNav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navPrev,
+  .navNext {
+    width: 100%;
+    text-align: left;
+  }
 }

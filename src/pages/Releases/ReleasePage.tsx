@@ -8,6 +8,14 @@ import { BandcampEmbed } from '@/components/Releases/BandcampEmbed/BandcampEmbed
 import { ExternalLinks } from '@/components/Releases/ExternalLinks/ExternalLinks';
 import styles from './ReleasePage.module.css';
 
+const FEATURED_ARTIST_COVER_IMAGES: Partial<Record<string, string>> = {
+  anoy: '/images/artists/gnosva001/anoy-cover.jpg',
+  crynn: '/images/artists/gnosva001/cryn-cover.jpg',
+  essio: '/images/artists/gnosva001/essio-cover.jpeg',
+  jbilo: '/images/artists/gnosva001/jbilo-cover.jpg',
+  ledeni: '/images/artists/gnosva001/ledeni-cover.jpg',
+};
+
 const INFO_KEYS = [
   'title',
   'artist',
@@ -288,8 +296,10 @@ const ReleasePage = () => {
               <div className={styles.featuredArtistsOnRelease}>
                 <GnosArtistGallery
                   rootClassName={styles.featuredArtistsRoot}
-                  galleryClassName={styles.featuredGalleryRow}
-                  artists={getReleaseArtistsDisplayList(release)}
+                  artists={getReleaseArtistsDisplayList(release).map((artist) => ({
+                    ...artist,
+                    image: FEATURED_ARTIST_COVER_IMAGES[artist.slug] ?? artist.image,
+                  }))}
                 />
               </div>
             ) : null}
