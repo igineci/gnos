@@ -1,5 +1,7 @@
 import { allReleases } from 'content-collections';
 import type { Release } from 'content-collections';
+import { getArtistOverridesForRelease } from '@/data/releases';
+import { nameToSlug } from '@/data/person';
 
 /** Format release date for display. Handles DD/MM/YYYY, YYYY-MM-DD, and TBD. */
 export function formatReleaseDate(dateStr: string | undefined): string {
@@ -15,6 +17,35 @@ export function formatReleaseDate(dateStr: string | undefined): string {
 
 export type ArtistDisplayFormat = 'short' | 'full';
 
+/** Alphabetical order by display name (case- and accent-insensitive). */
+export function sortArtistsByName<T extends { name: string }>(artists: T[]): T[] {
+  return [...artists].sort((a, b) =>
+    a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
+  );
+}
+
+export type ReleaseArtistDisplayItem = {
+  name: string;
+  slug: string;
+  image?: string;
+};
+
+/** VA line-up for UI: same portrait URLs as GNOS Team “Featured artists” (MDX + release overrides). */
+export function getReleaseArtistsDisplayList(
+  release: Release
+): ReleaseArtistDisplayItem[] {
+  if (release.type !== 'va' || !release.artists?.length) return [];
+  const overrides = getArtistOverridesForRelease(release.slug);
+  return sortArtistsByName(release.artists).map((a) => {
+    const slug = nameToSlug(a.name);
+    return {
+      name: a.name,
+      slug,
+      image: overrides?.[slug]?.image ?? a.image,
+    };
+  });
+}
+
 /**
  * Get display string for release artist(s).
  * - short: VA → "Various Artists", album → artist name
@@ -29,7 +60,9 @@ export function getArtistDisplay(
   }
   if (release.type === 'va') {
     if (format === 'full' && release.artists?.length) {
-      return release.artists.map((a) => a.name).join(', ');
+      return sortArtistsByName(release.artists)
+        .map((a) => a.name)
+        .join(', ');
     }
     return 'Various Artists';
   }
@@ -66,9 +99,9 @@ export const sortedReleases: Release[] = [...allReleases].sort((a, b) => {
 const isUpcomingByDate = (release: Release) =>
   release.releaseDate?.toUpperCase().includes('TBD') ?? false;
 
-/** Upcoming: ignorantia (by slug) plus any TBD-dated releases */
-export const upcomingReleases = sortedReleases.filter(
-  (r) => r.slug === 'ignorantia' || isUpcomingByDate(r)
+/** Upcoming: releases with TBD (or missing) release date */
+export const upcomingReleases = sortedReleases.filter((r) =>
+  isUpcomingByDate(r)
 );
 
 /** Catalog: releases that are not upcoming */

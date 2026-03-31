@@ -109,8 +109,13 @@ export const Header = ({ loaderExited = false }: HeaderProps) => {
     location.pathname === ROUTE_PATHS.TEAM ||
     location.pathname.startsWith('/artist') ||
     location.pathname.startsWith('/team');
+  const isReleasesSection =
+    location.pathname === ROUTE_PATHS.RELEASES ||
+    location.pathname.startsWith(`${ROUTE_PATHS.RELEASES}/`);
   const activeIndex = NAV_ITEMS.findIndex((item) =>
-    item.path === location.pathname || (item.path === ROUTE_PATHS.TEAM && isGnosSection)
+    item.path === location.pathname ||
+    (item.path === ROUTE_PATHS.TEAM && isGnosSection) ||
+    (item.path === ROUTE_PATHS.RELEASES && isReleasesSection)
   );
   const targetIndex = activeIndex >= 0 ? activeIndex : 0;
 
@@ -175,13 +180,13 @@ export const Header = ({ loaderExited = false }: HeaderProps) => {
     if (!loaderExited) return;
     if (location.pathname !== prevPathRef.current) {
       initialDecodeRef.current = false;
-      const match = NAV_ITEMS.find((item) => item.path === location.pathname);
-      if (match) {
-        setTriggers((prev) => ({ ...prev, [match.path]: (prev[match.path] || 0) + 1 }));
+      if (activeIndex >= 0) {
+        const path = NAV_ITEMS[activeIndex].path;
+        setTriggers((prev) => ({ ...prev, [path]: (prev[path] || 0) + 1 }));
       }
       prevPathRef.current = location.pathname;
     }
-  }, [loaderExited, location.pathname]);
+  }, [loaderExited, location.pathname, activeIndex]);
 
   return (
     <header
@@ -225,12 +230,15 @@ export const Header = ({ loaderExited = false }: HeaderProps) => {
                       to={path}
                       className={({ isActive }) => {
                         const gnosActive = path === ROUTE_PATHS.TEAM && isGnosSection;
-                        const active = isActive || gnosActive;
+                        const releasesActive = path === ROUTE_PATHS.RELEASES && isReleasesSection;
+                        const active = isActive || gnosActive || releasesActive;
                         return `${styles.navLink} ${active ? styles.navLinkActive : ''}`;
                       }}
                       {...(path === ROUTE_PATHS.TEAM
                         ? { isActive: () => isGnosSection }
-                        : {})}
+                        : path === ROUTE_PATHS.RELEASES
+                          ? { isActive: () => isReleasesSection }
+                          : {})}
                       onClick={() => setMenuOpen(false)}
                     >
                       <ScrambleText

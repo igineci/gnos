@@ -14,8 +14,6 @@ const HomePage = () => {
 
   return (
     <section className={styles.section}>
-      <div className={styles.scanlineOverlay} aria-hidden />
-
       {/* Hero: logo + tagline */}
       <div className={styles.hero}>
         <div className={styles.heroStack}>

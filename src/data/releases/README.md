@@ -48,4 +48,10 @@ MDX files in this folder define releases. Each file is validated against the sch
    ```
 
 7. **Editorial body**
-   - Replace the placeholder text in the MDX body with release story, artist bios, etc. Supports full MDX (headings, lists, emphasis, etc.).
+   - Replace the placeholder text in the MDX body with release story, artist bios, etc. Standard Markdown in the body is rendered on the release page (`ReactMarkdown`).
+   - **GNOS accent color:** wrap any inline phrase with `[[gnos]]` and `[[/gnos]]` to show it in label turquoise (still supports `*italic*` and `**bold**` inside the wrap). You can put spaces inside the markers or after `[[/gnos]]`; the page inserts a word space after each highlight where Markdown would drop it.
+   - **New paragraph before another `[[gnos]]`:** leave a **blank line** (or a line that is only spaces) before the tag; the release page detects that and adds paragraph spacing before the next highlight.
+
+   ```md
+   Normal text. [[gnos]]This line uses GNOS color.[[/gnos]] More text.
+   ```

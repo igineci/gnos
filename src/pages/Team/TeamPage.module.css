@@ -5,18 +5,6 @@
   position: relative;
 }
 
-.scanlineOverlay {
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(0deg,
-      transparent,
-      transparent 2px,
-      rgba(0, 0, 0, 0.12) 2px,
-      rgba(0, 0, 0, 0.12) 4px);
-  pointer-events: none;
-  z-index: 1;
-}
-
 .mainFrame {
   position: relative;
   width: 100%;
@@ -57,6 +45,12 @@
   margin-bottom: 2.5rem;
   position: relative;
   z-index: 2;
+}
+
+/* Keep hover overlays above following sections (e.g. Meet the Team) */
+.section:has(.galleryItem:hover),
+.section:has(.galleryItem:focus-visible) {
+  z-index: 80;
 }
 
 .section:last-child {
@@ -124,6 +118,12 @@
   overflow: visible;
 }
 
+/* Lift entire card on hover/focus so overlay + label sit above neighbor cells */
+.galleryItem:hover,
+.galleryItem:focus-visible {
+  z-index: 100;
+}
+
 .galleryItem:hover .coverImage,
 .galleryItem:focus-visible .coverImage {
   filter: none;
@@ -138,7 +138,7 @@
   height: auto;
   aspect-ratio: 306 / 178;
   pointer-events: none;
-  z-index: 2;
+  z-index: 50;
   opacity: 0;
   transition: opacity 0.22s ease, transform 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
   display: flex;
@@ -161,6 +161,38 @@
 .galleryItem[data-hover-side='left']:hover .hoverOverlay,
 .galleryItem[data-hover-side='left']:focus-visible .hoverOverlay {
   transform: translateY(-50%) scale(1);
+}
+
+/* Desktop: in-card overlay is hidden — hover UI is portaled to body (escapes overflow / modals) */
+@media (min-width: 768px) {
+  .galleryItem > .hoverOverlay {
+    display: none !important;
+  }
+}
+
+/* Portaled hover overlay (GnosArtistGallery, desktop only) */
+.hoverOverlayFixedPortal {
+  position: fixed;
+  z-index: 10000;
+  margin: 0;
+  right: auto;
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.hoverOverlayFixedPortal .hoverText {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+}
+
+.hoverOverlayFlipped .hoverSvg {
+  transform: scaleX(-1);
+  transform-origin: center;
+}
+
+.hoverOverlayFlipped .hoverText {
+  left: 39.3%;
 }
 
 .hoverSvg {
@@ -191,14 +223,34 @@
   align-items: center;
   justify-content: center;
   gap: 0.16rem;
-  padding: 0 0.5rem;
+  padding: 0.35rem 0.65rem;
   margin: 0;
   opacity: 0;
   clip-path: inset(0 100% 0 0);
   transition: opacity 0.2s ease 0.06s, clip-path 0.35s cubic-bezier(0.34, 1.2, 0.64, 1) 0.06s;
   pointer-events: none;
   text-align: center;
-  z-index: 10;
+  z-index: 60;
+}
+
+/* Diffuse “blob” behind name/role so type stays legible over SVG + photos */
+.hoverText::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 118%;
+  height: 138%;
+  min-height: 2.85rem;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 72% 78% at 50% 50%,
+      rgba(6, 8, 10, 0.94) 0%,
+      rgba(6, 8, 10, 0.78) 38%,
+      rgba(6, 8, 10, 0.42) 62%,
+      rgba(6, 8, 10, 0) 82%);
+  filter: blur(5px);
 }
 
 .galleryItem:hover .hoverText,
@@ -220,6 +272,8 @@
 }
 
 .hoverName {
+  position: relative;
+  z-index: 1;
   font-family: 'Compacta', var(--gnos-font-display);
   font-size: clamp(0.9rem, 1.7vw, 1.2rem);
   font-weight: 900;
@@ -228,8 +282,10 @@
   text-transform: uppercase;
   color: var(--gnos-muted);
   text-shadow:
-    0 0 4px rgba(0, 0, 0, 0.9),
-    0 0 8px rgba(8, 89, 94, 0.25);
+    0 0 2px rgba(0, 0, 0, 1),
+    0 0 10px rgba(0, 0, 0, 0.95),
+    0 1px 18px rgba(0, 0, 0, 0.85),
+    0 0 8px rgba(8, 89, 94, 0.35);
   white-space: nowrap;
   max-width: 100%;
   overflow: hidden;
@@ -237,6 +293,8 @@
 }
 
 .hoverRole {
+  position: relative;
+  z-index: 1;
   font-family: var(--gnos-font-body);
   font-size: clamp(0.52rem, 0.86vw, 0.68rem);
   font-weight: 900;
@@ -244,7 +302,11 @@
   line-height: 1.15;
   text-transform: uppercase;
   color: var(--gnos-turquoise);
-  opacity: 0.9;
+  opacity: 0.95;
+  text-shadow:
+    0 0 2px rgba(0, 0, 0, 1),
+    0 0 12px rgba(0, 0, 0, 0.9),
+    0 1px 14px rgba(0, 0, 0, 0.75);
   white-space: normal;
   max-width: 100%;
   overflow: hidden;
@@ -350,12 +412,24 @@
     transform: none;
     width: 100%;
     min-height: 0;
-    padding: 0;
+    padding: 0.35rem 0.5rem;
     opacity: 1;
     clip-path: none;
     align-items: flex-start;
     text-align: left;
     gap: 0.25rem;
+  }
+
+  .hoverText::before {
+    width: 100%;
+    height: 125%;
+    min-height: 2.4rem;
+    filter: blur(7px);
+    background: radial-gradient(ellipse 88% 85% at 50% 45%,
+        rgba(6, 8, 10, 0.92) 0%,
+        rgba(6, 8, 10, 0.65) 45%,
+        rgba(6, 8, 10, 0.22) 72%,
+        rgba(6, 8, 10, 0) 88%);
   }
 
   .galleryItem:hover .hoverText,

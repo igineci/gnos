@@ -4,8 +4,6 @@ import styles from './ReleasesPage.module.css';
 
 const ReleasesPage = () => (
   <section className={styles.page}>
-    <div className={styles.scanlineOverlay} aria-hidden />
-
     <div className={styles.mainFrame}>
       <div className={styles.mainFrameContent}>
 

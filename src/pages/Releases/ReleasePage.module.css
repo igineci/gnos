@@ -6,20 +6,6 @@
   position: relative;
 }
 
-.scanlineOverlay {
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.1) 2px,
-    rgba(0, 0, 0, 0.1) 4px
-  );
-  pointer-events: none;
-  z-index: 1;
-}
-
 /* — Same frame as ReleasesPage: container border from releases-frame.svg — */
 .mainFrame {
   position: relative;
@@ -63,6 +49,14 @@
   margin-bottom: 1rem;
 }
 
+/* Decorative corners: out of flex flow so ENTRY ID / TYPE stay a clean row */
+.cornerFrame {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* — Top header — */
 .topHeader {
   position: relative;
@@ -78,13 +72,22 @@
 
 .topHeaderLeft,
 .topHeaderRight {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
+.topHeaderLeft {
+  flex: 0 0 auto;
+  justify-content: flex-start;
+}
+
 .topHeaderRight {
+  flex: 0 0 auto;
   flex-shrink: 0;
+  margin-left: auto;
 }
 
 .topLabel {
@@ -92,8 +95,9 @@
   font-size: 0.75rem;
   font-weight: 900;
   letter-spacing: 0.2em;
-  color: var(--gnos-turquoise);
+  color: var(--gnos-white);
   opacity: 0.9;
+  text-align: left;
 }
 
 .topDivider {
@@ -111,17 +115,58 @@
   color: var(--gnos-turquoise);
 }
 
-/* — Main grid — */
-.mainGrid {
-  display: grid;
-  grid-template-columns: 1fr;
+/* — Release body: primary row, then featured row, then nav — */
+.releaseBody {
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
 }
 
+.releasePrimary {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
 @media (min-width: 640px) {
-  .mainGrid {
+  .releasePrimary {
     grid-template-columns: 1fr 1fr;
+    align-items: stretch;
   }
+}
+
+.releasePrimaryLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 0;
+}
+
+@media (min-width: 640px) {
+  .releasePrimaryLeft {
+    height: 100%;
+    align-self: stretch;
+  }
+}
+
+.releasePrimaryLeft .panel {
+  margin-bottom: 0;
+}
+
+.infoPanel {
+  flex: 0 0 auto;
+}
+
+.releasePrimaryRight {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.releasePrimaryRight .panel {
+  margin-bottom: 0;
+  width: 100%;
 }
 
 /* — Panel base — */
@@ -140,11 +185,8 @@
   margin-bottom: 0;
 }
 
-/* — Left column: info + description — */
-.leftColumn {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.releaseNavSection .panel {
+  margin-bottom: 0;
 }
 
 .infoRows {
@@ -167,19 +209,34 @@
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--gnos-white);
-  min-width: 8ch;
+  /* Same width every row so values share one left edge (still in the open right/center band). */
+  flex: 0 0 13.5rem;
+  max-width: 45%;
+  text-align: left;
   flex-shrink: 0;
 }
 
 .infoValue {
   flex: 1;
-  text-align: center;
+  text-align: left;
+  min-width: 0;
   font-family: var(--gnos-font-display);
   font-size: 0.75rem;
   font-weight: 900;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--gnos-white);
+  margin-left: 30px;
+}
+
+.infoBuyLink {
+  color: var(--gnos-white);
+  text-decoration: none;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+.infoBuyLink:hover {
+  text-shadow: 0 0 8px var(--gnos-turquoise-glow);
 }
 
 .infoDivider {
@@ -188,13 +245,11 @@
   right: 0;
   bottom: 0;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--gnos-turquoise) 10%,
-    var(--gnos-turquoise) 90%,
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      var(--gnos-turquoise) 10%,
+      var(--gnos-turquoise) 90%,
+      transparent);
   opacity: 0.5;
 }
 
@@ -203,11 +258,54 @@
   overflow-y: auto;
 }
 
+@media (min-width: 640px) {
+  .releasePrimaryLeft .descriptionPanel {
+    flex: 1 1 0;
+    min-height: 0;
+    max-height: none;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .releasePrimaryLeft .descriptionPanel .descriptionBox {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+  }
+}
+
 .descriptionBox {
   font-family: var(--gnos-font-body);
-  font-size: 0.9rem;
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 2;
   color: rgba(255, 255, 255, 0.85);
+  padding: 10px;
+}
+
+/* Let [[gnos]] spans sit on the same line as following text; keep real paragraph breaks (p after p). */
+.descriptionBox .descriptionFlow>p {
+  display: inline;
+  margin: 0;
+  vertical-align: baseline;
+}
+
+.descriptionBox .descriptionFlow>p+p {
+  display: block;
+  margin-top: 0.75rem;
+  margin-bottom: 0;
+}
+
+.descriptionBox .descriptionFlow>.descriptionGnos {
+  display: inline;
+  vertical-align: baseline;
+}
+
+.descriptionBox .descriptionFlow>.descriptionBlockSpacer {
+  display: block;
+  margin-top: 0.75rem;
+  height: 0;
+  overflow: hidden;
 }
 
 .descriptionBox p {
@@ -223,157 +321,71 @@
   color: var(--gnos-muted);
 }
 
+/* Inline spans from [[gnos]]...[[/gnos]]: same face + tracking as header .logoText; margin after = reliable word gap */
+.descriptionGnos {
+  font-family: 'Compacta', 'Compacta Std', var(--gnos-font-display);
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--gnos-turquoise);
+  margin-inline-end: 0.2em;
+  -webkit-font-smoothing: antialiased;
+}
+
+.descriptionGnos em {
+  color: inherit;
+  font-style: italic;
+  opacity: 0.92;
+}
+
+.descriptionGnos strong {
+  color: inherit;
+  font-weight: 700;
+}
+
 .placeholder {
   display: block;
   min-height: 2rem;
 }
 
-/* — Artists grid: digital artifact / CRT terminal aesthetic — */
-.artistsPanel {
+/* Featured artists: full width under primary row, single horizontal row */
+.featuredArtistsOnRelease {
   position: relative;
-  border: 1px solid var(--gnos-turquoise);
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.7);
-  box-shadow:
-    0 0 8px var(--gnos-turquoise-glow),
-    0 0 20px rgba(8, 89, 94, 0.2),
-    inset 0 0 20px rgba(8, 89, 94, 0.03);
-  margin-bottom: 1rem;
-  overflow: hidden;
+  z-index: 2;
+  width: 100%;
+  min-width: 0;
 }
 
-/* Noise/grain overlay */
-.artistsPanel::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.12;
-  pointer-events: none;
-  z-index: 1;
+.featuredArtistsOnRelease .featuredArtistsRoot {
+  margin-bottom: 0;
 }
 
-.artistsHeader {
+/* Nested selector beats Team `galleryGrid`’s display:grid (same element, two classes) */
+.featuredArtistsOnRelease .featuredGalleryRow {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-  position: relative;
-  z-index: 2;
-}
-
-.artistsHeaderLine {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--gnos-turquoise) 5%,
-    var(--gnos-turquoise) 95%,
-    transparent
-  );
-  box-shadow: 0 0 6px var(--gnos-turquoise-glow);
-  opacity: 0.8;
-}
-
-.artistsHeaderTitle {
-  font-family: var(--gnos-font-display);
-  font-size: 0.7rem;
-  font-weight: 900;
-  letter-spacing: 0.25em;
-  color: var(--gnos-turquoise);
-  text-shadow: 0 0 8px var(--gnos-turquoise-glow);
-  margin: 0;
-  white-space: nowrap;
-}
-
-.artistsGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  flex-direction: row;
+  flex-wrap: nowrap;
   gap: 1rem;
-  align-items: end;
-  position: relative;
-  z-index: 2;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding-bottom: 0.35rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable;
 }
 
-@media (min-width: 480px) {
-  .artistsGrid {
-    grid-template-columns: repeat(4, 1fr);
+.featuredArtistsOnRelease .featuredGalleryRow>a {
+  flex: 0 0 auto;
+  width: 132px;
+  min-width: 132px;
+}
+
+@media (min-width: 768px) {
+  .featuredArtistsOnRelease .featuredGalleryRow>a {
+    width: 148px;
+    min-width: 148px;
   }
-}
-
-.artistCard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.artistPortrait {
-  position: relative;
-  aspect-ratio: 1;
-  width: 100%;
-  overflow: hidden;
-  border: 1px solid var(--gnos-turquoise);
-  box-shadow:
-    0 0 6px var(--gnos-turquoise-glow),
-    inset 0 0 12px rgba(8, 89, 94, 0.15);
-}
-
-/* Monochromatic blue/purple tint + low contrast */
-.artistImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: grayscale(0.6) contrast(0.85) brightness(0.9)
-    sepia(0.15) hue-rotate(170deg) saturate(0.3);
-}
-
-/* Scanline overlay */
-.artistPortraitScanlines {
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.15) 2px,
-    rgba(0, 0, 0, 0.15) 4px
-  );
-  pointer-events: none;
-  z-index: 1;
-}
-
-.artistDivider {
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--gnos-turquoise) 20%,
-    var(--gnos-turquoise) 80%,
-    transparent
-  );
-  opacity: 0.6;
-  box-shadow: 0 0 4px var(--gnos-turquoise-glow);
-}
-
-.artistName {
-  font-family: var(--gnos-font-display);
-  font-size: 0.65rem;
-  font-weight: 900;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gnos-turquoise);
-  text-shadow: 0 0 6px var(--gnos-turquoise-glow);
-  text-align: center;
-}
-
-/* — Right column: cover + player + nav — */
-.rightColumn {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
 }
 
 .coverSquare {
@@ -389,6 +401,17 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.bandcampHero {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0.5rem 0.75rem;
+}
+
+/* When cover + link-only Bandcamp share a panel */
+.panel .bandcampHero {
+  padding-top: 1.25rem;
 }
 
 /* — Release nav (prev / next) — */

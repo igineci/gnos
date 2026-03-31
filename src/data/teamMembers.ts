@@ -1,4 +1,4 @@
-import type { Person } from './gnos';
+import type { Person } from './person';
 import { TARENS_SHARED } from './sharedPeople';
 
 export const TEAM_MEMBERS: Person[] = [
