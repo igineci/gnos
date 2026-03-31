@@ -3,7 +3,7 @@
 const TARENS_PROMO_LINKS: { label: string; url: string }[] = [
   { label: 'INSTAGRAM', url: 'https://www.instagram.com/tarens_tk/' },
   { label: 'SOUNDCLOUD', url: 'https://soundcloud.com/tarens' },
-  { label: 'SPOTIFY', url: 'https://open.spotify.com/artist/7e3l3472m9Xx2nQdQw2pX3' },
+  { label: 'SPOTIFY', url: 'https://open.spotify.com/artist/0xKj7cesw9XCUHa6mj7Ot8' },
   { label: 'APPLE MUSIC', url: 'https://music.apple.com/us/artist/tarens/1706332067' },
   { label: 'LINKTREE', url: 'https://linktr.ee/tarens' },
 ];

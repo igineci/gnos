@@ -48,6 +48,11 @@ function computeHoverOverlayLayout(link: HTMLElement): Pick<FixedHoverState, 'le
 }
 
 function fitHoverName(node: HTMLElement) {
+  if (isMobileViewport()) {
+    node.style.fontSize = '';
+    return;
+  }
+
   const parent = node.parentElement;
 
   if (!parent) {
@@ -330,14 +335,25 @@ export function GnosArtistGallery({
                       draggable={false}
                     />
                     {artist.image ? (
-                      <img
-                        src={artist.image}
-                        alt={artist.name}
-                        className={styles.coverImage}
-                        loading="lazy"
-                        decoding="async"
-                        draggable={false}
-                      />
+                      <>
+                        <img
+                          src={artist.image}
+                          alt={artist.name}
+                          className={styles.coverImageColor}
+                          loading="lazy"
+                          decoding="async"
+                          draggable={false}
+                        />
+                        <img
+                          src={artist.image}
+                          alt=""
+                          className={styles.coverImageBw}
+                          aria-hidden
+                          loading="lazy"
+                          decoding="async"
+                          draggable={false}
+                        />
+                      </>
                     ) : (
                       <div className={styles.coverPlaceholder} aria-hidden />
                     )}
@@ -349,7 +365,7 @@ export function GnosArtistGallery({
                       className={styles.hoverSvg}
                       draggable={false}
                     />
-                    <div className={`${styles.hoverText} ${styles.hoverTextArtist}`}>
+                    <div className={`${styles.hoverText} ${styles.hoverTextTeam}`}>
                       <span className={styles.hoverName} data-hover-name>
                         {artist.name}
                       </span>

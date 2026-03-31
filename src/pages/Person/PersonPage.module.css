@@ -16,6 +16,7 @@
 
   width: 100%;
   position: relative;
+  padding-top: 0.85rem;
 }
 
 .content {
@@ -37,6 +38,7 @@
   color: var(--gnos-turquoise);
   text-decoration: none;
   margin-bottom: 0.5rem;
+  margin-top: 0.35rem;
   transition: color 0.3s ease, opacity 0.3s ease;
   position: relative;
   z-index: 2;
@@ -790,6 +792,7 @@
 @media (max-width: 768px) {
   .page {
     --person-text-panel-height: clamp(22rem, 58vh, 30rem);
+    padding-top: 1rem;
   }
 
   .content {
@@ -800,7 +803,7 @@
     display: inline-flex;
     align-items: center;
     min-height: 2.75rem;
-    padding: 0.25rem 0;
+    padding: 0.25rem 10px;
     margin-left: 1rem;
   }
 
@@ -883,7 +886,7 @@
   .frameCellInterview .frameScrollShell,
   .frameCellInterview .frameScroll,
   .frameCellBiography,
-  .frameCellBiography > *,
+  .frameCellBiography>*,
   .frameCellBiography .frameInner,
   .frameCellBiography .frameScrollShell,
   .frameCellBiography .frameScroll {

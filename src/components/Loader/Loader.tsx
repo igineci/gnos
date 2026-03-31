@@ -23,30 +23,45 @@ export const Loader = ({ onExited }: LoaderProps) => {
 
   useEffect(() => {
     const start = performance.now();
+    let frameId = 0;
+    let exitTimeout = 0;
+    let cancelled = false;
 
     const tick = (now: number) => {
-      const elapsed = now - start;
-      const p = Math.min(100, (elapsed / DURATION_MS) * 100);
+      if (cancelled) return;
 
-      if (clipRef.current) clipRef.current.setAttribute('width', `${(p / 100) * BAR_VIEWBOX_WIDTH}`);
+      const elapsed = Math.max(0, now - start);
+      const p = Math.min(100, Math.max(0, (elapsed / DURATION_MS) * 100));
+      const width = Math.min(
+        BAR_VIEWBOX_WIDTH,
+        Math.max(0, (p / 100) * BAR_VIEWBOX_WIDTH),
+      );
+
+      if (clipRef.current) clipRef.current.setAttribute('width', `${width}`);
       if (percentRef.current) percentRef.current.textContent = `${Math.round(p)}%`;
 
       if (p < 100) {
-        requestAnimationFrame(tick);
+        frameId = requestAnimationFrame(tick);
       } else {
         if (overlayRef.current) {
           overlayRef.current.style.opacity = '0';
           overlayRef.current.style.transition = `opacity ${FADE_OUT_MS}ms ease-out`;
           overlayRef.current.style.pointerEvents = 'none';
         }
-        setTimeout(() => {
+        exitTimeout = window.setTimeout(() => {
           setExited(true);
           onExited?.();
         }, FADE_OUT_MS);
       }
     };
 
-    requestAnimationFrame(tick);
+    frameId = requestAnimationFrame(tick);
+
+    return () => {
+      cancelled = true;
+      window.cancelAnimationFrame(frameId);
+      window.clearTimeout(exitTimeout);
+    };
   }, [onExited]);
 
   if (exited) return null;

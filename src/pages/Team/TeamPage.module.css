@@ -124,9 +124,9 @@
   z-index: 100;
 }
 
-.galleryItem:hover .coverImage,
-.galleryItem:focus-visible .coverImage {
-  filter: none;
+.galleryItem:hover .coverImageBw,
+.galleryItem:focus-visible .coverImageBw {
+  opacity: 0;
 }
 
 .hoverOverlay {
@@ -165,7 +165,7 @@
 
 /* Desktop: in-card overlay is hidden — hover UI is portaled to body (escapes overflow / modals) */
 @media (min-width: 768px) {
-  .galleryItem > .hoverOverlay {
+  .featuredArtistsSection .galleryItem>.hoverOverlay {
     display: none !important;
   }
 }
@@ -339,17 +339,27 @@
   z-index: 1;
 }
 
-.galleryArtwork .coverImage {
+.galleryArtwork .coverImageColor,
+.galleryArtwork .coverImageBw {
   position: absolute;
-  inset: 0;
+  top: 1%;
+  right: 1%;
+  bottom: 1%;
+  left: 1%;
   z-index: 0;
-  width: 98%;
-  height: 98%;
   object-fit: cover;
+  image-rendering: auto;
+}
+
+.galleryArtwork .coverImageColor {
+  z-index: 0;
+}
+
+.galleryArtwork .coverImageBw {
+  z-index: 0;
   filter: grayscale(100%);
-  transition: filter 0.3s ease;
-  margin-top: 1%;
-  margin-left: 1%;
+  opacity: 1;
+  transition: opacity 0.26s ease;
 }
 
 .galleryArtwork .coverPlaceholder {
@@ -384,9 +394,20 @@
     overflow: visible;
   }
 
+  .galleryArtwork .coverImageBw {
+    opacity: 1;
+    transition: none;
+  }
+
+  .galleryItem:hover .coverImageBw,
+  .galleryItem:focus-visible .coverImageBw {
+    opacity: 1;
+  }
+
   .hoverOverlay {
     position: relative;
     left: auto;
+    right: auto;
     top: auto;
     width: 100%;
     aspect-ratio: auto;
@@ -398,6 +419,14 @@
 
   .galleryItem:hover .hoverOverlay,
   .galleryItem:focus-visible .hoverOverlay {
+    transform: none;
+  }
+
+  .galleryItem[data-hover-side='left'] .hoverOverlay,
+  .galleryItem[data-hover-side='left']:hover .hoverOverlay,
+  .galleryItem[data-hover-side='left']:focus-visible .hoverOverlay {
+    left: auto;
+    right: auto;
     transform: none;
   }
 
@@ -418,6 +447,14 @@
     align-items: flex-start;
     text-align: left;
     gap: 0.25rem;
+  }
+
+  .galleryItem[data-hover-side='left'] .hoverText {
+    left: auto;
+  }
+
+  .hoverTextArtist {
+    min-height: 4.5rem;
   }
 
   .hoverText::before {

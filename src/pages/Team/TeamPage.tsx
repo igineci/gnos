@@ -5,6 +5,22 @@ import { getFeaturedArtists, getTeamMembers } from '@/data/gnos';
 import { catalogReleases } from '@/lib/releases';
 import styles from './TeamPage.module.css';
 
+const FEATURED_ARTIST_COVER_IMAGES: Partial<Record<string, string>> = {
+  anoy: '/images/artists/gnosva001/anoy-cover.jpg',
+  crynn: '/images/artists/gnosva001/cryn-cover.jpg',
+  essio: '/images/artists/gnosva001/essio-cover.jpeg',
+  jbilo: '/images/artists/gnosva001/jbilo-cover.jpg',
+  ledeni: '/images/artists/gnosva001/ledeni-cover.jpg',
+};
+
+const TEAM_MEMBER_COVER_IMAGES: Partial<Record<string, string>> = {
+  kabay: '/images/team/kabay-cover.jpg',
+  isidora: '/images/team/isidora-cover.jpg',
+  andrija: '/images/team/andrija-cover.jpeg',
+  ema: '/images/team/ema-cover.jpeg',
+  igineci: '/images/team/andjela-cover.jpeg'
+};
+
 const TeamPage = () => {
   const featuredArtists = getFeaturedArtists();
   const teamMembers = getTeamMembers();
@@ -57,6 +73,11 @@ const TeamPage = () => {
     };
 
     const fitHoverName = (node: HTMLElement) => {
+      if (window.innerWidth <= 767) {
+        node.style.fontSize = '';
+        return;
+      }
+
       const parent = node.parentElement;
 
       if (!parent) {
@@ -149,10 +170,11 @@ const TeamPage = () => {
         <div className={styles.mainFrameContent}>
           {showFeaturedArtists && (
             <GnosArtistGallery
+              rootClassName={styles.featuredArtistsSection}
               artists={featuredArtists.map((a) => ({
                 name: a.name,
                 slug: a.slug,
-                image: a.image,
+                image: FEATURED_ARTIST_COVER_IMAGES[a.slug] ?? a.image,
               }))}
             />
           )}
@@ -191,14 +213,25 @@ const TeamPage = () => {
                           draggable={false}
                         />
                         {member.image ? (
-                          <img
-                            src={member.image}
-                            alt={member.name}
-                            className={styles.coverImage}
-                            loading="lazy"
-                            decoding="async"
-                            draggable={false}
-                          />
+                          <>
+                            <img
+                              src={TEAM_MEMBER_COVER_IMAGES[member.slug] ?? member.image}
+                              alt={member.name}
+                              className={styles.coverImageColor}
+                              loading="lazy"
+                              decoding="async"
+                              draggable={false}
+                            />
+                            <img
+                              src={TEAM_MEMBER_COVER_IMAGES[member.slug] ?? member.image}
+                              alt=""
+                              className={styles.coverImageBw}
+                              aria-hidden
+                              loading="lazy"
+                              decoding="async"
+                              draggable={false}
+                            />
+                          </>
                         ) : (
                           <div className={styles.coverPlaceholder} aria-hidden />
                         )}

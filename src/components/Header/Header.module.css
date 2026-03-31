@@ -217,6 +217,25 @@
   margin-bottom: 0;
 }
 
+.navLabel {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.navLabelGhost {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.navLabelAnimated {
+  position: absolute;
+  inset: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .navLink:hover,
 .navLinkActive:hover {
   color: var(--gnos-white);

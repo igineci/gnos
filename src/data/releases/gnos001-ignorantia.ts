@@ -262,7 +262,7 @@ export const GNOS001_ARTIST_OVERRIDES: ReleaseArtistOverridesMap = {
         ],
       },
       {
-        q: 'Why did you start producing music?',
+        q: 'When and how did you get into music?',
         a: [
           {
             parts: [
@@ -486,7 +486,7 @@ export const GNOS001_ARTIST_OVERRIDES: ReleaseArtistOverridesMap = {
         ],
       },
       {
-        q: 'Do you have any local heroes in music production?',
+        q: 'What are your biggest music influences?',
         a: [
           {
             parts: [

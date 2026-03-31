@@ -1,31 +1,31 @@
 .page {
   width: 100%;
   min-height: 100%;
-  padding: 2rem 0 4rem;
+  padding: 1.25rem 0 2.5rem;
   position: relative;
 }
 
 .mainFrame {
   position: relative;
-  width: 100%;
+  width: calc(100% - 1.5rem);
   max-width: var(--gnos-content-width, 800px);
   margin-left: auto;
   margin-right: auto;
   min-height: 200px;
   box-sizing: border-box;
-  border: 24px solid transparent;
-  border-image: url('/svg/releases/releases-frame.svg') 30 / 24px / 0 stretch;
+  border: 1rem solid transparent;
+  border-image: url('/svg/releases/releases-frame.svg') 30 / 1rem / 0 stretch;
   background: transparent;
 }
 
 .mainFrameContent {
   position: relative;
-  padding: 1.5rem 2rem 2rem;
+  padding: 1rem 1rem 1.5rem;
   min-height: 120px;
 }
 
 .section {
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   position: relative;
   z-index: 2;
 }
@@ -36,24 +36,27 @@
 
 .sectionHeader {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.625rem;
   margin-bottom: 1rem;
   min-width: 0;
 }
 
 .sectionTitle {
   font-family: var(--gnos-font-display);
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 3vw, 1.1rem);
   font-weight: 900;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gnos-turquoise);
   flex-shrink: 0;
+  line-height: 1.1;
 }
 
 .sectionLineSeparator {
-  flex: 1;
+  width: 100%;
+  flex: none;
   min-width: 0;
   overflow: hidden;
   display: flex;
@@ -104,7 +107,7 @@
 
 .releaseListWrapper {
   position: relative;
-  padding: 1rem;
+  padding: 0.75rem;
   overflow: visible;
 }
 
@@ -124,33 +127,39 @@
   text-align: center;
 }
 
-@media (max-width: 767px) {
-  .mainFrameContent {
-    padding: 1rem 1rem 1.5rem;
-  }
-
-  .section {
-    margin-bottom: 2rem;
-  }
-
-  .releaseListWrapper {
-    padding: 0.75rem;
-  }
-}
-
-@media (max-width: 520px) {
+@media (min-width: 640px) {
   .sectionHeader {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
   }
 
   .sectionLineSeparator {
-    width: 100%;
-    flex: none;
+    flex: 1;
+    width: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .page {
+    padding: 2rem 0 4rem;
   }
 
-  .decorLines {
-    width: 100%;
-    min-width: 0;
+  .mainFrame {
+    width: calc(100% - 3rem);
+    border: 1.5rem solid transparent;
+    border-image: url('/svg/releases/releases-frame.svg') 30 / 1.5rem / 0 stretch;
+  }
+
+  .mainFrameContent {
+    padding: 1.5rem 2rem 2rem;
+  }
+
+  .section {
+    margin-bottom: 2.5rem;
+  }
+
+  .releaseListWrapper {
+    padding: 1rem;
   }
 }

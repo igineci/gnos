@@ -28,6 +28,12 @@ const INITIAL_DECODE_DELAYS = (() => {
 
 const CIPHER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZΔΣΨΩ░▒▓┤╡╢';
 
+function isPathActive(path: string, pathname: string, isGnosSection: boolean, isReleasesSection: boolean) {
+  if (path === ROUTE_PATHS.TEAM) return isGnosSection;
+  if (path === ROUTE_PATHS.RELEASES) return isReleasesSection;
+  return path === pathname;
+}
+
 function ScrambleText({
   text,
   speed = 45,
@@ -89,8 +95,8 @@ interface HeaderProps {
 export const Header = ({ loaderExited = false }: HeaderProps) => {
   const location = useLocation();
   const frameRef = useRef<HTMLDivElement>(null);
-  const navRef = useRef<HTMLUListElement>(null);
   const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const labelRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const initialDecodeRef = useRef(true);
   const hasMountedRef = useRef(false);
   const prevPathRef = useRef(location.pathname);
@@ -123,15 +129,14 @@ export const Header = ({ loaderExited = false }: HeaderProps) => {
     if (!loaderExited) return;
     const run = () => {
       const frame = frameRef.current;
-      const links = linkRefs.current;
       if (!frame) return;
       const frameRect = frame.getBoundingClientRect();
-      if (!links.length) return;
-      const link = links[targetIndex];
-      if (!link) return;
-      const linkRect = link.getBoundingClientRect();
-      const linkCenterX = linkRect.left + linkRect.width / 2;
-      let left = Math.round(linkCenterX - frameRect.left - INDICATOR_WIDTH_PX / 2);
+      const label = labelRefs.current[targetIndex];
+      const link = linkRefs.current[targetIndex];
+      const targetRect = label?.getBoundingClientRect() ?? link?.getBoundingClientRect();
+      if (!targetRect) return;
+      const targetCenterX = targetRect.left + targetRect.width / 2;
+      let left = Math.round(targetCenterX - frameRect.left - INDICATOR_WIDTH_PX / 2);
       left = Math.max(0, Math.min(left, frameRect.width - INDICATOR_WIDTH_PX));
       setIndicatorLeft(left);
       setIndicatorVisible(true);
@@ -219,35 +224,51 @@ export const Header = ({ loaderExited = false }: HeaderProps) => {
               <span className={styles.menuButtonIcon} aria-hidden />
             </button>
 
-            <nav id="main-nav" aria-label="Main" className={styles.navWrap}>
-              <ul ref={navRef} className={styles.nav}>
+            <nav
+              id="main-nav"
+              aria-label="Main"
+              className={styles.navWrap}
+              onClick={(e) => {
+                if (e.target === e.currentTarget) {
+                  setMenuOpen(false);
+                }
+              }}
+            >
+              <ul className={styles.nav}>
                 {NAV_ITEMS.map(({ label, path }, index) => (
                   <li key={path}>
+                    {(() => {
+                      const active = isPathActive(path, location.pathname, isGnosSection, isReleasesSection);
+                      return (
                     <NavLink
                       ref={(el) => {
                         linkRefs.current[index] = el;
                       }}
                       to={path}
-                      className={({ isActive }) => {
-                        const gnosActive = path === ROUTE_PATHS.TEAM && isGnosSection;
-                        const releasesActive = path === ROUTE_PATHS.RELEASES && isReleasesSection;
-                        const active = isActive || gnosActive || releasesActive;
-                        return `${styles.navLink} ${active ? styles.navLinkActive : ''}`;
-                      }}
-                      {...(path === ROUTE_PATHS.TEAM
-                        ? { isActive: () => isGnosSection }
-                        : path === ROUTE_PATHS.RELEASES
-                          ? { isActive: () => isReleasesSection }
-                          : {})}
+                      className={`${styles.navLink} ${active ? styles.navLinkActive : ''}`}
                       onClick={() => setMenuOpen(false)}
                     >
-                      <ScrambleText
-                        text={label}
-                        trigger={triggers[path] ?? 0}
-                        delay={initialDecodeRef.current ? INITIAL_DECODE_DELAYS[index] : 400}
-                        speed={DECODE_SPEED_MS}
-                      />
+                      <span
+                        ref={(el) => {
+                          labelRefs.current[index] = el;
+                        }}
+                        className={styles.navLabel}
+                      >
+                        <span className={styles.navLabelGhost} aria-hidden>
+                          {label}
+                        </span>
+                        <span className={styles.navLabelAnimated}>
+                          <ScrambleText
+                            text={label}
+                            trigger={triggers[path] ?? 0}
+                            delay={initialDecodeRef.current ? INITIAL_DECODE_DELAYS[index] : 400}
+                            speed={DECODE_SPEED_MS}
+                          />
+                        </span>
+                      </span>
                     </NavLink>
+                      );
+                    })()}
                   </li>
                 ))}
               </ul>
