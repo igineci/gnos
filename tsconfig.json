@@ -15,10 +15,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "content-collections": ["./.content-collections/generated"]
+      "@/*": ["./src/*"],
+      "content-collections": ["./content-collections/generated"]
     }
   },
   "include": ["src", ".content-collections/generated/**/*", "content-collections.ts", "vite-env.d.ts"]
