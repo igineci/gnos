@@ -1,6 +1,6 @@
-import { defineCollection, defineConfig } from '@content-collections/core';
-import { compileMDX } from '@content-collections/mdx';
-import { z } from 'zod';
+import { defineCollection, defineConfig } from "@content-collections/core";
+import { compileMDX } from "@content-collections/mdx";
+import { z } from "zod";
 
 const tracklistItemSchema = z.object({
   title: z.string(),
@@ -20,14 +20,14 @@ const creditSchema = z.object({
 });
 
 const releases = defineCollection({
-  name: 'releases',
-  directory: 'src/data/releases',
-  include: '**/*.mdx',
+  name: "releases",
+  directory: "src/data/releases",
+  include: "**/*.mdx",
   schema: z.object({
     title: z.string(),
     slug: z.string(),
     content: z.string(),
-    type: z.enum(['album', 'va']),
+    type: z.enum(["album", "ep", "va"]),
     catalogNumber: z.string(),
     releaseDate: z.string(),
     coverArt: z.string(),

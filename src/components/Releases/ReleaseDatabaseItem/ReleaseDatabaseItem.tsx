@@ -44,8 +44,11 @@ export const ReleaseDatabaseItem = ({ release, comingSoon = false }: ReleaseData
             src="/svg/coming-soon-hover.svg"
             alt=""
             className={styles.hoverSvg}
+            draggable={false}
           />
-          <span className={styles.hoverLabel}>COMING SOON</span>
+          <div className={styles.hoverText}>
+            <span className={styles.hoverName}>COMING SOON</span>
+          </div>
         </div>
       )}
     </>

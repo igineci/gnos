@@ -10,7 +10,7 @@ interface ReleaseCardProps {
 
 export const ReleaseCard = ({ release }: ReleaseCardProps) => {
   const artistDisplay = getArtistDisplay(release, 'full');
-  const typeClass = release.type === 'album' ? styles.album : styles.va;
+  const typeClass = release.type === 'va' ? styles.va : styles.album;
 
   return (
     <Link
