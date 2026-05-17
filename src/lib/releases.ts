@@ -55,7 +55,7 @@ export function getArtistDisplay(
   release: Release,
   format: ArtistDisplayFormat = 'short'
 ): string {
-  if (release.type === 'album') {
+  if (release.type === 'album' || release.type === 'ep') {
     return release.artist ?? '';
   }
   if (release.type === 'va') {
@@ -96,10 +96,21 @@ export const sortedReleases: Release[] = [...allReleases].sort((a, b) => {
   return (a.catalogNumber ?? '').localeCompare(b.catalogNumber ?? '');
 });
 
-const isUpcomingByDate = (release: Release) =>
-  release.releaseDate?.toUpperCase().includes('TBD') ?? false;
+/** Start-of-today timestamp, so releases scheduled for today still count as upcoming. */
+const startOfToday = (() => {
+  const now = new Date();
+  return new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+})();
 
-/** Upcoming: releases with TBD (or missing) release date */
+const isUpcomingByDate = (release: Release) => {
+  const raw = release.releaseDate;
+  if (!raw || raw.toUpperCase().includes('TBD')) return true;
+  const ts = parseReleaseDate(raw);
+  if (!Number.isFinite(ts)) return true;
+  return ts >= startOfToday;
+};
+
+/** Upcoming: TBD/missing date, or release date today or later. */
 export const upcomingReleases = sortedReleases.filter((r) =>
   isUpcomingByDate(r)
 );

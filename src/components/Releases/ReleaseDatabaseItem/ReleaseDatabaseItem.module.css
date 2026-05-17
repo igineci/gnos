@@ -184,8 +184,7 @@
 }
 
 .item[data-upcoming] .cover {
-  transform: scale(1.08);
-  filter: blur(4px) contrast(1.1);
+  filter: contrast(1.1);
 }
 
 .details {
