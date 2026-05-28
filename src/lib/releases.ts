@@ -30,11 +30,11 @@ export type ReleaseArtistDisplayItem = {
   image?: string;
 };
 
-/** VA line-up for UI: same portrait URLs as GNOS Team “Featured artists” (MDX + release overrides). */
+/** Release line-up for featured-artist UI (MDX artists + per-release overrides). */
 export function getReleaseArtistsDisplayList(
   release: Release
 ): ReleaseArtistDisplayItem[] {
-  if (release.type !== 'va' || !release.artists?.length) return [];
+  if (!release.artists?.length) return [];
   const overrides = getArtistOverridesForRelease(release.slug);
   return sortArtistsByName(release.artists).map((a) => {
     const slug = nameToSlug(a.name);
@@ -103,14 +103,16 @@ const startOfToday = (() => {
 })();
 
 const isUpcomingByDate = (release: Release) => {
+  if (release.upcoming === false) return false;
+  if (release.upcoming === true) return true;
   const raw = release.releaseDate;
   if (!raw || raw.toUpperCase().includes('TBD')) return true;
   const ts = parseReleaseDate(raw);
   if (!Number.isFinite(ts)) return true;
-  return ts >= startOfToday;
+  return ts > startOfToday;
 };
 
-/** Upcoming: TBD/missing date, or release date today or later. */
+/** Upcoming: explicit upcoming flag, TBD/missing date, or release date after today. */
 export const upcomingReleases = sortedReleases.filter((r) =>
   isUpcomingByDate(r)
 );
@@ -119,3 +121,20 @@ export const upcomingReleases = sortedReleases.filter((r) =>
 export const catalogReleases = sortedReleases.filter(
   (r) => !upcomingReleases.includes(r)
 );
+
+/**
+ * Chronological neighbors for release detail navigation.
+ * sortedReleases is newest-first, so older = index + 1, newer = index - 1.
+ */
+export function getReleaseNeighbors(slug: string): {
+  previous: Release | null;
+  next: Release | null;
+} {
+  const index = sortedReleases.findIndex((r) => r.slug === slug);
+  if (index === -1) return { previous: null, next: null };
+  return {
+    previous:
+      index < sortedReleases.length - 1 ? sortedReleases[index + 1] : null,
+    next: index > 0 ? sortedReleases[index - 1] : null,
+  };
+}

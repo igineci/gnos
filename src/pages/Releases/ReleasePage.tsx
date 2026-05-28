@@ -2,7 +2,12 @@ import { Fragment } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import ReactMarkdown, { type Components } from 'react-markdown';
 import { ROUTE_PATHS } from '@/constants/routes';
-import { formatReleaseDate, getReleaseArtistsDisplayList, sortedReleases } from '@/lib/releases';
+import {
+  formatReleaseDate,
+  getReleaseArtistsDisplayList,
+  getReleaseNeighbors,
+  sortedReleases,
+} from '@/lib/releases';
 import { GnosArtistGallery } from '@/components/GnosArtistGallery/GnosArtistGallery';
 import { BandcampEmbed } from '@/components/Releases/BandcampEmbed/BandcampEmbed';
 import { ExternalLinks } from '@/components/Releases/ExternalLinks/ExternalLinks';
@@ -127,11 +132,7 @@ function ReleaseDescription({ content }: { content: string }) {
 const ReleasePage = () => {
   const { slug } = useParams<{ slug: string }>();
   const release = sortedReleases.find((r) => r.slug === slug);
-  const currentIndex = release ? sortedReleases.findIndex((r) => r.slug === slug) : -1;
-  const prevRelease = currentIndex > 0 ? sortedReleases[currentIndex - 1] : null;
-  const nextRelease = currentIndex >= 0 && currentIndex < sortedReleases.length - 1
-    ? sortedReleases[currentIndex + 1]
-    : null;
+  const { previous: prevRelease, next: nextRelease } = getReleaseNeighbors(slug ?? '');
 
   if (!release) {
     return (
@@ -143,6 +144,10 @@ const ReleasePage = () => {
       </section>
     );
   }
+
+  const featuredArtists = getReleaseArtistsDisplayList(release);
+  const featuredSectionTitle =
+    featuredArtists.length === 1 ? 'FEATURED ARTIST' : 'FEATURED ARTISTS';
 
   const artistDisplay =
     release.type === 'va' ? 'VARIOUS' : (release.artist ?? '').toUpperCase();
@@ -292,11 +297,12 @@ const ReleasePage = () => {
               </div>
             </div>
 
-            {release.type === 'va' && release.artists && release.artists.length > 0 ? (
+            {featuredArtists.length > 0 ? (
               <div className={styles.featuredArtistsOnRelease}>
                 <GnosArtistGallery
                   rootClassName={styles.featuredArtistsRoot}
-                  artists={getReleaseArtistsDisplayList(release).map((artist) => ({
+                  sectionTitle={featuredSectionTitle}
+                  artists={featuredArtists.map((artist) => ({
                     ...artist,
                     image: FEATURED_ARTIST_COVER_IMAGES[artist.slug] ?? artist.image,
                   }))}

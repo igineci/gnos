@@ -12,6 +12,8 @@ export type GnosArtistGalleryItem = {
 type GnosArtistGalleryProps = {
   artists: GnosArtistGalleryItem[];
   emptyMessage?: string;
+  /** Section heading, e.g. FEATURED ARTIST vs FEATURED ARTISTS. */
+  sectionTitle?: string;
   /** Merged onto the root (e.g. tighter margins on release page). */
   rootClassName?: string;
   /** Merged onto the gallery grid (e.g. single-row layout on release page). */
@@ -103,6 +105,7 @@ function fitHoverName(node: HTMLElement) {
 export function GnosArtistGallery({
   artists,
   emptyMessage = 'No featured artists yet.',
+  sectionTitle = 'FEATURED ARTISTS',
   rootClassName,
   galleryClassName,
 }: GnosArtistGalleryProps) {
@@ -297,7 +300,7 @@ export function GnosArtistGallery({
         className={[styles.section, rootClassName].filter(Boolean).join(' ')}
       >
         <div className={styles.sectionHeader}>
-          <span className={styles.sectionTitle}>FEATURED ARTISTS</span>
+          <span className={styles.sectionTitle}>{sectionTitle}</span>
           <div className={styles.sectionLineSeparator} aria-hidden>
             <img src="/svg/line-separator.svg" alt="" className={styles.lineSeparatorSvg} draggable={false} />
           </div>

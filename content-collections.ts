@@ -30,6 +30,8 @@ const releases = defineCollection({
     type: z.enum(["album", "ep", "va"]),
     catalogNumber: z.string(),
     releaseDate: z.string(),
+    /** When false, release appears in catalog even if release date is in the future. */
+    upcoming: z.boolean().optional(),
     coverArt: z.string(),
 
     tracklist: z.array(tracklistItemSchema),
